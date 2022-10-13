@@ -1,0 +1,1 @@
+export { IProject } from './project.interface';

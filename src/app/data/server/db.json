@@ -1,0 +1,193 @@
+{
+    "list_project": [
+        {
+            "id": 16,
+            "id_user": 1,
+            "context": "magic",
+            "port_container": 8000,
+            "url": "https://github.com/ManuelCoronel/Magic_trivia.git",
+            "static_path": "magic_trivia/static"
+        },
+        {
+            "id": 17,
+            "id_user": 1,
+            "context": "api",
+            "port_container": 8091,
+            "url": "https://github.com/davidsachica/space-station-api.git",
+            "static_path": "src/main/resources"
+        }
+    ],
+    "log_project": [
+        {
+            "message": "Sending build context to Docker daemon  193.8MB\n"
+        },
+        {
+            "message": "Step 1/6 : FROM python:3.8-slim-buster\n"
+        },
+        {
+            "message": " ---> 60abb4f18941\n"
+        },
+        {
+            "message": "Step 2/6 : WORKDIR /app\n"
+        },
+        {
+            "message": " ---> Running in 2eb920dc0c3b\n"
+        },
+        {
+            "message": "Removing intermediate container 2eb920dc0c3b\n"
+        },
+        {
+            "message": " ---> a08d9537da29\n"
+        },
+        {
+            "message": "Step 3/6 : COPY /magic_trivia/requirements.txt requirements.txt\n"
+        },
+        {
+            "message": " ---> c0c3073b30b1\n"
+        },
+        {
+            "message": "Step 4/6 : RUN pip3 install -r requirements.txt\n"
+        },
+        {
+            "message": " ---> Running in 12877af7b2fa\n"
+        },
+        {
+            "message": "Collecting asgiref==3.5.2\n"
+        },
+        {
+            "message": "  Downloading asgiref-3.5.2-py3-none-any.whl (22 kB)\n"
+        },
+        {
+            "message": "Collecting certifi==2022.6.15\n"
+        },
+        {
+            "message": "  Downloading certifi-2022.6.15-py3-none-any.whl (160 kB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 160.2/160.2 KB 6.8 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Collecting charset-normalizer==2.1.0\n"
+        },
+        {
+            "message": "  Downloading charset_normalizer-2.1.0-py3-none-any.whl (39 kB)\n"
+        },
+        {
+            "message": "Collecting Django==4.0.6\n"
+        },
+        {
+            "message": "  Downloading Django-4.0.6-py3-none-any.whl (8.0 MB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.0/8.0 MB 80.7 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Collecting djangorestframework==3.13.1\n"
+        },
+        {
+            "message": "  Downloading djangorestframework-3.13.1-py3-none-any.whl (958 kB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 958.3/958.3 KB 33.4 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Collecting idna==3.3\n"
+        },
+        {
+            "message": "  Downloading idna-3.3-py3-none-any.whl (61 kB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.2/61.2 KB 7.6 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Collecting pytz==2022.1\n"
+        },
+        {
+            "message": "  Downloading pytz-2022.1-py2.py3-none-any.whl (503 kB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 503.5/503.5 KB 35.3 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Collecting requests==2.28.1\n"
+        },
+        {
+            "message": "  Downloading requests-2.28.1-py3-none-any.whl (62 kB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.8/62.8 KB 9.5 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Collecting sqlparse==0.4.2\n"
+        },
+        {
+            "message": "  Downloading sqlparse-0.4.2-py3-none-any.whl (42 kB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.3/42.3 KB 4.5 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Collecting tzdata==2022.1\n"
+        },
+        {
+            "message": "  Downloading tzdata-2022.1-py2.py3-none-any.whl (339 kB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 339.5/339.5 KB 27.7 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Collecting urllib3==1.26.10\n"
+        },
+        {
+            "message": "  Downloading urllib3-1.26.10-py2.py3-none-any.whl (139 kB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 139.2/139.2 KB 17.3 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Collecting backports.zoneinfo\n"
+        },
+        {
+            "message": "  Downloading backports.zoneinfo-0.2.1-cp38-cp38-manylinux1_x86_64.whl (74 kB)\n"
+        },
+        {
+            "message": "     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 74.0/74.0 KB 10.2 MB/s eta 0:00:00\n"
+        },
+        {
+            "message": "Installing collected packages: pytz, urllib3, tzdata, sqlparse, idna, charset-normalizer, certifi, backports.zoneinfo, asgiref, requests, Django, djangorestframework\n"
+        },
+        {
+            "message": "Successfully installed Django-4.0.6 asgiref-3.5.2 backports.zoneinfo-0.2.1 certifi-2022.6.15 charset-normalizer-2.1.0 djangorestframework-3.13.1 idna-3.3 pytz-2022.1 requests-2.28.1 sqlparse-0.4.2 tzdata-2022.1 urllib3-1.26.10\n"
+        },
+        {
+            "message": "You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.\n"
+        },
+        {
+            "message": " ---> b3a92b50d64a\n"
+        },
+        {
+            "message": "Step 5/6 : COPY . .\n"
+        },
+        {
+            "message": " ---> 68b160b2b9ef\n"
+        },
+        {
+            "message": "Step 6/6 : CMD [\"python3\",\"magic_trivia/manage.py\",\"runserver\",\"0.0.0.0:8000\"]\n"
+        },
+        {
+            "message": " ---> Running in 87a71b24589d\n"
+        },
+        {
+            "message": "Removing intermediate container 87a71b24589d\n"
+        },
+        {
+            "message": " ---> 344f3fac29e1\n"
+        },
+        {
+            "message": "Successfully built 344f3fac29e1\n"
+        },
+        {
+            "message": "Successfully tagged magic:latest\n"
+        }
+    ]
+}

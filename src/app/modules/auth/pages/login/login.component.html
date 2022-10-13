@@ -1,0 +1,23 @@
+<div class="login backgroundImage">
+    <div class="wrapper wrapper-login">
+        <div class="container container-login animated fadeIn">
+            <h3 class="text-center">Iniciar Sesión para Acceder</h3>
+            <div class="login-form">
+                <div class="form-action">
+                    <button type="button" class="btn btn-primary btn-rounded btn-social" (click)="signInWithGoogle()">
+                        <i class="fab fa-google"></i>
+                        Iniciar Sesión con Google
+                    </button>
+                    <asl-google-signin-button *ngIf="!socialUser"></asl-google-signin-button>
+                    <div *ngIf="socialUser">
+                        <img src="{{ socialUser.photoUrl }}">
+                        <div>
+                            <h4>{{ socialUser.name }}</h4>
+                            <p>{{ socialUser.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

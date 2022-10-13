@@ -1,0 +1,4 @@
+{
+    "/sp_project/projects/api/v1/*": "/$1",
+    "/sp_project/projects/api/v1/*/:id/BUILD": "/:id"
+}
