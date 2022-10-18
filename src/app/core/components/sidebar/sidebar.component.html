@@ -20,17 +20,17 @@
                     <div class="collapse in" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a routerLink="../../account/profile" style="cursor: pointer;">
+                                <a [routerLink]="['/account/profile']" style="cursor: pointer;">
                                     <span class="link-collapse">Perfil</span>
                                 </a>
                             </li>
                             <li>
-                                <a routerLink="../account/settings" style="cursor: pointer;">
+                                <a [routerLink]="['/account/settings']" style="cursor: pointer;">
                                     <span class="link-collapse">Ajustes</span>
                                 </a>
                             </li>
                             <li>
-                                <a style="cursor: pointer;">
+                                <a [routerLink]="['/home']" style="cursor: pointer;">
                                     <span class="link-collapse">Cerrar Sesión</span>
                                 </a>
                             </li>
@@ -40,7 +40,7 @@
             </div>
             <ul class="nav">
                 <li routerLinkActive="active" class="nav-item">
-                    <a routerLink="../../account/" style="cursor: pointer;">
+                    <a [routerLink]="['/dashboard']" style="cursor: pointer;">
                         <i class="fas fa-home"></i>
                         <p>Tablero</p>
                     </a>
@@ -52,7 +52,7 @@
                     <h4 class="text-section">Modulos</h4>
                 </li>
                 <li routerLinkActive="active" class="nav-item">
-                    <a routerLink="../../projects/" style="cursor: pointer;">
+                    <a [routerLink]="['/projects']" style="cursor: pointer;">
                         <i class="fas fa-columns"></i>
                         <p>Proyectos</p>
                     </a>

@@ -1,6 +1,5 @@
 <!-- Navbar Header -->
 <nav class="navbar navbar-header navbar-expand-lg">
-
     <div class="container-fluid">
         <div class="collapse" id="search-nav">
             <form class="navbar-left navbar-form nav-search mr-md-3">
@@ -38,57 +37,40 @@
                             <div class="notif-center">
                                 <a href="#">
                                     <div class="notif-img">
-                                        <img src="../../../../../../assets/img/jm_denis.jpg" alt="Img Profile">
+                                        <img src="/../../assets/img/jm_denis.jpg" alt="Img Profile">
                                     </div>
                                     <div class="notif-content">
                                         <span class="subject">Jimmy Denis</span>
-                                        <span class="block">
-                                            How are you ?
-                                        </span>
+                                        <span class="block">How are you ?</span>
                                         <span class="time">5 minutes ago</span>
                                     </div>
                                 </a>
                                 <a href="#">
                                     <div class="notif-img">
-                                        <img src="../../../../../../assets/img/chadengle.jpg" alt="Img Profile">
+                                        <img src="/../../assets/img/chadengle.jpg" alt="Img Profile">
                                     </div>
                                     <div class="notif-content">
                                         <span class="subject">Chad</span>
-                                        <span class="block">
-                                            Ok, Thanks !
-                                        </span>
+                                        <span class="block">Ok, Thanks !</span>
                                         <span class="time">12 minutes ago</span>
                                     </div>
                                 </a>
                                 <a href="#">
                                     <div class="notif-img">
-                                        <img src="../../../../../../assets/img/mlane.jpg" alt="Img Profile">
+                                        <img src="/../../assets/img/mlane.jpg" alt="Img Profile">
                                     </div>
                                     <div class="notif-content">
                                         <span class="subject">Jhon Doe</span>
-                                        <span class="block">
-                                            Ready for the meeting today...
-                                        </span>
+                                        <span class="block">Ready for the meeting today...</span>
                                         <span class="time">12 minutes ago</span>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="notif-img">
-                                        <img src="../../../../../../assets/img/talha.jpg" alt="Img Profile">
-                                    </div>
-                                    <div class="notif-content">
-                                        <span class="subject">Talha</span>
-                                        <span class="block">
-                                            Hi, Apa Kabar ?
-                                        </span>
-                                        <span class="time">17 minutes ago</span>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </li>
                     <li>
-                        <a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i>
+                        <a class="see-all" href="javascript:void(0);">
+                            See all messages<i class="fa fa-angle-right"></i>
                         </a>
                     </li>
                 </ul>
@@ -108,46 +90,39 @@
                             <a href="#">
                                 <div class="notif-icon notif-primary"> <i class="fa fa-user-plus"></i> </div>
                                 <div class="notif-content">
-                                    <span class="block">
-                                        New user registered
-                                    </span>
+                                    <span class="block">New user registered</span>
                                     <span class="time">5 minutes ago</span>
                                 </div>
                             </a>
                             <a href="#">
                                 <div class="notif-icon notif-success"> <i class="fa fa-comment"></i> </div>
                                 <div class="notif-content">
-                                    <span class="block">
-                                        Rahmad commented on Admin
-                                    </span>
+                                    <span class="block">Rahmad commented on Admin</span>
                                     <span class="time">12 minutes ago</span>
                                 </div>
                             </a>
                             <a href="#">
                                 <div class="notif-img">
-                                    <img src="../../../../assets/img/profile2.jpg" alt="Img Profile">
+                                    <img src="/../../assets/img/profile2.jpg" alt="Img Profile">
                                 </div>
                                 <div class="notif-content">
-                                    <span class="block">
-                                        Reza send messages to you
-                                    </span>
+                                    <span class="block">Reza send messages to you</span>
                                     <span class="time">12 minutes ago</span>
                                 </div>
                             </a>
                             <a href="#">
                                 <div class="notif-icon notif-danger"> <i class="fa fa-heart"></i> </div>
                                 <div class="notif-content">
-                                    <span class="block">
-                                        Farrah liked Admin
-                                    </span>
+                                    <span class="block">Farrah liked Admin</span>
                                     <span class="time">17 minutes ago</span>
                                 </div>
                             </a>
                         </div>
                     </li>
                     <li>
-                        <a class="see-all" href="javascript:void(0);">See all notifications<i
-                                class="fa fa-angle-right"></i> </a>
+                        <a class="see-all" href="javascript:void(0);">
+                            See all notifications<i class="fa fa-angle-right"></i>
+                        </a>
                     </li>
                 </ul>
             </li>
@@ -160,28 +135,26 @@
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <li>
                         <div class="user-box">
-                            <div class="avatar-lg"><img src="../../../../assets/img/profile.jpg" alt="image profile"
-                                    class="avatar-img rounded"></div>
+                            <div class="avatar-lg">
+                                <img src="../../../../assets/img/profile.jpg" alt="image profile"
+                                    class="avatar-img rounded">
+                            </div>
                             <div class="u-text">
                                 <h4>Hizrian</h4>
-                                <p class="text-muted">hello@example.com</p><a href="profile.html"
-                                    class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                <p class="text-muted">hello@example.com</p>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="#">My Balance</a>
-                        <a class="dropdown-item" href="#">Inbox</a>
+                        <a class="dropdown-item" [routerLink]="['/account/profile']">Perfil</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Account Setting</a>
+                        <a class="dropdown-item" [routerLink]="['/account/settings']">Ajustes</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" [routerLink]="['/home']">Cerrar Sesion</a>
                     </li>
                 </ul>
             </li>
-
         </ul>
     </div>
 </nav>

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie-service';
 import { HttpTokenInterceptor } from '@core/interceptors/http-token.interceptor';
@@ -18,7 +20,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     SidebarComponent
   ],
   imports: [
-    HttpClientModule
+    CommonModule,
+    HttpClientModule,
+    RouterModule
   ],
   providers: [
     CookieService,

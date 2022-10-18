@@ -25,7 +25,7 @@ import { AuthRoutingModule } from './auth-routing.module';
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(environment.googleClientId)
+            provider: new GoogleLoginProvider(environment.oauth.googleClientId)
           }
         ],
         onError: (err) => {

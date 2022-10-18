@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from "@abacritt/angularx-social-login";
+import { AuthService } from '@core/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,31 +12,28 @@ import { SocialAuthService, GoogleLoginProvider, SocialUser } from "@abacritt/an
 })
 export class LoginComponent implements OnInit {
 
-  socialUser!: SocialUser;
-  isLoggedin?: boolean;
-
   constructor(
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
-  ngOnInit() {
-    this.socialAuthService.authState.subscribe((user) => {
-      this.socialUser = user;
-      this.isLoggedin = user != null;
-      console.log(this.socialUser);
-    });
+  ngOnInit() { }
+
+  public signInWithGoogle(): void {
+    this.socialAuthService
+      .signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then((data: SocialUser) => {
+        this.signIn(data);
+        console.log(data);
+      }).catch((error) => {
+        console.log(error);
+      });
   }
 
-  signInWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((data: SocialUser) => {
-      console.log(data);
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
-
-  signOut(): void {
-    this.socialAuthService.signOut();
+  public signIn(data: SocialUser) {
+    this.authService.login(data.idToken);
+    this.router.navigate(['/account/profile']);
   }
 
 }

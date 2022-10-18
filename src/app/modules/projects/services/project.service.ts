@@ -21,6 +21,10 @@ export class ProjectService {
     return this.http.get<IProject[]>(`${this.url}/${HttpApi.projectList}/${id}`);
   }
 
+  public postProject(project: IProject): Observable<IProject> {
+    return this.http.post<IProject>(`${this.url}/${HttpApi.projectList}`, project);
+  }
+
   public deleteProject(project: any): Observable<any> {
     return this.http.delete<any>(`${this.url}/${HttpApi.projectDelete}`, project);
   }

@@ -1,9 +1,8 @@
 export class HttpApi {
-    // OAuth
-    static oauthLogin = 'oauth/token';
 
-    // Start Mutual Auth
-    static userRegister = 'api/user/register';
+    // OAuth
+    static oauthToken = 'auth/login';
+    static oauthRefreshToken = 'auth/refresh-token';
 
     // Project
     static projectList = 'list_project';

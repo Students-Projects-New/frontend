@@ -1,21 +1,32 @@
 <div class="login backgroundImage">
     <div class="wrapper wrapper-login">
         <div class="container container-login animated fadeIn">
-            <h3 class="text-center">Iniciar Sesión para Acceder</h3>
+            <h3 class="text-center">Sign In To Admin</h3>
             <div class="login-form">
-                <div class="form-action">
-                    <button type="button" class="btn btn-primary btn-rounded btn-social" (click)="signInWithGoogle()">
-                        <i class="fab fa-google"></i>
-                        Iniciar Sesión con Google
-                    </button>
-                    <asl-google-signin-button *ngIf="!socialUser"></asl-google-signin-button>
-                    <div *ngIf="socialUser">
-                        <img src="{{ socialUser.photoUrl }}">
-                        <div>
-                            <h4>{{ socialUser.name }}</h4>
-                            <p>{{ socialUser.email }}</p>
+                <div class="form-group">
+                    <label for="username" class="placeholder"><b>Username</b></label>
+                    <input id="username" name="username" type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="placeholder"><b>Password</b></label>
+                    <a href="#" class="link float-right">Forget Password ?</a>
+                    <div class="position-relative">
+                        <input id="password" name="password" type="password" class="form-control" required>
+                        <div class="show-password">
+                            <i class="flaticon-interface"></i>
                         </div>
                     </div>
+                </div>
+                <div class="form-group form-action-d-flex mb-3">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="rememberme">
+                        <label class="custom-control-label m-0" for="rememberme">Remember Me</label>
+                    </div>
+                    <a [routerLink]="['/projects']" class="btn btn-primary col-md-5 float-right mt-3 mt-sm-0 fw-bold">Sign In</a>
+                </div>
+                <div class="login-account">
+                    <span class="msg">Don't have an account yet ?</span>
+                    <a href="#" id="show-signup" class="link">Sign Up</a>
                 </div>
             </div>
         </div>

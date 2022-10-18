@@ -2,11 +2,19 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const server = {
+  protocol: 'http',
+  hostname: '20.172.104.99',
+  port: 80,
+};
+
 export const environment = {
   production: false,
   name: 'development',
-  googleClientId: '906303529522-pa3hcik7n8ib6r6cmgiis9e2ljm5l0h8.apps.googleusercontent.com',
-  baseUrl: 'http://20.172.104.99/sp_project/projects/api/v1',
+  oauth: {
+    googleClientId: '906303529522-pa3hcik7n8ib6r6cmgiis9e2ljm5l0h8.apps.googleusercontent.com'
+  },
+  baseUrl: `${server.protocol}://${server.hostname}:${server.port}/sp_project/projects/api/v1`,
 };
 
 /*

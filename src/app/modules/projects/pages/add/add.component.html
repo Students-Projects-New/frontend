@@ -1,1 +1,75 @@
-<p>add works!</p>
+<div class="page-header">
+    <h4 class="page-title">New Project</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Projects</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">New Project</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">New Project</div>
+            </div>
+            <div class="card-body">
+                <form autocomplete="off" [formGroup]="newProject" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="context">Context</label>
+                        <input type="text" class="form-control" id="context" formControlName="context">
+                        <ng-container *ngFor="let validation of validationMessages['context']">
+                            <div *ngIf="f?.['context']?.hasError(validation.type) && isFieldValid('context')">
+                                <small class="text-danger">{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="form-group">
+                        <label for="port_container">Port</label>
+                        <input type="text" class="form-control" id="port_container" formControlName="port_container">
+                        <ng-container *ngFor="let validation of validationMessages['port_container']">
+                            <div *ngIf="f?.['port_container']?.hasError(validation.type) && isFieldValid('port_container')">
+                                <small class="text-danger">{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">URL</label>
+                        <input type="text" class="form-control" id="url" formControlName="url">
+                        <ng-container *ngFor="let validation of validationMessages['url']">
+                            <div *ngIf="f?.['url']?.hasError(validation.type) && isFieldValid('url')">
+                                <small class="text-danger">{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="form-group">
+                        <label for="static_path">Static Path</label>
+                        <input type="text" class="form-control" id="static_path" formControlName="static_path">
+                        <ng-container *ngFor="let validation of validationMessages['static_path']">
+                            <div *ngIf="f?.['static_path']?.hasError(validation.type) && isFieldValid('static_path')">
+                                <small class="text-danger">{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-default" (click)="onBack()">Back</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
