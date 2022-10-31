@@ -1,9 +1,12 @@
+import { IRole } from "./role.interface";
+
 export interface IUser {
     id: number;
     username: string;
+    first_name: string;
+    last_name: string;
     email: string;
-    password: string;
-    role: string;
-    created_at: string;
-    updated_at: string;
+    picture: string;
+    is_active: boolean;
+    roles: IRole[];
 }

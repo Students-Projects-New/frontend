@@ -26,15 +26,15 @@ export class HttpTokenInterceptor implements HttpInterceptor {
   }
 
   private performRequest(request: HttpRequest<any>): HttpRequest<any> {
-    let headers: HttpHeaders = request.headers;
-    if (this.isApiUrl(request.url)) {
+    let headers: HttpHeaders = new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' });
+    if (!this.isApiUrl(request.url)) {
       headers = headers.set('Authorization', `Bearer ${this.authService.accessToken}`);
     }
     return request.clone({ headers });
   }
 
   private isApiUrl(apiUrl: string): boolean {
-    const blockedApiList = [HttpApi.oauthToken];
+    const blockedApiList = [HttpApi.oauthToken, HttpApi.oauthRefreshToken];
     return blockedApiList.some((url) => apiUrl.includes(url));
   }
 
@@ -76,7 +76,6 @@ export class HttpTokenInterceptor implements HttpInterceptor {
 
   private processRequestFinally(): void {
     this.refreshTokenInProgress = false;
-    console.log('processRequestFinally');
   }
 
 }

@@ -39,25 +39,21 @@
                 </div>
             </div>
             <ul class="nav">
-                <li routerLinkActive="active" class="nav-item">
-                    <a [routerLink]="['/dashboard']" style="cursor: pointer;">
-                        <i class="fas fa-home"></i>
-                        <p>Tablero</p>
-                    </a>
-                </li>
-                <li class="nav-section">
-                    <span class="sidebar-mini-icon">
-                        <i class="fa fa-ellipsis-h"></i>
-                    </span>
-                    <h4 class="text-section">Modulos</h4>
-                </li>
                 <ng-container *ngFor="let item of menuItems">
-                    <li routerLinkActive="active" class="nav-item">
-                        <a [routerLink]="[item.link]" style="cursor: pointer;">
-                            <i class="{{item.icon}}"></i>
-                            <p>{{item.title}}</p>
-                        </a>
+                    <li class="nav-section">
+                        <span class="sidebar-mini-icon">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </span>
+                        <h4 class="text-section">{{item.title}}</h4>
                     </li>
+                    <ng-container *ngFor="let subItem of item.children">
+                        <li routerLinkActive="active" class="nav-item">
+                            <a [routerLink]="[subItem.path]" style="cursor: pointer;">
+                                <i class="{{subItem.icon}}"></i>
+                                <p>{{subItem.name}}</p>
+                            </a>
+                        </li>
+                    </ng-container>
                 </ng-container>
             </ul>
         </div>

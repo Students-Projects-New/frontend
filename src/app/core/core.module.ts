@@ -6,18 +6,12 @@ import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpTokenInterceptor } from '@core/interceptors/http-token.interceptor';
 import { ErrorHandlerInterceptor } from '@core/interceptors/error-handler.interceptor';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import * as CoreComponents from '@core/components';
 
 
 @NgModule({
   declarations: [
-    FooterComponent,
-    HeaderComponent,
-    NavbarComponent,
-    SidebarComponent
+    ...CoreComponents.components
   ],
   imports: [
     CommonModule,
@@ -30,10 +24,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true }
   ],
   exports: [
-    FooterComponent,
-    HeaderComponent,
-    NavbarComponent,
-    SidebarComponent
+    ...CoreComponents.components
   ]
 })
 export class CoreModule { }

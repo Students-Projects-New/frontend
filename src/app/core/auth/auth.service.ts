@@ -8,6 +8,7 @@ import { environment } from '@env/environment';
 import { HttpApi } from '@core/http/http-api';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '@data/models';
+import { IToken } from '@data/interfaces';
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class AuthService {
 
   private readonly url = `${environment.baseUrl}`;
   private currentUserSubject: BehaviorSubject<User>;
-  public  currentUser: Observable<User>;
+  public currentUser: Observable<User>;
   private jwtHelper: JwtHelperService;
   private token: any;
 
@@ -50,20 +51,19 @@ export class AuthService {
     return this.cookieService.get('refresh_token');
   }
 
-  public login(user: any): Observable<any> {
-    return this.http.post<any>(`${this.url}/${HttpApi.oauthToken}`, user)
+  public signIn(data: any): Observable<IToken> {
+    return this.http.post<IToken>(`${this.url}/${HttpApi.oauthToken}`, JSON.stringify(data))
       .pipe(
-        tap((res) => {
-          this.token = this.jwtHelper.decodeToken(res.access_token);
-          this.cookieService.set('access_token', res.access_token, res.expires_in, '/');
-          this.cookieService.set('refresh_token', res.refresh_token, res.expires_in, '/');
+        tap((res: IToken) => {
+          this.token = this.jwtHelper.decodeToken(res.access);
+          this.cookieService.set('access_token', res.access, new Date(this.token.exp * 1000), '/');
+          this.cookieService.set('refresh_token', res.refresh, new Date(this.token.exp * 1000), '/');
           localStorage.setItem('currentUser', JSON.stringify(this.token.user));
           this.currentUserSubject.next(this.token.user);
         }),
         catchError(this.handleError)
       );
   }
-
 
   public logout(): void {
     localStorage.clear();

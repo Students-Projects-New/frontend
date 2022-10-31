@@ -6,15 +6,32 @@ import { DetailsComponent } from './pages/details/details.component';
 import { ListComponent } from './pages/list/list.component';
 
 import { AdminLayoutComponent } from '@layout/admin-layout/admin-layout.component';
+import { ROLE } from "@data/enums/role.enum";
 
 const routes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
     children: [
-      { path: '', component: ListComponent, pathMatch: 'full', title: 'List Projects' },
-      { path: 'new', component: AddComponent, title: 'New Project' },
-      { path: ':id', component: DetailsComponent, title: 'Project Details' }
+      {
+        path: '',
+        component: ListComponent,
+        pathMatch: 'full',
+        title: 'List Projects',
+        data: { roles: [ROLE.STUDENT] }
+      },
+      {
+        path: 'new',
+        component: AddComponent,
+        title: 'New Project',
+        data: { roles: [ROLE.STUDENT] }
+      },
+      {
+        path: ':id',
+        component: DetailsComponent,
+        title: 'Project Details',
+        data: { roles: [ROLE.STUDENT] }
+      }
     ],
   }
 ];

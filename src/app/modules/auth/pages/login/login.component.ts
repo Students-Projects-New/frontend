@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SocialAuthService, GoogleLoginProvider, SocialUser } from "@abacritt/angularx-social-login";
+import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
 import { AuthService } from '@core/auth/auth.service';
+import { IToken } from '@data/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -18,22 +19,21 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() { }
-
-  public signInWithGoogle(): void {
-    this.socialAuthService
-      .signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then((data: SocialUser) => {
-        this.signIn(data);
-        console.log(data);
-      }).catch((error) => {
-        console.log(error);
-      });
+  ngOnInit() {
+    this.socialAuthService.authState.subscribe((user: SocialUser) => {
+      if (user) {
+        this.sendGoogleToken(user);
+      }
+    });
   }
 
-  public signIn(data: SocialUser) {
-    this.authService.login(data.idToken);
-    this.router.navigate(['/account/profile']);
+  public sendGoogleToken(socialUser: SocialUser) {
+    this.authService.signIn(socialUser.idToken).subscribe((token: IToken) => {
+      if (token) {
+        this.router.navigate(['/account/profile']);
+      }
+      this.socialAuthService.signOut();
+    });
   }
 
 }

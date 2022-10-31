@@ -1,10 +1,56 @@
-import { Directive } from '@angular/core';
+import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+
+import { AuthService } from '@core/auth/auth.service';
+import { User } from '@data/models';
 
 @Directive({
   selector: '[appPermissions]'
 })
-export class PermissionsDirective {
+export class PermissionsDirective implements OnInit, OnDestroy {
 
-  constructor() { }
+  private currentUser!: User;
+  private permissions!: string[];
+  private unsubscribe$ = new Subject<void>();
+
+  constructor(
+    private templateRef: TemplateRef<any>,
+    private viewContainer: ViewContainerRef,
+    private authService: AuthService
+  ) { }
+
+  ngOnInit(): void {
+    this.authService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((user: User) => {
+        this.currentUser = user;
+        this.updateView();
+      });
+  }
+
+  @Input()
+  set appPermissions(permissions: string[]) {
+    this.permissions = permissions;
+    this.updateView();
+  }
+
+  private updateView(): void {
+    if (this.currentUser && this.hasPermissions()) {
+      this.viewContainer.createEmbeddedView(this.templateRef);
+    } else {
+      this.viewContainer.clear();
+    }
+  }
+
+  private hasPermissions(): boolean {
+    const isLoggedIn = this.authService.isLoggedIn();
+    const hasPermission = true;
+    return isLoggedIn && hasPermission;
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
 }

@@ -1,6 +1,11 @@
+import { ROLE } from '@data/enums/role.enum';
+
 export interface ISidebar {
     title: string;
-    icon: string;
-    link?: string;
-    roles?: string[];
+    children: {
+        name: string;
+        icon: string;
+        path: string;
+        roles?: ROLE[];
+    }[];
 }
