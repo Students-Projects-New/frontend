@@ -9,21 +9,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
+const COMPONENTS = [
+  AppComponent,
+  AdminLayoutComponent
+];
+
+const MODULES = [
+  BrowserModule,
+  AppRoutingModule,
+  CoreModule,
+  SharedModule
+];
+
+const PROVIDERS = [
+  { provide: APP_BASE_HREF, useValue: '/students-projects' },
+  { provide: LocationStrategy, useClass: PathLocationStrategy }
+];
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    AdminLayoutComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CoreModule,
-    SharedModule
-  ],
-  providers: [
-    { provide: APP_BASE_HREF, useValue: '/students-projects' },
-    { provide: LocationStrategy, useClass: PathLocationStrategy },
-  ],
+  declarations: [...COMPONENTS],
+  imports: [...MODULES],
+  providers: [...PROVIDERS],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

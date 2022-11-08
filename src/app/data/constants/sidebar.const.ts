@@ -13,7 +13,7 @@ export const MENU_ITEMS: ISidebar[] = [
         ],
     },
     {
-        title: "Modules",
+        title: "Modulos",
         children: [
             {
                 name: 'Academico',

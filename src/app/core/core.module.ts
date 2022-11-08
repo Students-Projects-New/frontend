@@ -8,23 +8,23 @@ import { HttpTokenInterceptor } from '@core/interceptors/http-token.interceptor'
 import { ErrorHandlerInterceptor } from '@core/interceptors/error-handler.interceptor';
 import * as CoreComponents from '@core/components';
 
+const MODULES = [
+  CommonModule,
+  HttpClientModule,
+  RouterModule
+];
+
+const PROVIDERS = [
+  CookieService,
+  { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true }
+];
+
 
 @NgModule({
-  declarations: [
-    ...CoreComponents.components
-  ],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    RouterModule
-  ],
-  providers: [
-    CookieService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true }
-  ],
-  exports: [
-    ...CoreComponents.components
-  ]
+  declarations: [...CoreComponents.components],
+  imports: [...MODULES],
+  providers: [...PROVIDERS],
+  exports: [...CoreComponents.components]
 })
 export class CoreModule { }

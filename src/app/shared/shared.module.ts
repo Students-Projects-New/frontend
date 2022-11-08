@@ -6,15 +6,8 @@ import { RolesDirective } from './directives/roles.directive';
 
 
 @NgModule({
-  declarations: [
-    ...SharedComponents.components,
-    RolesDirective,
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    ...SharedComponents.components
-  ]
+  declarations: [...SharedComponents.components, RolesDirective],
+  imports: [CommonModule],
+  exports: [...SharedComponents.components, RolesDirective]
 })
 export class SharedModule { }

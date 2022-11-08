@@ -7,32 +7,34 @@ import { environment } from '@env/environment';
 
 import { AuthRoutingModule } from './auth-routing.module';
 
+const MODULES = [
+  CommonModule,
+  AuthRoutingModule,
+  SocialLoginModule
+];
+
+const PROVIDERS = [
+  {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: true,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(environment.oauth.googleClientId)
+        }
+      ],
+      onError: (err) => {
+        console.error(err);
+      }
+    } as SocialAuthServiceConfig,
+  }
+];
+
 
 @NgModule({
-  declarations: [
-    ...AuthRoutingModule.components
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    SocialLoginModule
-  ],
-  providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: true,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(environment.oauth.googleClientId)
-          }
-        ],
-        onError: (err) => {
-          console.error(err);
-        }
-      } as SocialAuthServiceConfig,
-    }
-  ]
+  declarations: [...AuthRoutingModule.components],
+  imports: [...MODULES],
+  providers: [...PROVIDERS]
 })
 export class AuthModule { }
