@@ -16,6 +16,24 @@ export const MENU_ITEMS: ISidebar[] = [
         title: "Modules",
         children: [
             {
+                name: 'Academico',
+                icon: 'fas fa-graduation-cap',
+                paths: [
+                    {
+                        name: 'Estudiantes',
+                        path: '/academics/students',
+                    },
+                    {
+                        name: 'Profesores',
+                        path: '/academics/teachers',
+                    },
+                    {
+                        name: 'Materias',
+                        path: '/academics/subjects',
+                    }
+                ],
+            },
+            {
                 name: 'Proyectos',
                 icon: 'fas fa-columns',
                 path: '/projects',
@@ -26,12 +44,6 @@ export const MENU_ITEMS: ISidebar[] = [
                 icon: 'fas fa-users',
                 path: '/users',
                 roles: [ROLE.ADMIN, ROLE.SUPPORT]
-            },
-            {
-                name: 'Roles',
-                icon: 'fas fa-user-tag',
-                path: '/roles',
-                roles: [ROLE.ADMIN]
             }
         ]
     }

@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
 import { AuthGuard } from '@core/guards/auth.guard';
 import { NoAuthGuard } from '@core/guards/no-auth.guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
   {
     path: 'home',
     loadChildren: () => import('@modules/home/home.module').then((m) => m.HomeModule),
@@ -31,22 +26,32 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'academics',
+    loadChildren: () => import('@modules/academics/academics.module').then((m) => m.AcademicsModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('@modules/users/users.module').then((m) => m.UsersModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'not-found',
     loadChildren: () => import('@modules/not-pages-found/not-pages-found.module').then((m) => m.NotPagesFoundModule)
   },
-  {
-    path: '**',
-    redirectTo: 'not-found'
-  }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'not-found' }
 ];
 
+const config: ExtraOptions = {
+  anchorScrolling: 'enabled',
+  useHash: true,
+  enableTracing: false,
+  preloadingStrategy: PreloadAllModules
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    anchorScrolling: 'enabled',
-    useHash: true,
-    enableTracing: false,
-    preloadingStrategy: PreloadAllModules
-  })],
+  imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

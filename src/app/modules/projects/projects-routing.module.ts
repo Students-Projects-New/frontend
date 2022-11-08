@@ -32,7 +32,7 @@ const routes: Routes = [
         title: 'Project Details',
         data: { roles: [ROLE.STUDENT] }
       }
-    ],
+    ]
   }
 ];
 

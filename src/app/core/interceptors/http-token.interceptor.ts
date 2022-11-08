@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { catchError, finalize, switchMap, filter, take } from 'rxjs/operators';
 
 import { HttpApi } from '@core/http/http-api';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/authentication/auth.service';
 
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {

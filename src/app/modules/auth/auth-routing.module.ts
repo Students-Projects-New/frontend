@@ -7,17 +7,9 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      {
-        path: 'login',
-        component: LoginComponent,
-        title: 'Login'
-      },
-      {
-        path: '**',
-        redirectTo: 'login',
-        pathMatch: 'full'
-      },
-    ],
+      { path: 'login', component: LoginComponent, title: 'Login' },
+      { path: '**', redirectTo: 'login', pathMatch: 'full' },
+    ]
   }
 ];
 

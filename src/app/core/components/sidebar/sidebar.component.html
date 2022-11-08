@@ -52,6 +52,17 @@
                                 <i class="{{subItem.icon}}"></i>
                                 <p>{{subItem.name}}</p>
                             </a>
+                            <ng-container *ngIf="subItem.paths">
+                                <ul class="nav nav-collapse">
+                                    <ng-container *ngFor="let subItemPath of subItem.paths">
+                                        <li routerLinkActive="active" class="nav-item">
+                                            <a [routerLink]="[subItemPath.path]" style="cursor: pointer;">
+                                                <span class="sub-item">{{subItemPath.name}}</span>
+                                            </a>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </ng-container>
                         </li>
                     </ng-container>
                 </ng-container>

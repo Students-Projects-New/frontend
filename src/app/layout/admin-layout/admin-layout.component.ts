@@ -16,7 +16,6 @@ export class AdminLayoutComponent implements OnInit {
     this.menuItems = this.sidebarService.menu;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }
