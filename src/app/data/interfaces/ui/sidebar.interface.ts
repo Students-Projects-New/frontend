@@ -2,15 +2,9 @@ import { ROLE } from '@data/enums/role.enum';
 
 export interface ISidebar {
     title: string;
-    children: ISidebarChild[];
-}
-
-export interface ISidebarChild {
-    name: string;
-    icon: string;
-    path?: string;
-    paths?: ISidebarChildPath[];
+    icon?: string;
+    link?: string;
+    expanded?: boolean;
+    children?: ISidebar[];
     roles?: ROLE[];
 }
-
-export interface ISidebarChildPath extends Omit<ISidebarChild, 'icon'| 'paths'> {}

@@ -6,9 +6,10 @@ export const MENU_ITEMS: ISidebar[] = [
         title: "Principal",
         children: [
             {
-                name: "Dashboard",
+                title: "Dashboard",
                 icon: "fas fa-home",
-                path: "/dashboard",
+                link: "/dashboard",
+                expanded: false,
             },
         ],
     },
@@ -16,33 +17,28 @@ export const MENU_ITEMS: ISidebar[] = [
         title: "Modulos",
         children: [
             {
-                name: 'Academico',
+                title: 'Academico',
                 icon: 'fas fa-graduation-cap',
-                paths: [
+                expanded: true,
+                children: [
                     {
-                        name: 'Estudiantes',
-                        path: '/academics/students',
-                    },
-                    {
-                        name: 'Profesores',
-                        path: '/academics/teachers',
-                    },
-                    {
-                        name: 'Materias',
-                        path: '/academics/subjects',
+                        title: 'Materias',
+                        link: '/academics/subjects',
                     }
                 ],
             },
             {
-                name: 'Proyectos',
+                title: 'Proyectos',
                 icon: 'fas fa-columns',
-                path: '/projects',
+                link: '/projects',
+                expanded: false,
                 roles: [ROLE.STUDENT]
             },
             {
-                name: 'Usuarios',
+                title: 'Usuarios',
                 icon: 'fas fa-users',
-                path: '/users',
+                link: '/users',
+                expanded: false,
                 roles: [ROLE.ADMIN, ROLE.SUPPORT]
             }
         ]
