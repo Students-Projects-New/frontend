@@ -1,1 +1,73 @@
-<p>add works!</p>
+<div class="page-header">
+    <h4 class="page-title">Carge de Materias</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a href="#">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Academico</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Materias</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">Nueva Materia</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Subir Archivos</div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="input-custom-file">Cargar Archivo Excel</label>
+                    <input type="file" class="form-control-file" id="input-custom-file" (change)="onFileChange($event)"
+                        accept=".xls, .xlsx">
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="isFileSelected()">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Lista de Materias</div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let subject of subjects; let i = index">
+                                <tr>
+                                    <th>{{i + 1}}</th>
+                                    <td>{{subject.code}}</td>
+                                    <td>{{subject.name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

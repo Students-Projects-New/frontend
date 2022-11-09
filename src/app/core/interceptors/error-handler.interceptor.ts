@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@core/authentication/auth.service';
+import { HttpError } from '@data/models';
 
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
@@ -26,7 +27,14 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
             this.router.navigate(['/not-found']);
             break;
         }
-        return throwError(() => error);
+        
+        let customError: HttpError;
+        try {
+          customError = HttpError.fromJSON(error.error);
+        } catch (e) {
+          customError = new HttpError('Unknown', 'Unknown', 'Unknown');
+        }
+        return throwError(() => customError);
       }));
   }
 }

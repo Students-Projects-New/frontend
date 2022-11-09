@@ -6,4 +6,6 @@ export { IRole } from './http/role.interface';
 
 export { IToken } from './http/token.interface';
 
+export { ISubject } from './http/subject.interface';
+
 export { ISidebar } from './ui/sidebar.interface';
