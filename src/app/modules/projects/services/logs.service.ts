@@ -10,7 +10,7 @@ import { environment } from '@env/environment';
 })
 export class LogsService {
 
-  private readonly url = `${environment.baseUrl}`;
+  private readonly url = `${environment.baseUrlProjects}`;
 
   constructor(
     private http: HttpClient

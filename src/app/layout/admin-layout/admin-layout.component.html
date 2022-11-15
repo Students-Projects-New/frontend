@@ -5,19 +5,7 @@
     </div>
     <app-sidebar [menuItems]="menuItems"></app-sidebar>
     <div class="main-panel">
-        <div class="content content-full">
-            <div class="page-navs bg-white">
-                <div class="nav-scroller">
-                    <div class="nav nav-tabs nav-line nav-color-primary d-flex align-items-center justify-contents-center w-100">
-                        <a class="nav-link active show" data-toggle="tab" href="#tab1">Lista de Proyectos
-                            <span class="count ml-1">(30)</span>
-                        </a>
-                        <div class="ml-auto">
-                            <a class="btn btn-success" [routerLink]="['/projects/new']">Nuevo Proyecto</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="content">
             <div class="page-inner">
                 <router-outlet></router-outlet>
             </div>

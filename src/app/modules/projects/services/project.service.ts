@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { HttpApi } from '@core/http/http-api';
-import { IProject } from '@data/interfaces/http/project.interface';
+import { IProject } from '@data/interfaces';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { environment } from '@env/environment';
 })
 export class ProjectService {
 
-  private readonly url = `${environment.baseUrl}`;
+  private readonly url = `${environment.baseUrlProjects}`;
 
   constructor(
     private http: HttpClient

@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AddComponent } from './pages/add/add.component';
-import { DetailsComponent } from './pages/details/details.component';
+import { DetailComponent } from './pages/detail/detail.component';
 import { ListComponent } from './pages/list/list.component';
 
 import { AdminLayoutComponent } from '@layout/admin-layout/admin-layout.component';
-import { ROLE } from "@data/enums/role.enum";
 
 const routes: Routes = [
   {
@@ -17,20 +16,17 @@ const routes: Routes = [
         path: '',
         component: ListComponent,
         pathMatch: 'full',
-        title: 'List Subjects',
-        data: { roles: [ROLE.STUDENT] }
+        title: 'Lista de Materias'
       },
       {
         path: 'new',
         component: AddComponent,
-        title: 'New Subject',
-        data: { roles: [ROLE.STUDENT] }
+        title: 'Nueva Materia'
       },
       {
         path: ':id',
-        component: DetailsComponent,
-        title: 'Subject Details',
-        data: { roles: [ROLE.STUDENT] }
+        component: DetailComponent,
+        title: 'Detalles de la Materia'
       }
     ]
   }

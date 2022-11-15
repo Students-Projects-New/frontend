@@ -6,7 +6,7 @@ import { IProject } from '@data/interfaces';
 import { ProjectService } from '@modules/projects/services/project.service';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-project-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })

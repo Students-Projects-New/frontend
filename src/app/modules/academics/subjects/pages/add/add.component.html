@@ -2,7 +2,7 @@
     <h4 class="page-title">Carge de Materias</h4>
     <ul class="breadcrumbs">
         <li class="nav-home">
-            <a href="#">
+            <a [routerLink]="['/dashboard']">
                 <i class="flaticon-home"></i>
             </a>
         </li>
@@ -10,62 +10,111 @@
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="#">Academico</a>
+            <a>Academico</a>
         </li>
         <li class="separator">
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="#">Materias</a>
+            <a [routerLink]="['/academics/subjects']">Materias</a>
         </li>
         <li class="separator">
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="#">Nueva Materia</a>
+            <a>Nueva Materia</a>
         </li>
     </ul>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Subir Archivos</div>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="input-custom-file">Cargar Archivo Excel</label>
-                    <input type="file" class="form-control-file" id="input-custom-file" (change)="onFileChange($event)"
-                        accept=".xls, .xlsx">
+<div class="row mx-5">
+    <ng-container *ngIf="!show">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Subir Archivos</div>
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-center mb-3">
+                        <div class="col-2">
+                            <h4>Archivo de materias de ejemplo (.xlsx)</h4>
+                        </div>
+                        <div class="col-2">
+                            <a href="assets/files/subjects.xlsx" download="subjects.xlsx">
+                                <i class="fas fa-file-excel fa-2x"></i>
+                                <span class="sub-item"> Descargar plantilla</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col text-center">
+                            <form class="dropzone">
+                                <div class="dz-message mb-3" data-dz-message>
+                                    <div class="icon">
+                                        <i class="flaticon-file"></i>
+                                    </div>
+                                    <h4 class="message"><strong>Cargar archivo</strong></h4>
+                                    <span class="note">Archivos compatibles: xlsx</span>
+                                </div>
+                                <div class="fallback">
+                                    <input class="form-control-file" type="file" hidden id="input-custom-file"
+                                        accept=".xls, .xlsx" style="display:none;" (change)="onFileChange($event)">
+                                    <label for="input-custom-file" class="btn btn-primary text-white">Cargar
+                                        Archivo</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col-2">
+                            <h4>Paginación</h4>
+                        </div>
+                        <div class="col-1">
+                            <div class="form-group">
+                                <select class="form-control" id="limit" (change)="onLimitChange($event)">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action text-center">
+                    <button class="btn btn-primary" [disabled]="!isFileSelected()" (click)="onUpload()">Cargar</button>
                 </div>
             </div>
         </div>
-    </div>
-    <ng-container *ngIf="isFileSelected()">
-        <div class="col-md-12">
+    </ng-container>
+    <ng-container *ngIf="show">
+        <div class="col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Lista de Materias</div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Código</th>
-                                    <th scope="col">Nombre</th>
-                                </tr>
-                            </thead>
-                            <tbody *ngFor="let subject of subjects; let i = index">
-                                <tr>
-                                    <th>{{i + 1}}</th>
-                                    <td>{{subject.code}}</td>
-                                    <td>{{subject.name}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <ngx-datatable class="material striped" [columnMode]="'flex'" [headerHeight]="50"
+                        [footerHeight]="50" rowHeight="auto" [rows]="rows" [limit]="limit">
+                        <ngx-datatable-column name="#" [flexGrow]="0.5">
+                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                {{(rowIndex + 1)}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Code" [flexGrow]="2">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{row?.code}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Name" [flexGrow]="2">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{ row?.name | titlecase }}
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+                <div class="card-action text-center">
+                    <button class="btn btn-primary" (click)="onSubmit()">Guardar</button>
+                    <button class="btn btn-default" (click)="onCancel()">Cancelar</button>
                 </div>
             </div>
         </div>

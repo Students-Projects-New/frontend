@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AddComponent } from './pages/add/add.component';
-import { DetailsComponent } from './pages/details/details.component';
+import { DetailComponent } from './pages/detail/detail.component';
 import { ListComponent } from './pages/list/list.component';
 
 import { AdminLayoutComponent } from '@layout/admin-layout/admin-layout.component';
+import { RoleGuard } from '@core/guards';
 import { ROLE } from "@data/enums/role.enum";
 
 const routes: Routes = [
@@ -17,20 +18,23 @@ const routes: Routes = [
         path: '',
         component: ListComponent,
         pathMatch: 'full',
-        title: 'List Projects',
-        data: { roles: [ROLE.STUDENT] }
+        title: 'Lista de Proyectos',
+        canActivate: [RoleGuard],
+        data: { roles: [ROLE.ADMIN, ROLE.SUPPORT, ROLE.TEACHER, ROLE.STUDENT] }
       },
       {
         path: 'new',
         component: AddComponent,
-        title: 'New Project',
-        data: { roles: [ROLE.STUDENT] }
+        title: 'Nuevo Proyecto',
+        canActivate: [RoleGuard],
+        data: { roles: [ROLE.ADMIN, ROLE.SUPPORT, ROLE.TEACHER, ROLE.STUDENT] }
       },
       {
         path: ':id',
-        component: DetailsComponent,
-        title: 'Project Details',
-        data: { roles: [ROLE.STUDENT] }
+        component: DetailComponent,
+        title: 'Detalles del Proyecto',
+        canActivate: [RoleGuard],
+        data: { roles: [ROLE.ADMIN, ROLE.SUPPORT, ROLE.TEACHER, ROLE.STUDENT] }
       }
     ]
   }
@@ -41,5 +45,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class ProjectsRoutingModule {
-  static components = [ListComponent, DetailsComponent, AddComponent];
+  static components = [ListComponent, DetailComponent, AddComponent];
 }

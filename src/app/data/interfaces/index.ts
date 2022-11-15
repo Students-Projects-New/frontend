@@ -8,4 +8,8 @@ export { IToken } from './http/token.interface';
 
 export { ISubject } from './http/subject.interface';
 
+export { IHttpError } from './http/http-error.interface';
+
 export { ISidebar } from './ui/sidebar.interface';
+
+export { IValidationMessages } from './ui/validation-messages.interface';

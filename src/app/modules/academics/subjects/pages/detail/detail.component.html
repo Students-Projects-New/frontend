@@ -1,0 +1,57 @@
+<div class="modal fade" id="editModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header no-bd">
+                <h5 class="modal-title">
+                    <span class="fw-mediumbold">
+                        Editar</span>
+                    <span class="fw-light">
+                        Materia
+                    </span>
+                </h5>
+                <button type="button" class="close" aria-label="Close" (click)="closedModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formSubject" (ngSubmit)="updateSubject()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group form-group-default">
+                                <label>ID</label>
+                                <input type="text" class="form-control" id="id" formControlName="id" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group form-group-default">
+                                <label>Codigo</label>
+                                <input type="text" class="form-control" id="code" formControlName="code">
+                                <ng-container *ngFor="let validation of validationMessages['code']">
+                                    <div *ngIf="f?.['code']?.hasError(validation.type) && isFieldValid('code')">
+                                        <small class="text-danger">{{validation.message}}</small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group form-group-default">
+                                <label>Nombre</label>
+                                <input type="text" class="form-control" id="name" formControlName="name">
+                                <ng-container *ngFor="let validation of validationMessages['name']">
+                                    <div *ngIf="f?.['name']?.hasError(validation.type) && isFieldValid('name')">
+                                        <small class="text-danger">{{validation.message}}</small>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer no-bd">
+                <button type="submit" class="btn btn-primary" [disabled]="!formSubject.valid">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="closedModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

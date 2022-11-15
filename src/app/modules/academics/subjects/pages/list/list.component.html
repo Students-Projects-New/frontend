@@ -1,1 +1,96 @@
-<p>list works subjects !</p>
+<div class="page-header">
+    <h4 class="page-title">Lista de Materias</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a [routerLink]="['/dashboard']">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a>Academico</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/academics/subjects']">Materias</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a>Lista Materia</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <div class="card-title">Lista de Materias</div>
+                    <button class="btn btn-primary btn-round ml-auto" (click)="createSubject()">
+                        <i class="fa fa-plus"></i>
+                        Adicionar Materia
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <!-- Modal -->
+                <ng-container *ngIf="showModal">
+                    <app-subject-detail [subject]="subject" (showModal)="showModal = $event"></app-subject-detail>
+                </ng-container>
+                <!-- End Modal -->
+
+                <!-- Table -->
+                <ngx-datatable class="material striped" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+                    rowHeight="auto" [rows]="rows" [limit]="limit">
+                    <ngx-datatable-column name="#" [flexGrow]="0.5">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            {{(rowIndex + 1)}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Code" [flexGrow]="2">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row?.code}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Name" [flexGrow]="2">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.name | titlecase }}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Actions" [flexGrow]="1">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="form-button-action">
+                                <button 
+                                    type="button" 
+                                    data-toggle="tooltip" 
+                                    title="Editar"
+                                    class="btn btn-link btn-primary btn-lg" 
+                                    data-original-title="Editar Materia"
+                                    (click)="openModal(row)">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button 
+                                    type="button" 
+                                    data-toggle="tooltip" 
+                                    title="Eliminar"
+                                    class="btn btn-link btn-danger" 
+                                    data-original-title="Eliminar Materia"
+                                    (click)="deleteSubject(row.id)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+                <!-- End Table -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@ import { IToken } from '@data/interfaces';
 })
 export class AuthService {
 
-  private readonly url = `${environment.baseUrl}`;
+  private readonly url = `${environment.baseUrlAuth}`;
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   private jwtHelper: JwtHelperService;

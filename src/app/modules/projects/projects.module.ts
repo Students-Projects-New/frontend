@@ -14,8 +14,8 @@ import { ProjectsRoutingModule } from './projects-routing.module';
   ],
   imports: [
     CommonModule,
-    SharedModule,
     ReactiveFormsModule,
+    SharedModule,
     ProjectsRoutingModule,
     LogMonitorModule
   ]

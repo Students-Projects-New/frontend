@@ -1,4 +1,6 @@
-export class HttpError {
+import { IHttpError } from "@data/interfaces";
+
+export class HttpError implements IHttpError {
     constructor(
         private _module: string,
         private _message: string,

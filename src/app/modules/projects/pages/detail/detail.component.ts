@@ -5,11 +5,11 @@ import { LogMessage as NgxLogMessage } from 'ngx-log-monitor';
 import { LogsService } from '@modules/projects/services/logs.service';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  selector: 'app-project-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.css']
 })
-export class DetailsComponent implements OnInit {
+export class DetailComponent implements OnInit {
 
   projectId!: string;
   build: NgxLogMessage[];

@@ -14,7 +14,9 @@ export const environment = {
   oauth: {
     googleClientId: '906303529522-pa3hcik7n8ib6r6cmgiis9e2ljm5l0h8.apps.googleusercontent.com'
   },
-  baseUrl: `${server.protocol}://${server.hostname}:${server.port}/sp_project/projects/api/v1`,
+  baseUrlAcademic: `${server.protocol}://${server.hostname}:${server.port}/sp_academic/academic/api/v1`,
+  baseUrlProjects: `${server.protocol}://${server.hostname}:${server.port}/sp_project/projects/api/v1`,
+  baseUrlAuth: `${server.protocol}://${server.hostname}:${server.port}/sp_user/auth/api/v1`,
 };
 
 /*

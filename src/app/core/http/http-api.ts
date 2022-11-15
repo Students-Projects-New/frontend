@@ -17,4 +17,9 @@ export class HttpApi {
     // Logs
     static logsProject = 'log_project';
 
+    // Subjects
+    static subjects = 'subjects';
+    static subjectsPeriod = 'subjectsPeriod';
+    static subjectsStudent = 'subjectsStudent';
+
 }

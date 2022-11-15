@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { IValidationMessages } from '@data/interfaces';
 import { ProjectService } from '@modules/projects/services/project.service';
 
 @Component({
-  selector: 'app-add',
+  selector: 'app-project-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
@@ -90,13 +91,4 @@ export class AddComponent implements OnInit {
     this.newProject.reset();
   }
 
-}
-
-export interface IValidationMessages {
-  [key: string]: IValidationMessage[];
-}
-
-export interface IValidationMessage {
-  type: string;
-  message: string;
 }

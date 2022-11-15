@@ -24,6 +24,17 @@ export const MENU_ITEMS: ISidebar[] = [
                     {
                         title: 'Materias',
                         link: '/academics/subjects',
+                        roles: [ROLE.ADMIN, ROLE.SUPPORT]
+                    },
+                    {
+                        title: 'Materia Periodo',
+                        link: '/academics/subject-period',
+                        roles: [ROLE.ADMIN, ROLE.SUPPORT]
+                    },
+                    { 
+                        title: 'Cursos',
+                        link: '/academics/courses',
+                        roles: [ROLE.ADMIN, ROLE.SUPPORT, ROLE.TEACHER]
                     }
                 ],
             },
