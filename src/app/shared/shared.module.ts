@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import * as SharedComponents from './components';
+import * as SharedPipes from './pipes';
 import { RolesDirective } from './directives/roles.directive';
-import { CardCourseComponent } from './components/cards/card-course/card-course.component';
-import { CardUserComponent } from './components/cards/card-user/card-user.component';
 
 
 @NgModule({
-  declarations: [...SharedComponents.components, RolesDirective, CardCourseComponent, CardUserComponent],
+  declarations: [...SharedComponents.components, RolesDirective, ...SharedPipes.pipes],
   imports: [CommonModule],
-  exports: [...SharedComponents.components, RolesDirective]
+  exports: [...SharedComponents.components, RolesDirective, ...SharedPipes.pipes]
 })
 export class SharedModule { }

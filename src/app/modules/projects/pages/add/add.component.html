@@ -28,6 +28,34 @@
             </div>
             <div class="card-body">
                 <form autocomplete="off" [formGroup]="newProject" (ngSubmit)="onSubmit()">
+                    <div class="form-group input-file input-file-image">
+                        <img class="img-upload-preview" width="150" height="150" [src]="imageURL" alt="preview">
+                        <input type="file" class="form-control form-control-file" id="image" formControlName="image" (change)="showPreview($event)" accept="image/*">
+                        <label for="image" class="label-input-file btn btn-default btn-round">
+                            <span class="btn-label">
+                                <i class="fa fa-file-image"></i>
+                            </span>
+                            Seleccionar Imagen
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nombre del Projecto</label>
+                        <input type="text" class="form-control" id="name" formControlName="name">
+                        <ng-container *ngFor="let validation of validationMessages['name']">
+                            <div *ngIf="f?.['name']?.hasError(validation.type) && isFieldValid('name')">
+                                <small class="text-danger">{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+                        <ng-container *ngFor="let validation of validationMessages['description']">
+                            <div *ngIf="f?.['description']?.hasError(validation.type) && isFieldValid('description')">
+                                <small class="text-danger">{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
                     <div class="form-group">
                         <label for="context">Contexto</label>
                         <input type="text" class="form-control" id="context" formControlName="context">
@@ -48,7 +76,12 @@
                     </div>
                     <div class="form-group">
                         <label for="url">URL Repositorio</label>
-                        <input type="text" class="form-control" id="url" formControlName="url">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">https://github.com/username/project</span>
+                            </div>
+                            <input type="text" class="form-control" id="url" formControlName="url">
+                        </div>
                         <ng-container *ngFor="let validation of validationMessages['url']">
                             <div *ngIf="f?.['url']?.hasError(validation.type) && isFieldValid('url')">
                                 <small class="text-danger">{{validation.message}}</small>
@@ -57,7 +90,12 @@
                     </div>
                     <div class="form-group">
                         <label for="static_path">Ruta Estática</label>
-                        <input type="text" class="form-control" id="static_path" formControlName="static_path">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">src/app/static</span>
+                            </div>
+                            <input type="text" class="form-control" id="static_path" formControlName="static_path">
+                        </div>
                         <ng-container *ngFor="let validation of validationMessages['static_path']">
                             <div *ngIf="f?.['static_path']?.hasError(validation.type) && isFieldValid('static_path')">
                                 <small class="text-danger">{{validation.message}}</small>

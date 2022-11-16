@@ -12,27 +12,40 @@ import { ProjectService } from '@modules/projects/services/project.service';
 })
 export class AddComponent implements OnInit {
 
+  imageURL: string;
+  file: File | undefined;
   newProject: FormGroup;
   validationMessages: IValidationMessages = {
+    name: [
+      { type: 'required', message: 'Nombre es requerido' },
+      { type: 'minlength', message: 'Nombre debe tener al menos 5 caracteres' },
+      { type: 'maxlength', message: 'Nombre no puede tener más de 25 caracteres' },
+      { type: 'pattern', message: 'Nombre debe contener solo letras' },
+    ],
+    description: [
+      { type: 'required', message: 'Descripción es requerida' },
+      { type: 'minlength', message: 'Descripción debe tener al menos 5 caracteres' },
+      { type: 'maxlength', message: 'Descripción no puede tener más de 25 caracteres' },
+      { type: 'pattern', message: 'Descripción debe contener solo letras' },
+    ],
     context: [
-      { type: 'required', message: 'Context is required' },
-      { type: 'minlength', message: 'Context must be at least 5 characters long' },
-      { type: 'maxlength', message: 'Context cannot be more than 25 characters long' },
-      { type: 'pattern', message: 'Your context must contain only letters' },
+      { type: 'required', message: 'Contexto es requerido' },
+      { type: 'minlength', message: 'Contexto debe tener al menos 5 caracteres' },
+      { type: 'maxlength', message: 'Contexto no puede tener más de 25 caracteres' },
+      { type: 'pattern', message: 'Contexto debe contener solo letras' },
     ],
     port_container: [
-      { type: 'required', message: 'Port Container is required' },
-      { type: 'minlength', message: 'Port Container must be at least 2 characters long' },
-      { type: 'maxlength', message: 'Port Container cannot be more than 5 characters long' },
-      { type: 'pattern', message: 'Your port container must contain only numbers' },
+      { type: 'required', message: 'Puerto es requerido' },
+      { type: 'minlength', message: 'Puerto debe tener al menos 2 caracteres' },
+      { type: 'maxlength', message: 'Puerto no puede tener más de 5 caracteres' },
+      { type: 'pattern', message: 'Puerto debe contener solo números' },
     ],
     url: [
-      { type: 'required', message: 'Url is required' },
-      { type: 'pattern', message: 'Your url must be a repository github or gitlab' },
+      { type: 'required', message: 'URL es requerido' },
+      { type: 'pattern', message: 'URL debe ser un repositorio de GitHub o GitLab' },
     ],
     static_path: [
-      { type: 'required', message: 'Static Path is required' },
-      { type: 'pattern', message: 'Your static path must be a folder path' },
+      { type: 'pattern', message: 'Ruta estática debe ser un directorio' },
     ]
   };
 
@@ -41,7 +54,21 @@ export class AddComponent implements OnInit {
     private projectService: ProjectService,
     private router: Router
   ) {
+    this.imageURL = '';
     this.newProject = this.fb.group({
+      name: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(25),
+        Validators.pattern('^[a-zA-Z ]*$')
+      ])),
+      description: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(25),
+        Validators.pattern('^[a-zA-Z ]*$')
+      ])),
+      image: new FormControl(''),
       context: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(5),
@@ -51,7 +78,7 @@ export class AddComponent implements OnInit {
       port_container: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(4),
+        Validators.maxLength(5),
         Validators.pattern('^[0-9]*$')
       ])),
       url: new FormControl('', Validators.compose([
@@ -59,7 +86,6 @@ export class AddComponent implements OnInit {
         Validators.pattern('^(https?://)?(www.)?((github.com)|(gitlab.com))/.+$')
       ])),
       static_path: new FormControl('', Validators.compose([
-        Validators.required,
         Validators.pattern('^(\/[a-zA-Z0-9]+)+$')
       ])),
     });
@@ -77,18 +103,42 @@ export class AddComponent implements OnInit {
     return this.newProject.controls[field].dirty || this.newProject.controls[field].touched;
   }
 
+  showPreview(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    if (target.files && file) {
+      this.fileToBase64(file).then((data: string) => {
+        this.imageURL = data;
+        this.newProject.patchValue({ image: data });
+      });
+    } else {
+      this.imageURL = '';
+      this.file = undefined;
+    }
+  }
+
+  fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  }
+
   onBack() {
     this.router.navigate(['/projects']);
   }
 
   onSubmit() {
-    if (!this.newProject.valid) {
+    console.log(this.newProject.value);
+    /*if (!this.newProject.valid) {
       this.newProject.markAllAsTouched();
       return;
     }
     console.log(this.newProject.value);
     this.projectService.createProject(this.newProject.value);
-    this.newProject.reset();
+    this.newProject.reset();*/
   }
 
 }

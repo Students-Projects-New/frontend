@@ -12,14 +12,12 @@ import { ProjectService } from '@modules/projects/services/project.service';
 })
 export class ListComponent implements OnInit, OnDestroy {
 
-  projects: IProject[];
+  projects: IProject[] = [];
   private unsubscribe$ = new Subject<void>();
 
   constructor(
     private projectService: ProjectService
-  ) {
-    this.projects = [];
-  }
+  ) { }
 
   ngOnInit(): void {
     this.loadProjects();
