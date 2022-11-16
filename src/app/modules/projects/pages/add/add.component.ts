@@ -87,7 +87,7 @@ export class AddComponent implements OnInit {
       return;
     }
     console.log(this.newProject.value);
-    this.projectService.postProject(this.newProject.value);
+    this.projectService.createProject(this.newProject.value);
     this.newProject.reset();
   }
 

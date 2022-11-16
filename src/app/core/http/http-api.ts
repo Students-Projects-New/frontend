@@ -22,4 +22,7 @@ export class HttpApi {
     static subjectsPeriod = 'subjectsPeriod';
     static subjectsStudent = 'subjectsStudent';
 
+    // Courses
+    static courses = 'subjectsPeriodDetail';
+
 }

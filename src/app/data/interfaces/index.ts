@@ -8,6 +8,8 @@ export { IToken } from './http/token.interface';
 
 export { ISubject } from './http/subject.interface';
 
+export { ICourse } from './http/course.interface';
+
 export { IHttpError } from './http/http-error.interface';
 
 export { ISidebar } from './ui/sidebar.interface';
