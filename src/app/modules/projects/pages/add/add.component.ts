@@ -13,7 +13,6 @@ import { ProjectService } from '@modules/projects/services/project.service';
 export class AddComponent implements OnInit {
 
   imageURL: string;
-  file: File | undefined;
   newProject: FormGroup;
   validationMessages: IValidationMessages = {
     name: [
@@ -32,7 +31,7 @@ export class AddComponent implements OnInit {
       { type: 'required', message: 'Contexto es requerido' },
       { type: 'minlength', message: 'Contexto debe tener al menos 5 caracteres' },
       { type: 'maxlength', message: 'Contexto no puede tener más de 25 caracteres' },
-      { type: 'pattern', message: 'Contexto debe contener solo letras' },
+      { type: 'pattern', message: 'Contexto debe contener letras, números y guiones' },
     ],
     port_container: [
       { type: 'required', message: 'Puerto es requerido' },
@@ -68,12 +67,12 @@ export class AddComponent implements OnInit {
         Validators.maxLength(25),
         Validators.pattern('^[a-zA-Z ]*$')
       ])),
-      image: new FormControl(''),
+      image: [''],
       context: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(25),
-        Validators.pattern('^[a-zA-Z ]*$')
+        Validators.pattern('^[a-zA-Z0-9-]*$')
       ])),
       port_container: new FormControl('', Validators.compose([
         Validators.required,
@@ -113,7 +112,6 @@ export class AddComponent implements OnInit {
       });
     } else {
       this.imageURL = '';
-      this.file = undefined;
     }
   }
 

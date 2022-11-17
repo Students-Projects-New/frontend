@@ -27,10 +27,13 @@
                 <div class="card-title">Nuevo Projecto</div>
             </div>
             <div class="card-body">
-                <form autocomplete="off" [formGroup]="newProject" (ngSubmit)="onSubmit()">
+                <form autocomplete="off" [formGroup]="newProject" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
                     <div class="form-group input-file input-file-image">
-                        <img class="img-upload-preview" width="150" height="150" [src]="imageURL" alt="preview">
-                        <input type="file" class="form-control form-control-file" id="image" formControlName="image" (change)="showPreview($event)" accept="image/*">
+                        <ng-container *ngIf="imageURL">
+                            <img class="img-upload-preview" width="150" height="150" [src]="imageURL" alt="preview">
+                        </ng-container>
+                        <input type="file" class="form-control form-control-file" id="image" name="image"
+                            (change)="showPreview($event)" accept="image/*">
                         <label for="image" class="label-input-file btn btn-default btn-round">
                             <span class="btn-label">
                                 <i class="fa fa-file-image"></i>
@@ -49,7 +52,8 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Descripción</label>
-                        <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+                        <textarea class="form-control" id="description" rows="3"
+                            formControlName="description"></textarea>
                         <ng-container *ngFor="let validation of validationMessages['description']">
                             <div *ngIf="f?.['description']?.hasError(validation.type) && isFieldValid('description')">
                                 <small class="text-danger">{{validation.message}}</small>
@@ -69,7 +73,8 @@
                         <label for="port_container">Puerto Container</label>
                         <input type="text" class="form-control" id="port_container" formControlName="port_container">
                         <ng-container *ngFor="let validation of validationMessages['port_container']">
-                            <div *ngIf="f?.['port_container']?.hasError(validation.type) && isFieldValid('port_container')">
+                            <div
+                                *ngIf="f?.['port_container']?.hasError(validation.type) && isFieldValid('port_container')">
                                 <small class="text-danger">{{validation.message}}</small>
                             </div>
                         </ng-container>

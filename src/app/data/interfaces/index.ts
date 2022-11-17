@@ -1,5 +1,7 @@
 export { IProject } from './http/project.interface';
 
+export { ITagElement } from './http/tag.interface';
+
 export { IUser } from './http/user.interface';
 
 export { IRole } from './http/role.interface';
