@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ISubject } from '@data/interfaces';
 import { SubjectsService } from '@modules/academics/subjects/services/subjects.service';
-import { XlsxToJsonService } from '@core/services/xlsx-to-json.service';
+import { ConvertFileService } from '@core/services/convert-file.service';
 
 @Component({
   selector: 'app-subject-add',
@@ -18,13 +18,14 @@ export class AddComponent implements OnInit {
 
   constructor(
     private subjectsService: SubjectsService,
-    private xlsxToJsonService: XlsxToJsonService
+    private convertFileService: ConvertFileService
   ) { }
 
   ngOnInit(): void { }
 
   onFileChange(event: Event) {
-    this.file = (event.target as HTMLInputElement).files![0];
+    const target = event.target as HTMLInputElement;
+    this.file = (target.files as FileList)[0];
     this.xlsxToJson();
   }
 
@@ -59,10 +60,9 @@ export class AddComponent implements OnInit {
   }
 
   private xlsxToJson(): void {
-    this.xlsxToJsonService.convertToJson(this.file!)
-      .then((data: ISubject[]) => {
-        this.rows = data;
-      });
+    this.convertFileService.convertToJson(this.file as File)
+      .then((data: ISubject[]) => this.rows = data)
+      .catch((error: Error) => console.log(error));
   }
 
 }

@@ -17,8 +17,8 @@ export class ProjectService {
     private http: HttpClient
   ) { }
 
-  public getProjects(id: string): Observable<IProject[]> {
-    return this.http.post<IProject[]>(`${this.url}/${HttpApi.projectList}/${id}`, {});
+  public getProjects(id: string, tags?: any): Observable<IProject[]> {
+    return this.http.post<IProject[]>(`${this.url}/${HttpApi.projectList}/${id}`, (tags) ? { params: tags } : {});
   }
 
   public createProject(project: IProject): Observable<IProject> {

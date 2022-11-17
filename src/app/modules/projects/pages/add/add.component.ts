@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { IValidationMessages } from '@data/interfaces';
+import { ConvertFileService } from '@core/services/convert-file.service';
 import { ProjectService } from '@modules/projects/services/project.service';
 
 @Component({
@@ -50,6 +51,7 @@ export class AddComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private convertFileService: ConvertFileService,
     private projectService: ProjectService,
     private router: Router
   ) {
@@ -106,22 +108,11 @@ export class AddComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     const file: File = (target.files as FileList)[0];
     if (target.files && file) {
-      this.fileToBase64(file).then((data: string) => {
-        this.imageURL = data;
-      }).catch((error: Error) => {
-        console.error(error);
-      });
+      this.convertFileService.convertToBase64(file)
+        .then((data: string) => this.imageURL = data)
+        .catch((error: Error) => console.log(error));
       this.newProject.patchValue({ image: file });
     }
-  }
-
-  fileToBase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = error => reject(error);
-    });
   }
 
   onBack() {
