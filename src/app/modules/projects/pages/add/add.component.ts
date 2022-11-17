@@ -67,7 +67,7 @@ export class AddComponent implements OnInit {
         Validators.maxLength(25),
         Validators.pattern('^[a-zA-Z ]*$')
       ])),
-      image: [''],
+      image: [null],
       context: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(5),
@@ -108,10 +108,10 @@ export class AddComponent implements OnInit {
     if (target.files && file) {
       this.fileToBase64(file).then((data: string) => {
         this.imageURL = data;
-        this.newProject.patchValue({ image: data });
+      }).catch((error: Error) => {
+        console.error(error);
       });
-    } else {
-      this.imageURL = '';
+      this.newProject.patchValue({ image: file });
     }
   }
 

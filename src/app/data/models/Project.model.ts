@@ -4,6 +4,9 @@ export class Project implements IProject {
     constructor(
         public id: number,
         public id_user: number,
+        public name: string,
+        public description: string,
+        public image: string,
         public context: string,
         public port_container: number,
         public url: string,
