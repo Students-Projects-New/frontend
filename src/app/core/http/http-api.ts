@@ -1,8 +1,9 @@
 export class HttpApi {
 
     // OAuth
-    static oauthToken = 'auth/login';
-    static oauthRefreshToken = 'auth/refresh-token';
+    static oauthToken = 'sign_in_up';
+    static oauthRefreshToken = 'refresh';
+    static oauthVerifyToken = 'verify';
 
     // Project
     static projectList = 'list_project';

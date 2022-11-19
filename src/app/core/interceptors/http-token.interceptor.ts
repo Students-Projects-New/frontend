@@ -34,7 +34,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
   }
 
   private isApiUrl(apiUrl: string): boolean {
-    const blockedApiList = [HttpApi.oauthToken, HttpApi.oauthRefreshToken];
+    const blockedApiList = [HttpApi.oauthToken];
     return blockedApiList.some((url) => apiUrl.includes(url));
   }
 

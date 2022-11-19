@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ISubject } from '@data/interfaces';
 import { SubjectsService } from '@modules/academics/subjects/services/subjects.service';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-subject-list',
@@ -11,10 +12,12 @@ import { SubjectsService } from '@modules/academics/subjects/services/subjects.s
 })
 export class ListComponent implements OnInit {
 
-  public subject: ISubject = {} as ISubject;
-  public rows: ISubject[] = [];
+  public subject!: ISubject;
+  public rows!: ISubject[];
+  public temp!: ISubject[];
   public limit: number = 10;
   public showModal: boolean = false;
+  @ViewChild(DatatableComponent) table!: DatatableComponent;
 
   constructor(
     private subjectsService: SubjectsService,
@@ -29,7 +32,17 @@ export class ListComponent implements OnInit {
     this.subjectsService.getSubjects()
       .subscribe((data: ISubject[]) => {
         this.rows = data;
+        this.temp = [...data];
       });
+  }
+
+  public filterSubjects(event: Event): void {
+    const val = (event.target as HTMLInputElement).value.toLowerCase();
+    const temp = this.temp.filter(function (d) {
+      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+    this.rows = temp;
+    this.table.offset = 0;
   }
 
   public createSubject(): void {

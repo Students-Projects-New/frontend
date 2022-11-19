@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ICourse } from '@data/interfaces';
 import { CoursesService } from '@modules/academics/courses/services/courses.service';
+import { CourseMock } from '@data/mocks/course.mock';
 
 @Component({
   selector: 'app-list',
@@ -13,7 +14,8 @@ export class ListComponent implements OnInit {
   public courses: ICourse[] = [];
 
   constructor(
-    private coursesService: CoursesService
+    private coursesService: CoursesService,
+    private courseMock: CourseMock
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +26,15 @@ export class ListComponent implements OnInit {
     this.coursesService.getCourses(1)
       .subscribe((courses: ICourse[]) => {
         this.courses = courses;
+        console.log(this.courses);
+      });
+  }
+
+  public getCoursesMock(): void {
+    this.courseMock.getCourses()
+      .subscribe((courses: ICourse[]) => {
+        this.courses = courses;
+        console.log(this.courses);
       });
   }
 

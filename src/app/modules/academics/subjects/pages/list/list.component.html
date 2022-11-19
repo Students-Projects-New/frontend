@@ -22,7 +22,7 @@
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a>Lista Materia</a>
+            <a>Lista</a>
         </li>
     </ul>
 </div>
@@ -46,25 +46,31 @@
                 </ng-container>
                 <!-- End Modal -->
 
+                <input
+                type="text"
+                style="padding:8px;margin:15px auto;width:30%;"
+                placeholder="Type to filter the name column..."
+                (keyup)="filterSubjects($event)"/>
+
                 <!-- Table -->
                 <ngx-datatable class="material striped" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
-                    rowHeight="auto" [rows]="rows" [limit]="limit">
-                    <ngx-datatable-column name="#" [flexGrow]="0.5">
-                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            {{(rowIndex + 1)}}
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="Code" [flexGrow]="2">
+                    rowHeight="auto" [rows]="rows" [limit]="limit" #table>
+                    <ngx-datatable-column name="ID" [flexGrow]="1" [resizeable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
-                            {{row?.code}}
+                            {{ row?.id }}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Name" [flexGrow]="2">
+                    <ngx-datatable-column name="Código Materia" [flexGrow]="2" [resizeable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.code }}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Nombre Materia" [flexGrow]="2" [resizeable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{ row?.name | titlecase }}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Actions" [flexGrow]="1">
+                    <ngx-datatable-column name="Acciones" [flexGrow]="1" [resizeable]="false" [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             <div class="form-button-action">
                                 <button 

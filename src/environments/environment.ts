@@ -12,7 +12,7 @@ export const environment = {
   production: false,
   name: 'development',
   oauth: {
-    googleClientId: '906303529522-pa3hcik7n8ib6r6cmgiis9e2ljm5l0h8.apps.googleusercontent.com'
+    googleClientId: '215382460353-qq2lc93pf3mdtvbg8560d7lumitronl8.apps.googleusercontent.com'
   },
   baseUrlAcademic: `${server.protocol}://${server.hostname}:${server.port}/sp_academic/academic/api/v1`,
   baseUrlProjects: `${server.protocol}://${server.hostname}:${server.port}/sp_project/projects/api/v1`,

@@ -1,10 +1,8 @@
-import { ISubject } from "./subject.interface";
+import { ISubjectPeriod } from "./subject-period.interface";
 
-export interface ICourse {
+export interface ICourse extends ISubjectPeriod {
     id: number;
-    year: number;
-    period: number;
-    id_teacher: number;
-    group: string;
-    subject_id: number | ISubject;
+    year: string;
+    period: string;
+    image?: string;
 }

@@ -6,9 +6,13 @@ export { IUser } from './http/user.interface';
 
 export { IRole } from './http/role.interface';
 
+export { ITokenDto } from './http/dto/token-dto.interface';
+
 export { IToken } from './http/token.interface';
 
 export { ISubject } from './http/subject.interface';
+
+export { ISubjectPeriod } from './http/subject-period.interface';
 
 export { ICourse } from './http/course.interface';
 

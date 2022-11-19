@@ -1,20 +1,23 @@
-<div class="table-responsive">
-    <table class="table table-hover text-center">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Código</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Estado</th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let subject of subjects; let i = index">
-            <tr>
-                <th>{{i + 1}}</th>
-                <td>{{subject.code}}</td>
-                <td>{{subject.name}}</td>
-                <td> - </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<ngx-datatable class="material striped" 
+    [columnMode]="'flex'" 
+    [headerHeight]="50" 
+    [footerHeight]="50" 
+    rowHeight="auto"
+    [rows]="rows" 
+    [limit]="limit">
+    <ngx-datatable-column name="#" [flexGrow]="0.5">
+        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            {{(rowIndex + 1)}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Code" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row?.code}}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Name" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row?.name | titlecase }}
+        </ng-template>
+    </ngx-datatable-column>
+</ngx-datatable>

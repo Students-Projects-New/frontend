@@ -8,7 +8,7 @@ import { environment } from '@env/environment';
 import { HttpApi } from '@core/http/http-api';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '@data/models';
-import { IToken } from '@data/interfaces';
+import { ITokenDto, IToken } from '@data/interfaces';
 
 
 @Injectable({
@@ -51,8 +51,8 @@ export class AuthService {
     return this.cookieService.get('refresh_token');
   }
 
-  public signIn(data: any): Observable<IToken> {
-    return this.http.post<IToken>(`${this.url}/${HttpApi.oauthToken}`, JSON.stringify(data))
+  public signIn(data: ITokenDto): Observable<IToken> {
+    return this.http.post<IToken>(`${this.url}/${HttpApi.oauthToken}/`, JSON.stringify(data))
       .pipe(
         tap((res: IToken) => {
           this.token = this.jwtHelper.decodeToken(res.access);

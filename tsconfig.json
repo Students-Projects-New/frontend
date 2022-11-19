@@ -23,11 +23,13 @@
       "dom"
     ],
     "paths": {
+      "@app/*": ["app/*"],
       "@core/*": ["app/core/*"],
       "@data/*": ["app/data/*"],
       "@layout/*": ["app/layout/*"],
       "@modules/*": ["app/modules/*"],
       "@shared/*": ["app/shared/*"],
+      "@components/*": ["app/shared/components/*"],
       "@env/*": ["environments/*"],
     }
   },

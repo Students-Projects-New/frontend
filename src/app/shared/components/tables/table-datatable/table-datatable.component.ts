@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableDatatableComponent implements OnInit {
 
-  public subjects: any[] = [];
+  public rows: any[] = [];
+  public columns: any[] = [];
   public limit: number = 10;
 
   constructor() { }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
 import { AuthService } from '@core/authentication/auth.service';
-import { IToken } from '@data/interfaces';
+import { ITokenDto, IToken } from '@data/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +13,8 @@ import { IToken } from '@data/interfaces';
 })
 export class LoginComponent implements OnInit {
 
+  private tokenDto: ITokenDto = {} as ITokenDto;
+
   constructor(
     private socialAuthService: SocialAuthService,
     private authService: AuthService,
@@ -20,20 +22,23 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.socialAuthService.authState.subscribe((user: SocialUser) => {
-      if (user) {
-        this.sendGoogleToken(user);
-      }
-    });
+    this.socialAuthService.authState
+      .subscribe((user: SocialUser) => {
+        if (user) {
+          this.tokenDto.token = user.idToken;
+          this.sendGoogleToken(this.tokenDto);
+        }
+      });
   }
 
-  public sendGoogleToken(socialUser: SocialUser) {
-    this.authService.signIn(socialUser.idToken).subscribe((token: IToken) => {
-      if (token) {
-        this.router.navigate(['/account/profile']);
-      }
-      this.socialAuthService.signOut();
-    });
+  public sendGoogleToken(data: ITokenDto): void {
+    this.authService.signIn(data)
+      .subscribe((token: IToken) => {
+        if (token) {
+          this.router.navigate(['/account/profile']);
+        }
+        this.socialAuthService.signOut();
+      });
   }
 
 }
