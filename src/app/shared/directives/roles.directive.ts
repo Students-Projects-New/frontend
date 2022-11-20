@@ -20,6 +20,7 @@ export class RolesDirective implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    console.table(this.roles);
     this.authService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((user: User) => {

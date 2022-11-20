@@ -5,13 +5,13 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="../../../../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                    <img [src]="currentUser.picture" alt="{{ currentUser.username }}" class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            Hizrian
-                            <span class="user-level">Administrator</span>
+                            {{ currentUser.first_name }}
+                            <span class="user-level">{{ currentUser.roles[0].name }}</span>
                             <span class="caret"></span>
                         </span>
                     </a>
@@ -19,17 +19,17 @@
                     <div class="collapse in" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a [routerLink]="['/account/profile']" style="cursor: pointer;">
+                                <a [routerLink]="['/account/profile']">
                                     <span class="link-collapse">Perfil</span>
                                 </a>
                             </li>
                             <li>
-                                <a [routerLink]="['/account/settings']" style="cursor: pointer;">
+                                <a [routerLink]="['/account/settings']">
                                     <span class="link-collapse">Ajustes</span>
                                 </a>
                             </li>
                             <li>
-                                <a [routerLink]="['/home']" style="cursor: pointer;">
+                                <a (click)="logOut()">
                                     <span class="link-collapse">Cerrar Sesión</span>
                                 </a>
                             </li>
@@ -46,15 +46,15 @@
                         <h4 class="text-section">{{item.title}}</h4>
                     </li>
                     <ng-container *ngFor="let subItem of item.children">
-                        <li class="nav-item" [routerLinkActive]="['active']">
+                        <li class="nav-item" [routerLinkActive]="['active']" *ngIf="hasRole(subItem.roles!)">
                             <ng-container *ngIf="!subItem.expanded">
-                                <a [routerLink]="[subItem.link]" style="cursor: pointer;">
+                                <a [routerLink]="[subItem.link]">
                                     <i class="{{subItem.icon}}"></i>
                                     <p>{{subItem.title}}</p>
                                 </a>
                             </ng-container>
-                            <ng-container *ngIf="subItem.expanded">
-                                <a data-toggle="collapse" [href]="'#'+ subItem.title" style="cursor: pointer;">
+                            <ng-container *ngIf="subItem.expanded && hasRole(subItem.roles!)">
+                                <a data-toggle="collapse" [href]="'#'+ subItem.title">
                                     <i class="{{subItem.icon}}"></i>
                                     <p>{{subItem.title}}</p>
                                     <ng-container *ngIf="subItem.children">
@@ -65,8 +65,8 @@
                                     <div class="collapse" [id]="subItem.title" [routerLinkActive]="['show']">
                                         <ul class="nav nav-collapse">
                                             <ng-container *ngFor="let subItemPath of subItem.children">
-                                                <li [routerLinkActive]="['active']">
-                                                    <a [routerLink]="[subItemPath.link]" style="cursor: pointer;">
+                                                <li [routerLinkActive]="['active']" *ngIf="hasRole(subItemPath.roles!)">
+                                                    <a [routerLink]="[subItemPath.link]">
                                                         <span class="sub-item">{{subItemPath.title}}</span>
                                                     </a>
                                                 </li>

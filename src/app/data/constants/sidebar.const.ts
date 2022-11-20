@@ -19,6 +19,7 @@ export const MENU_ITEMS: ISidebar[] = [
             {
                 title: 'Academico',
                 icon: 'fas fa-graduation-cap',
+                roles: [ROLE.ADMIN, ROLE.SUPPORT, ROLE.TEACHER],
                 expanded: true,
                 children: [
                     {

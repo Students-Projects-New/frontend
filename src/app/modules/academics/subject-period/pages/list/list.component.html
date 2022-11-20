@@ -46,6 +46,28 @@
                 </ng-container>-->
                 <!-- End Modal -->
 
+                <!-- Filter -->
+                <div class="row justify-content-between">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group" style="width: 20%">
+                            <label for="pageSize">Mostrar</label>
+                            <select class="form-control" id="pageSize" (change)="onLimitChange($event)">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group" style="width: 40%">
+                            <label for="search">Buscar</label>
+                            <input type="text" placeholder="Buscar" class="form-control" id="search" (keyup)="filterSubjects($event)">
+                        </div>
+                    </div>
+                </div>
+                <!-- End Filter -->
+
                 <!-- Table -->
                 <ngx-datatable class="material striped" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
                     rowHeight="auto" [rows]="rows" [limit]="limit">
@@ -87,21 +109,13 @@
                     <ngx-datatable-column name="Acciones" [flexGrow]="2" [resizeable]="false" [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             <div class="form-button-action">
-                                <button 
-                                    type="button" 
-                                    data-toggle="tooltip" 
-                                    title="Editar"
-                                    class="btn btn-link btn-primary btn-lg" 
-                                    data-original-title="Editar Materia Periodo"
+                                <button type="button" data-toggle="tooltip" title="Editar"
+                                    class="btn btn-link btn-primary btn-lg" data-original-title="Editar Materia Periodo"
                                     (click)="openModal(row)">
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <button 
-                                    type="button" 
-                                    data-toggle="tooltip" 
-                                    title="Eliminar"
-                                    class="btn btn-link btn-danger" 
-                                    data-original-title="Eliminar Materia Periodo"
+                                <button type="button" data-toggle="tooltip" title="Eliminar"
+                                    class="btn btn-link btn-danger" data-original-title="Eliminar Materia Periodo"
                                     (click)="deleteSubjectPeriod(row.id)">
                                     <i class="fa fa-times"></i>
                                 </button>

@@ -36,6 +36,11 @@ export class ListComponent implements OnInit {
       });
   }
 
+  public onLimitChange(event: Event): void {
+    this.limit = Number((event.target as HTMLInputElement).value);
+    this.table.limit = this.limit;
+  }
+
   public filterSubjects(event: Event): void {
     const val = (event.target as HTMLInputElement).value.toLowerCase();
     const temp = this.temp.filter(function (d) {
