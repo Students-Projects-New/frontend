@@ -10,7 +10,10 @@ export interface IProject {
     port_container: number;
     url: string;
     static_path: string;
-    tags?: ITagElement[];
+    tags: ITagElement[];
+    stages?: any[];
+    collaborators: number[];
+    subjects?: number[];
     created_at?: Date;
     updated_at?: Date;
 }

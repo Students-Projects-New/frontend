@@ -22,6 +22,10 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.signInWithGoogle();
+  }
+
+  public signInWithGoogle(): void {
     this.socialAuthService.authState
       .subscribe((user: SocialUser) => {
         if (user) {

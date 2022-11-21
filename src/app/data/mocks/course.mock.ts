@@ -15,7 +15,7 @@ export class CourseMock {
             year: "2022",
             period: "2",
             image: `assets/img/courses/${this.currentValue}.svg`,
-            id_teacher: "1151811",
+            id_teacher: 1151811,
             group: "A",
             id_subject: {
                 id: 3,

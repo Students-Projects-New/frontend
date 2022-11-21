@@ -15,8 +15,8 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   @Input() subject!: ISubject;
   @Output() showModal = new EventEmitter<boolean>();
-  formSubject: FormGroup;
-  validationMessages: IValidationMessages = {
+  public formSubject: FormGroup;
+  public validationMessages: IValidationMessages = {
     code: [
       { type: 'required', message: 'Codigo es requerido' },
       { type: 'minlength', message: 'Codigo debe tener al menos 7 caracteres' },
@@ -65,9 +65,9 @@ export class DetailComponent implements OnInit, OnDestroy {
     $('#editModal').modal(action);
   }
 
-  get f() { return this.formSubject.controls; }
+  public get f() { return this.formSubject.controls; }
 
-  isFieldValid(field: string): boolean {
+  public isFieldValid(field: string): boolean {
     return this.formSubject.controls[field].dirty || this.formSubject.controls[field].touched;
   }
 

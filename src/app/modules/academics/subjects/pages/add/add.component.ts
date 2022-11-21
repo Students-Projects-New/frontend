@@ -12,7 +12,7 @@ import { ConvertFileService } from '@core/services/convert-file.service';
 export class AddComponent implements OnInit {
 
   public show: boolean = false;
-  public file: File | undefined;
+  private file: File | undefined;
   public rows: ISubject[] = [];
   public limit: number = 10;
 
@@ -23,35 +23,35 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onFileChange(event: Event) {
+  public onFileChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.file = (target.files as FileList)[0];
     this.xlsxToJson();
   }
 
-  onLimitChange(event: Event) {
+  public onLimitChange(event: Event): void {
     this.limit = Number((event.target as HTMLInputElement).value);
   }
 
-  onUpload() {
+  public onUpload(): void {
     this.show = true;
   }
 
-  onReset() {
+  private onReset(): void {
     this.show = false;
     this.file = undefined;
     this.rows = [];
     this.limit = 10;
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     this.subjectsService.createSubject(this.rows)
       .subscribe((data: ISubject[]) => {
         this.onReset();
       });
   }
 
-  onCancel() {
+  public onCancel(): void {
     this.onReset();
   }
 

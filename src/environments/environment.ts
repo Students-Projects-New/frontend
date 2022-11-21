@@ -17,6 +17,7 @@ export const environment = {
   baseUrlAcademic: `${server.protocol}://${server.hostname}:${server.port}/sp_academic/academic/api/v1`,
   baseUrlProjects: `${server.protocol}://${server.hostname}:${server.port}/sp_project/projects/api/v1`,
   baseUrlAuth: `${server.protocol}://${server.hostname}:${server.port}/sp_user/auth/api/v1`,
+  baseUrlUsers: `${server.protocol}://${server.hostname}:${server.port}/sp_user/users/api/v1`,
 };
 
 /*

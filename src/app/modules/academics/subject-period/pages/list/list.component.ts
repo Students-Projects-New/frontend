@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ICourse } from '@data/interfaces';
+import { ICourse, ISubject } from '@data/interfaces';
 import { SubjectPeriodService } from '@modules/academics/subject-period/services/subject-period.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 
@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
 
   public course: ICourse = {} as ICourse;
   public rows: ICourse[] = [];
-  public temp: ICourse[] = [];
+  private temp: ICourse[] = [];
   public limit: number = 10;
   public showModal: boolean = false;
   @ViewChild(DatatableComponent) table!: DatatableComponent;
@@ -28,7 +28,7 @@ export class ListComponent implements OnInit {
     this.getSubjectsPeriod();
   }
 
-  public getSubjectsPeriod(): void {
+  private getSubjectsPeriod(): void {
     this.subjectPeriodService.getSubjectsPeriod()
       .subscribe((data: ICourse[]) => {
         this.rows = data;
@@ -43,8 +43,14 @@ export class ListComponent implements OnInit {
 
   public filterSubjects(event: Event): void {
     const val = (event.target as HTMLInputElement).value.toLowerCase();
-    const temp = this.temp.filter(function (d) {
-      return d.id_subject.name.toLowerCase().indexOf(val) !== -1 || !val;
+    const temp = this.temp.filter((d: ICourse) => {
+      return d.id_subject.id!.toString().toLowerCase().indexOf(val) !== -1 || !val ||
+        d.id_subject.code.toLowerCase().indexOf(val) !== -1 || !val ||
+        d.id_subject.name.toLowerCase().indexOf(val) !== -1 || !val ||
+        d.id_teacher.toString().toLowerCase().indexOf(val) !== -1 || !val ||
+        d.group.toLowerCase().indexOf(val) !== -1 || !val ||
+        d.year.toLowerCase().indexOf(val) !== -1 || !val ||
+        d.period.toLowerCase().indexOf(val) !== -1 || !val;
     });
     this.rows = temp;
     this.table.offset = 0;
@@ -55,7 +61,6 @@ export class ListComponent implements OnInit {
   }
 
   public openModal(course: ICourse): void {
-    console.log(course);
     this.course = course;
     this.showModal = true;
   }

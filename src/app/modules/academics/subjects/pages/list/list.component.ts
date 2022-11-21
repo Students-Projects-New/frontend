@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
 
   public subject!: ISubject;
   public rows!: ISubject[];
-  public temp!: ISubject[];
+  private temp!: ISubject[];
   public limit: number = 10;
   public showModal: boolean = false;
   @ViewChild(DatatableComponent) table!: DatatableComponent;
@@ -28,7 +28,7 @@ export class ListComponent implements OnInit {
     this.getSubjects();
   }
 
-  public getSubjects(): void {
+  private getSubjects(): void {
     this.subjectsService.getSubjects()
       .subscribe((data: ISubject[]) => {
         this.rows = data;
@@ -60,7 +60,10 @@ export class ListComponent implements OnInit {
   }
 
   public deleteSubject(id: number): void {
-    console.log(id);
+    this.subjectsService.deleteSubject(id)
+      .subscribe((data: ISubject) => {
+        this.getSubjects();
+      });
   }
 
 }

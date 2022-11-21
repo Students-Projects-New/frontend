@@ -8,18 +8,22 @@ import { DetailComponent } from './pages/detail/detail.component';
 import { AddComponent } from './pages/add/add.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
+const COMPONENTS = [
+  ListComponent,
+  DetailComponent,
+  AddComponent
+];
+
+const MODULES = [
+  CommonModule,
+  ReactiveFormsModule,
+  SubjectPeriodRoutingModule,
+  NgxDatatableModule
+]
+
 
 @NgModule({
-  declarations: [
-    ListComponent,
-    DetailComponent,
-    AddComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    SubjectPeriodRoutingModule,
-    NgxDatatableModule
-  ]
+  declarations: [...COMPONENTS],
+  imports: [...MODULES]
 })
 export class SubjectPeriodModule { }

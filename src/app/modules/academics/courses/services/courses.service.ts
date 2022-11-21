@@ -23,15 +23,14 @@ export class CoursesService {
   }
 
   public getCourses(id: number): Observable<ICourse[]> {
-    return this.http.get<ICourse[]>(`${this.url}/${HttpApi.courses}/${id}`)
+    return this.http.get<ICourse[]>(`${this.url}/${HttpApi.courses_Teacher}/${id}`)
       .pipe(
         map((courses: ICourse[]) => {
           return courses.map((course: ICourse) => {
             course.image = `assets/img/courses/${this.currentValue}.svg`;
             return course;
           });
-        }
-        )
+        })
       );
   }
 

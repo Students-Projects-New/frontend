@@ -21,7 +21,7 @@ export class RoleGuard implements CanActivate {
   }
 
   private checkRole(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.authService.hasRole(route.data['roles'], 'Role Guard')) return true;
+    if (this.authService.hasRole(route.data['roles'])) return true;
     this.authService.logout();
     this.router.navigate(['/auth/login'], { queryParams: { returnUrl: state.url } });
     return false;

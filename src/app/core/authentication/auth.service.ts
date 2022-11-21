@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie-service';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { RoleMock } from '@app/data/mocks/role.mock';
 import { environment } from '@env/environment';
 import { HttpApi } from '@core/http/http-api';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -29,6 +30,7 @@ export class AuthService {
     private http: HttpClient,
     private cookieService: CookieService,
     private socialAuthService: SocialAuthService,
+    private roleMock: RoleMock,
     private router: Router
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}') as User);
@@ -62,12 +64,21 @@ export class AuthService {
     this.cookieService.set('refresh_token', token.refresh, new Date(this.token.exp * 1000), '/');
     localStorage.setItem('currentUser', JSON.stringify(this.token.user));
     this.currentUserSubject.next(this.token.user);
+    this.setRoles();
     this.detectUserActivity();
     this.autoRefreshToken(new Date(this.token.exp * 1000).getTime() - new Date().getTime());
   }
 
+  public setRoles(): void {
+    this.roleMock.getRoles()
+      .subscribe((roles: any) => {
+        this.getCurrentUserSubject().roles = roles;
+      });
+      localStorage.setItem('currentUser', JSON.stringify(this.getCurrentUserSubject()));
+  }
+
   public signIn(data: ITokenDto): Observable<IToken> {
-    return this.http.post<IToken>(`${this.url}/${HttpApi.oauthToken}/`, JSON.stringify(data))
+    return this.http.post<IToken>(`${this.url}/${HttpApi.oauth_Token}/`, JSON.stringify(data))
       .pipe(
         tap((res: IToken) => {
           this.autoSignIn(res);
@@ -97,7 +108,7 @@ export class AuthService {
 
   public loginWithRefreshToken(): Observable<IToken> {
     const data = { refresh: this.refreshToken };
-    return this.http.post<IToken>(`${this.url}/${HttpApi.oauthRefreshToken}`, JSON.stringify(data))
+    return this.http.post<IToken>(`${this.url}/${HttpApi.oauth_Refresh_Token}`, JSON.stringify(data))
       .pipe(
         tap((res: IToken) => {
           this.autoSignIn(res);
@@ -130,8 +141,7 @@ export class AuthService {
     }, expirationDuration);
   }
 
-  public hasRole(roles: ROLE[], message?: string): boolean {
-    console.log( { roles, message });
+  public hasRole(roles: ROLE[]): boolean {
     return this.getCurrentUserSubject().roles.some((role) => roles.includes(role.name));
   }
 

@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
 
   public hasRole(roles: ROLE[]): boolean {
     if (!roles) return true;
-    return this.authService.hasRole(roles, 'Sidebar');
+    return this.authService.hasRole(roles);
   }
 
   public logOut(): void {

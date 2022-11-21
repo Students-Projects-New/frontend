@@ -22,7 +22,7 @@ export class ListComponent implements OnInit {
     this.getCourses();
   }
 
-  public getCourses(): void {
+  private getCourses(): void {
     const id = this.authService.getCurrentUserSubject().id;
     this.coursesService.getCourses(id)
       .subscribe((courses: ICourse[]) => {

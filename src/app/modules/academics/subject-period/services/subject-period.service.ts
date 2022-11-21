@@ -18,15 +18,15 @@ export class SubjectPeriodService {
   ) { }
 
   public getSubjectsPeriod(): Observable<ICourse[]> {
-    return this.http.get<ICourse[]>(`${this.url}/${HttpApi.subjectsPeriod}/`);
+    return this.http.get<ICourse[]>(`${this.url}/${HttpApi.subjects_Period}/`);
   }
 
   public createSubjectPeriod(subjectPeriod: ISubjectPeriod[]): Observable<ICourse[]> {
-    return this.http.post<ICourse[]>(`${this.url}/${HttpApi.subjectsPeriod}/`, subjectPeriod);
+    return this.http.post<ICourse[]>(`${this.url}/${HttpApi.subjects_Period}/`, subjectPeriod);
   }
 
   public deleteSubjectPeriod(id: number): Observable<ISubjectPeriod> {
-    return this.http.delete<ISubjectPeriod>(`${this.url}/${HttpApi.subjectsPeriod}/${id}/`);
+    return this.http.delete<ISubjectPeriod>(`${this.url}/${HttpApi.subjects_Period}/${id}/`);
   }
 
 }

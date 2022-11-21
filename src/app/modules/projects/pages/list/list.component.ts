@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 
 import { IProject } from '@data/interfaces';
+import { AuthService } from '@core/authentication/auth.service';
 import { ProjectService } from '@modules/projects/services/project.service';
 
 @Component({
@@ -10,12 +9,12 @@ import { ProjectService } from '@modules/projects/services/project.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit {
 
-  projects: IProject[] = [];
-  private unsubscribe$ = new Subject<void>();
+  public projects: IProject[] = [];
 
   constructor(
+    private authService: AuthService,
     private projectService: ProjectService
   ) { }
 
@@ -23,19 +22,18 @@ export class ListComponent implements OnInit, OnDestroy {
     this.loadProjects();
   }
 
-  public loadProjects(): void {
+  private loadProjects(): void {
+    const id = this.authService.getCurrentUserSubject().id;
     this.projectService
-      .getProjects('1')
-      .pipe(takeUntil(this.unsubscribe$))
+      .getProjects(id)
       .subscribe((res: IProject[]) => {
         this.projects = res;
       });
   }
 
-  public deleteProject(id: any): void {
+  private deleteProject(id: any): void {
     this.projectService
       .deleteProject(id)
-      .pipe(takeUntil(this.unsubscribe$))
       .subscribe((res) => {
         console.log(res);
       });
@@ -43,11 +41,6 @@ export class ListComponent implements OnInit, OnDestroy {
 
   public trackByFn(index: number, item: IProject): number {
     return item.id;
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

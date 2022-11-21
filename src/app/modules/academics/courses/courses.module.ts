@@ -13,9 +13,15 @@ const COMPONENTS = [
   AddComponent
 ];
 
+const MODULES = [
+  CommonModule,
+  CoursesRoutingModule,
+  SharedModule
+]
+
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [CommonModule, CoursesRoutingModule, SharedModule]
+  imports: [...MODULES]
 })
 export class CoursesModule { }

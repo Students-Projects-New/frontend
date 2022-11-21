@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { HttpApi } from '@core/http/http-api';
-import { IProject } from '@data/interfaces';
+import { IProject, IProjectDto } from '@data/interfaces';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -17,16 +17,20 @@ export class ProjectService {
     private http: HttpClient
   ) { }
 
-  public getProjects(id: string, tags?: any): Observable<IProject[]> {
-    return this.http.post<IProject[]>(`${this.url}/${HttpApi.projectList}/${id}`, (tags) ? { params: tags } : {});
+  public projectValidateContext(context: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/${HttpApi.project_Validate_Context}/${context}`);
+  }
+
+  public getProjects(id: number, tags?: any): Observable<IProject[]> {
+    return this.http.post<IProject[]>(`${this.url}/${HttpApi.project_List}/${id}`, (tags) ? { params: tags } : {});
   }
 
   public createProject(project: IProject): Observable<IProject> {
-    return this.http.post<IProject>(`${this.url}/${HttpApi.projectList}`, project);
+    return this.http.post<IProject>(`${this.url}/${HttpApi.project_List}`, project);
   }
 
-  public deleteProject(project: any): Observable<any> {
-    return this.http.delete<any>(`${this.url}/${HttpApi.projectDelete}`, project);
+  public deleteProject(project: IProjectDto): Observable<any> {
+    return this.http.post<any>(`${this.url}/${HttpApi.project_Delete}`, { params: project });
   }
 
 }

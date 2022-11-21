@@ -1,13 +1,47 @@
 <div class="card">
-    <div class="p-2">
-        <!--<img class="card-img-top rounded" src="{{ project.image }}" alt="{{ project.name }}">-->
-        <img class="card-img-top rounded" src="assets/img/projects/product1.jpg" alt="Product 1">
-    </div>
+    <a class="text-dark" [routerLink]="['/projects', project.id]">
+        <img class="card-img-top rounded img-project" src="{{ project.image }}" alt="{{ project.name }}">
+    </a>
     <div class="card-body pt-2">
-        <span class="badge badge-warning float-right">{{ 'Fundamentos de Programación en Computadores' | truncateText:20 }}</span>
-        <!--<h4 class="card-title mb-1 fw-bold">{{ project.name }}</h4>-->
-        <h4 class="card-title mb-1 fw-bold">Hola Mundo</h4>
-        <p class="card-text">{{ project.description! | truncateText:80 }}</p>
-        <p class="text-muted small mb-2">{{ project.created_at | date }}</p>
+        <h4 class="card-title my-2 fw-bold">
+            <a class="text-dark" [routerLink]="['/projects', project.id]">{{ project.name }}</a>
+        </h4>
+        <div class="d-flex mb-3">
+            <ng-container *ngIf="contributors[project.id_user].picture != null">
+                <div class="avatar">
+                    <img [src]="contributors[project.id_user].picture" [alt]="contributors[project.id_user].first_name"
+                        class="avatar-img rounded-circle">
+                </div>
+            </ng-container>
+            <div class="owner ml-2">
+                <span class="badge badge-warning">
+                    {{ 'Fundamentos de Programación en Computadores' | truncateText:45 }}
+                </span>
+                <br>
+                <small class="text-muted mr-25">by</small>
+                <small class="username"><strong> {{ contributors[project.id_user].first_name | titlecase }}
+                    </strong></small>
+                <span class="text-muted ml-50 mr-25"> | </span>
+                <small class="date text-muted">{{ project.created_at | date }}</small>
+            </div>
+        </div>
+        <ng-container *ngIf="project.tags.length > 0">
+            <div class="tags">
+                <span class="badge" *ngFor="let t of project.tags">
+                    {{ t.tag.name }}
+                </span>
+            </div>
+        </ng-container>
+        <p class="card-text">{{ project.description! | truncateText:200 }}</p>
+        <div class="avatar-group">
+            <ng-container *ngIf="project.collaborators && project.collaborators.length > 0">
+                <div class="avatar" *ngFor="let c of this.project.collaborators">
+                    <ng-container *ngIf="contributors[c].picture !== null">
+                        <img [src]="contributors[c].picture" [alt]="contributors[c].first_name"
+                            class="avatar-img rounded-circle border border-white">
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
     </div>
 </div>

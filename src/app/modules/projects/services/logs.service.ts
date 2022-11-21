@@ -17,11 +17,11 @@ export class LogsService {
   ) { }
 
   public getBuildLogs(id: string): Observable<any> {
-    return this.http.get<any>(`${this.url}/${HttpApi.logsProject}/${id}/BUILD`);
+    return this.http.get<any>(`${this.url}/${HttpApi.logs_Project}/${id}/BUILD`);
   }
 
   public getDeployLogs(id: string): Observable<any> {
-    return this.http.get<any>(`${this.url}/${HttpApi.logsProject}/${id}/CONT`);
+    return this.http.get<any>(`${this.url}/${HttpApi.logs_Project}/${id}/CONT`);
   }
 
 }
