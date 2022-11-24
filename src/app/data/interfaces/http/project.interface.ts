@@ -1,4 +1,5 @@
 import { ITagElement } from './tag.interface';
+import { IStage } from './stage.interface';
 
 export interface IProject {
     id: number;
@@ -10,10 +11,11 @@ export interface IProject {
     port_container: number;
     url: string;
     static_path: string;
+    subject_period: number;
     tags: ITagElement[];
-    stages?: any[];
+    stages: IStage[];
     collaborators: number[];
-    subjects?: number[];
-    created_at?: Date;
-    updated_at?: Date;
+    subjects: number[];
+    created_at: Date;
+    updated_at: Date;
 }

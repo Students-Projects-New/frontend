@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { IValidationMessages, ICourseStudent } from '@data/interfaces';
+import { IValidationMessages, ICourseStudent, IProject } from '@data/interfaces';
 import { ConvertFileService } from '@core/services/convert-file.service';
 import { AuthService } from '@core/authentication/auth.service';
 import { ProjectValidateContextService } from '@core/services/project-validate-context.service';
@@ -16,6 +16,7 @@ import { ProjectService } from '@modules/projects/services/project.service';
 })
 export class AddComponent implements OnInit {
 
+  public currentUser: any = this.authService.getCurrentUserSubject();
   public imageURL: string;
   public coursesStudent: ICourseStudent[];
   public newProject: FormGroup;
@@ -29,7 +30,7 @@ export class AddComponent implements OnInit {
     description: [
       { type: 'required', message: 'Descripción es requerida' },
       { type: 'minlength', message: 'Descripción debe tener al menos 5 caracteres' },
-      { type: 'maxlength', message: 'Descripción no puede tener más de 25 caracteres' },
+      { type: 'maxlength', message: 'Descripción no puede tener más de 50 caracteres' },
       { type: 'pattern', message: 'Descripción debe contener solo letras' },
     ],
     context: [
@@ -66,7 +67,7 @@ export class AddComponent implements OnInit {
     this.imageURL = '';
     this.coursesStudent = [];
     this.newProject = this.fb.group({
-      id_user: new FormControl(localStorage.getItem('id_user')),
+      id_user: new FormControl(this.currentUser.id),
       name: new FormControl('',
         Validators.compose([
           Validators.required,
@@ -78,7 +79,7 @@ export class AddComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(25),
+          Validators.maxLength(50),
           Validators.pattern('^[a-zA-Z ]*$')
         ])),
       image: [null],
@@ -87,7 +88,7 @@ export class AddComponent implements OnInit {
           Validators.required,
           Validators.minLength(5),
           Validators.maxLength(25),
-          Validators.pattern('^[a-zA-Z0-9-]*$'),
+          Validators.pattern('^[a-zA-Z0-9-]*$')
         ]),
         Validators.composeAsync([
           this.contexValidatorService.validate.bind(this.contexValidatorService)
@@ -104,11 +105,11 @@ export class AddComponent implements OnInit {
           Validators.required,
           Validators.pattern('^(https?://)?(www.)?((github.com)|(gitlab.com))/.+$')
         ])),
-      static_path: new FormControl('',
+      static_path: new FormControl('src/app',
         Validators.compose([
-          Validators.pattern('^(\/[a-zA-Z0-9]+)+$')
+          Validators.pattern('^[a-zA-Z0-9/]*$')
         ])),
-      subject_period: [null],
+      subject_period: [''],
     });
   }
 
@@ -121,7 +122,6 @@ export class AddComponent implements OnInit {
     this.courseStudentService.getCoursesStudent(id)
       .subscribe((coursesStudent: ICourseStudent[]) => {
         this.coursesStudent = coursesStudent;
-        console.log(this.coursesStudent);
       });
   }
 
@@ -138,11 +138,11 @@ export class AddComponent implements OnInit {
   public showPreview(event: Event): void {
     const target = event.target as HTMLInputElement;
     const file: File = (target.files as FileList)[0];
+    this.newProject.patchValue({ image: file });
     if (target.files && file) {
       this.convertFileService.convertToBase64(file)
         .then((data: string) => this.imageURL = data)
         .catch((error: Error) => console.log(error));
-      this.newProject.patchValue({ image: file });
     }
   }
 
@@ -160,9 +160,10 @@ export class AddComponent implements OnInit {
       this.newProject.markAllAsTouched();
       return;
     }
-    this.projectService.createProject(this.newProject.value)
-      .subscribe((data) => {
-        this.newProject.reset();
+
+    const formData: FormData = this.convertFileService.convertToFormData(this.newProject.value);
+    this.projectService.createProject(formData)
+      .subscribe((project: IProject) => {
         this.router.navigate(['/projects']);
       });
   }

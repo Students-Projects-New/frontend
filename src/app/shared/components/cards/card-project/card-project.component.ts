@@ -14,7 +14,7 @@ export class CardProjectComponent implements OnInit, OnDestroy {
   @Input() project!: IProject;
   private collaboratorSubscription: Subscription | undefined;
   private collaborators: number[] = [];
-  public contributors: IDictionary<IUserDto> = {};
+  public contributors: Record<number, IUserDto> = {};
 
   constructor(
     private collaboratorsService: CollaboratorsService
@@ -23,11 +23,15 @@ export class CardProjectComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setImages();
     this.setCollaborators();
-    this.getCollaborators();
   }
 
   private setCollaborators(): void {
+    /*if (this.project.collaborators.length > 0) {
+      this.collaborators = [...this.project.collaborators];
+    }
+    this.collaborators.push(this.project.id_user);*/
     this.collaborators = [...this.project.collaborators, this.project.id_user];
+    this.getCollaborators();
   }
 
   private setImages(): void {
@@ -36,15 +40,17 @@ export class CardProjectComponent implements OnInit, OnDestroy {
   }
 
   private getCollaborators(): void {
-    if (this.project.collaborators.length > 0) {
-      this.collaboratorSubscription = this.collaboratorsService
-        .getCollaborators(this.collaborators)
-        .subscribe((contributors: IUserDto[]) => {
-          contributors.forEach((contributor: IUserDto) => {
-            this.contributors[contributor.id] = contributor;
-          });
+    this.collaboratorSubscription = this.collaboratorsService
+      .setContributors(this.collaborators)
+      .subscribe((contributors: IUserDto[]) => {
+        contributors.forEach((contributor: IUserDto) => {
+          this.contributors[contributor.id] = contributor;
         });
-    }
+      });
+  }
+
+  public getContributorsLength(): number {
+    return Object.keys(this.contributors).length;
   }
 
   ngOnDestroy(): void {

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie-service';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
-import { RoleMock } from '@app/data/mocks/role.mock';
+import { RolesMock } from '@app/data/mocks/roles.mock';
 import { environment } from '@env/environment';
 import { HttpApi } from '@core/http/http-api';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -30,7 +30,7 @@ export class AuthService {
     private http: HttpClient,
     private cookieService: CookieService,
     private socialAuthService: SocialAuthService,
-    private roleMock: RoleMock,
+    private rolesMock: RolesMock,
     private router: Router
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}') as User);
@@ -70,7 +70,7 @@ export class AuthService {
   }
 
   public setRoles(): void {
-    this.roleMock.getRoles()
+    this.rolesMock.getRoles()
       .subscribe((roles: any) => {
         this.getCurrentUserSubject().roles = roles;
       });

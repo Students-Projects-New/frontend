@@ -7,7 +7,7 @@ import { IRole } from '@data/interfaces';
 @Injectable({
     providedIn: 'root'
 })
-export class RoleMock {
+export class RolesMock {
 
     private roles: IRole[] = [
         {

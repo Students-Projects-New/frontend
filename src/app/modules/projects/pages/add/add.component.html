@@ -118,7 +118,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <select class="form-control" id="id_subject_period" (change)="changeSubjectPeriod($event)">
+                                <select class="form-control" id="subject_period" formControlName="subject_period" (change)="changeSubjectPeriod($event)">
                                     <option [value]="c.id_subject_period.id" *ngFor="let c of coursesStudent">{{ c.id_subject_period.id_subject.name | titlecase }}</option>
                                 </select>
                             </div>

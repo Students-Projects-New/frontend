@@ -25,8 +25,8 @@ export class ProjectService {
     return this.http.post<IProject[]>(`${this.url}/${HttpApi.project_List}/${id}`, (tags) ? { params: tags } : {});
   }
 
-  public createProject(project: IProject): Observable<IProject> {
-    return this.http.post<IProject>(`${this.url}/${HttpApi.project_List}`, project);
+  public createProject(project: FormData): Observable<IProject> {
+    return this.http.post<IProject>(`${this.url}/${HttpApi.project_Create}/`, project);
   }
 
   public deleteProject(project: IProjectDto): Observable<any> {

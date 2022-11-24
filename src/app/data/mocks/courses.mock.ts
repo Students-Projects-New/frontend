@@ -6,7 +6,7 @@ import { ICourse } from '@data/interfaces';
 @Injectable({
     providedIn: 'root'
 })
-export class CourseMock {
+export class CoursesMock {
 
     private currentValue = Math.floor(Math.random() * 4) + 1;
     private courses: ICourse[] = [

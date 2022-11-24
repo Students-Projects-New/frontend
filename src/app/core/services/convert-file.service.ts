@@ -37,4 +37,15 @@ export class ConvertFileService {
     });
   }
 
+  public convertToFormData(data: any): FormData {
+    const formData = new FormData();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+        console.log(key, data[key]);
+      }
+    }
+    return formData;
+  }
+
 }

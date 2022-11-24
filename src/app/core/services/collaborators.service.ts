@@ -13,30 +13,33 @@ import { environment } from '@env/environment';
 export class CollaboratorsService {
 
   private readonly url = `${environment.baseUrlUsers}`;
-  private contributorSubject: BehaviorSubject<IDictionary<IUserDto>>;
-  public readonly contributors: Observable<IDictionary<IUserDto>>;
+  private contributorSubject: BehaviorSubject<Record<number, IUserDto>>;
+  public readonly contributors: Observable<Record<number, IUserDto>>;
 
   constructor(private http: HttpClient) {
-    this.contributorSubject = new BehaviorSubject<IDictionary<IUserDto>>({});
+    this.contributorSubject = new BehaviorSubject<Record<number, IUserDto>>({});
     this.contributors = this.contributorSubject.asObservable();
   }
 
-  public get contributorsValue(): IDictionary<IUserDto> {
-    return this.contributorSubject.value;
-  }
-
-  public getCollaborators(ids: number[]): Observable<IUserDto[]> {
+  public setContributors(ids: number[]): Observable<IUserDto[]> {
     return this.http.post<IUserDto[]>(`${this.url}/${HttpApi.collaborators}/`, { id_users: ids })
       .pipe(
         tap((contributors: IUserDto[]) => {
-          const dictionary: IDictionary<IUserDto> = {};
+          const contributorsDict: Record<number, IUserDto> = {};
           contributors.forEach((contributor: IUserDto) => {
-            dictionary[contributor.id] = contributor;
+            contributorsDict[contributor.id] = contributor;
           });
-          this.contributorSubject.next(dictionary);
+          this.contributorSubject.next(contributorsDict);
         })
       );
   }
 
+  get contributorsValue(): Record<number, IUserDto> {
+    return this.contributorSubject.getValue();
+  }
+
+  get currentContributors(): Observable<Record<number, IUserDto>> {
+    return this.contributors;
+  }
 
 }

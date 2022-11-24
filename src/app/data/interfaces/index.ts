@@ -4,6 +4,8 @@ export { IProjectDto } from './http/dto/project-dto.interface';
 
 export { ITagElement } from './http/tag.interface';
 
+export { IStage } from './http/stage.interface';
+
 export { IUser } from './http/user.interface';
 
 export { IUserDto } from './http/dto/user-dto.interface';

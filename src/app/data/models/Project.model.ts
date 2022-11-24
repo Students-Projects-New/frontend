@@ -1,4 +1,4 @@
-import { IProject } from "@data/interfaces";
+import { IProject, ITagElement, IStage } from "@data/interfaces";
 
 export class Project implements IProject {
     constructor(
@@ -11,8 +11,12 @@ export class Project implements IProject {
         public port_container: number,
         public url: string,
         public static_path: string,
-        public tags: any[],
-        public stages: any[],
+        public subject_period: number,
+        public tags: ITagElement[],
+        public stages: IStage[],
         public collaborators: number[],
+        public subjects: number[],
+        public created_at: Date,
+        public updated_at: Date,
     ) { }
 }
