@@ -30,16 +30,13 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     if (this.authService.isLoggedIn() && !this.isApiUrl(request.url)) {
       headers = headers.set('Authorization', `Bearer ${this.authService.accessToken}`);
     } if (this.isForm(request.url)) {
-      /*let headersForm: HttpHeaders = new HttpHeaders({ 'Accept': 'application/json' });
-      headersForm = headersForm.set('Authorization', `Bearer ${this.authService.accessToken}`);
-      headers = headersForm;*/
       headers = headers.delete('Content-Type');
     }
     return request.clone({ headers });
   }
 
   private isApiUrl(apiUrl: string): boolean {
-    const blockedApiList = [HttpApi.oauth_Token, HttpApi.project_Create];
+    const blockedApiList = [HttpApi.oauth_Token];
     return blockedApiList.some((url) => apiUrl.includes(url));
   }
 
