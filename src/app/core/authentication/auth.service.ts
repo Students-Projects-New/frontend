@@ -58,6 +58,16 @@ export class AuthService {
     return this.cookieService.get('refresh_token');
   }
 
+  public signIn(data: ITokenDto): Observable<IToken> {
+    return this.http.post<IToken>(`${this.url}/${HttpApi.oauth_Token}/`, JSON.stringify(data))
+      .pipe(
+        tap((res: IToken) => {
+          this.autoSignIn(res);
+        }),
+        catchError(this.handleError)
+      );
+  }
+
   private autoSignIn(token: IToken) {
     this.token = this.jwtHelper.decodeToken(token.access);
     this.cookieService.set('access_token', token.access, new Date(this.token.exp * 1000), '/');
@@ -74,26 +84,20 @@ export class AuthService {
       .subscribe((roles: any) => {
         this.getCurrentUserSubject().roles = roles;
       });
-      localStorage.setItem('currentUser', JSON.stringify(this.getCurrentUserSubject()));
+    localStorage.setItem('currentUser', JSON.stringify(this.getCurrentUserSubject()));
   }
 
-  public signIn(data: ITokenDto): Observable<IToken> {
-    return this.http.post<IToken>(`${this.url}/${HttpApi.oauth_Token}/`, JSON.stringify(data))
-      .pipe(
-        tap((res: IToken) => {
-          this.autoSignIn(res);
-        }),
-        catchError(this.handleError)
-      );
+  private detectUserActivity(): void {
+    const timeout = new Date(this.token.exp * 1000).getTime() - new Date().getTime();
+    window.addEventListener('mousemove', () => {
+      this.autoLogout(timeout);
+    });
   }
 
-  private signOutWithGoogle(): void {
-    this.socialAuthService.authState
-      .subscribe((user) => {
-        if (user) {
-          this.socialAuthService.signOut();
-        }
-      });
+  private autoLogout(expirationDuration: number): void {
+    setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 
   public logout(): void {
@@ -106,39 +110,42 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
   }
 
-  public loginWithRefreshToken(): Observable<IToken> {
-    const data = { refresh: this.refreshToken };
-    return this.http.post<IToken>(`${this.url}/${HttpApi.oauth_Refresh_Token}`, JSON.stringify(data))
-      .pipe(
-        tap((res: IToken) => {
-          this.autoSignIn(res);
-        }),
-        catchError(this.handleError)
-      );
-  }
-
-  private autoLogout(expirationDuration: number): void {
-    setTimeout(() => {
-      this.logout();
-    }, expirationDuration);
-  }
-
-  private detectUserActivity(): void {
-    window.addEventListener('mousemove', () => {
-      this.autoLogout(new Date(this.token.exp * 1000).getTime() - new Date().getTime());
-    });
+  private signOutWithGoogle(): void {
+    this.socialAuthService.authState
+      .subscribe((user) => {
+        if (user) {
+          this.socialAuthService.signOut();
+        }
+      });
   }
 
   private autoRefreshToken(expirationDuration: number = 300000): void {
     let refreshInterval = setInterval(() => {
       if (this.isLoggedIn()) {
         if (this.jwtHelper.isTokenExpired(this.accessToken)) {
-          this.loginWithRefreshToken();
+          this.loginWithRefreshToken().subscribe();
         }
       } else {
         clearInterval(refreshInterval);
       }
     }, expirationDuration);
+  }
+
+  public loginWithRefreshToken(): Observable<IToken> {
+    const data = { refresh: this.refreshToken };
+    return this.http.post<IToken>(`${this.url}/${HttpApi.oauth_Refresh_Token}/`, JSON.stringify(data))
+      .pipe(
+        tap((res: IToken) => {
+          this.token = this.jwtHelper.decodeToken(res.access);
+          this.cookieService.set('access_token', res.access, new Date(this.token.exp * 1000), '/');
+          localStorage.setItem('currentUser', JSON.stringify(this.token.user));
+          this.currentUserSubject.next(this.token.user);
+          this.setRoles();
+          this.detectUserActivity();
+          this.autoRefreshToken(new Date(this.token.exp * 1000).getTime() - new Date().getTime());
+        }),
+        catchError(this.handleError)
+      );
   }
 
   public hasRole(roles: ROLE[]): boolean {

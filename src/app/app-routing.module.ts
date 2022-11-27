@@ -51,7 +51,7 @@ const config: ExtraOptions = {
   anchorScrolling: 'enabled',
   useHash: true,
   enableTracing: false,
-  preloadingStrategy: PreloadAllModules
+  //preloadingStrategy: PreloadAllModules
 };
 
 @NgModule({

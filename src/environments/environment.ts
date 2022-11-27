@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 const server = {
-  protocol: 'http',
-  hostname: '20.172.104.99',
+  protocol: 'https',
+  hostname: 'becl.me',
   port: 80,
 };
 
@@ -14,10 +14,10 @@ export const environment = {
   oauth: {
     googleClientId: '215382460353-qq2lc93pf3mdtvbg8560d7lumitronl8.apps.googleusercontent.com'
   },
-  baseUrlAcademic: `${server.protocol}://${server.hostname}:${server.port}/sp_academic/academic/api/v1`,
-  baseUrlProjects: `${server.protocol}://${server.hostname}:${server.port}/sp_project/projects/api/v1`,
-  baseUrlAuth: `${server.protocol}://${server.hostname}:${server.port}/sp_user/auth/api/v1`,
-  baseUrlUsers: `${server.protocol}://${server.hostname}:${server.port}/sp_user/users/api/v1`,
+  baseUrlAcademic: `${server.protocol}://${server.hostname}/sp_academic/academic/api/v1`,
+  baseUrlProjects: `${server.protocol}://${server.hostname}/sp_project/projects/api/v1`,
+  baseUrlAuth: `${server.protocol}://${server.hostname}/sp_user/auth/api/v1`,
+  baseUrlUsers: `${server.protocol}://${server.hostname}/sp_user/users/api/v1`,
 };
 
 /*

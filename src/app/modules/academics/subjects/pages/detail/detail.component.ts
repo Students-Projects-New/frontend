@@ -72,11 +72,12 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   public updateSubject(): void {
-    this.subjectsService.updateSubject(this.subject.id!, this.subject)
+    this.subjectsService
+      .updateSubject(this.subject.id!, this.subject)
       .subscribe((data: ISubject) => {
         this.subject = data;
       });
-      this.showModal.emit(false);
+    this.showModal.emit(false);
   }
 
   public closedModal(): void {

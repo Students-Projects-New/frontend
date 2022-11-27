@@ -33,6 +33,9 @@ export class AddComponent implements OnInit {
       { type: 'maxlength', message: 'Descripción no puede tener más de 50 caracteres' },
       { type: 'pattern', message: 'Descripción debe contener solo letras' },
     ],
+    image: [
+      { type: 'required', message: 'Imagen es requerida' },
+    ],
     context: [
       { type: 'required', message: 'Contexto es requerido' },
       { type: 'minlength', message: 'Contexto debe tener al menos 5 caracteres' },
@@ -52,7 +55,10 @@ export class AddComponent implements OnInit {
     ],
     static_path: [
       { type: 'pattern', message: 'Ruta estática debe ser un directorio' },
-    ]
+    ],
+    subject_period: [
+      { type: 'required', message: 'Materia es requerido' },
+    ],
   };
 
   constructor(
@@ -64,7 +70,7 @@ export class AddComponent implements OnInit {
     private projectService: ProjectService,
     private router: Router
   ) {
-    this.imageURL = '';
+    this.imageURL = 'https://cdn-icons-png.flaticon.com/512/4173/4173337.png';
     this.coursesStudent = [];
     this.newProject = this.fb.group({
       id_user: new FormControl(this.currentUser.id),
@@ -82,7 +88,10 @@ export class AddComponent implements OnInit {
           Validators.maxLength(50),
           Validators.pattern('^[a-zA-Z ]*$')
         ])),
-      image: [null],
+      image: new FormControl(null,
+        Validators.compose([
+          Validators.required
+        ])),
       context: new FormControl('',
         Validators.compose([
           Validators.required,
@@ -109,7 +118,10 @@ export class AddComponent implements OnInit {
         Validators.compose([
           Validators.pattern('^[a-zA-Z0-9/]*$')
         ])),
-      subject_period: [''],
+      subject_period: new FormControl(null,
+        Validators.compose([
+          Validators.required
+        ])),
     });
   }
 
@@ -119,7 +131,8 @@ export class AddComponent implements OnInit {
 
   public getCoursesStudent(): void {
     const id = this.authService.getCurrentUserSubject().id;
-    this.courseStudentService.getCoursesStudent(id)
+    this.courseStudentService
+      .getCoursesStudent(id)
       .subscribe((coursesStudent: ICourseStudent[]) => {
         this.coursesStudent = coursesStudent;
       });
@@ -140,7 +153,8 @@ export class AddComponent implements OnInit {
     const file: File = (target.files as FileList)[0];
     this.newProject.patchValue({ image: file });
     if (target.files && file) {
-      this.convertFileService.convertToBase64(file)
+      this.convertFileService
+        .convertToBase64(file)
         .then((data: string) => this.imageURL = data)
         .catch((error: Error) => console.log(error));
     }
@@ -156,16 +170,18 @@ export class AddComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    if (!this.newProject.valid) {
+    this.newProject.markAllAsTouched();
+    /*if (!this.newProject.valid) {
       this.newProject.markAllAsTouched();
       return;
     }
 
     const formData: FormData = this.convertFileService.convertToFormData(this.newProject.value);
-    this.projectService.createProject(formData)
+    this.projectService
+      .createProject(formData)
       .subscribe((project: IProject) => {
         this.router.navigate(['/projects']);
-      });
+      });*/
   }
 
 }

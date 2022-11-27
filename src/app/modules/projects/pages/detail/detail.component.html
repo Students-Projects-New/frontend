@@ -1,8 +1,8 @@
 <div class="page-header">
-    <h4 class="page-title">Detail</h4>
+    <h4 class="page-title">Resumen</h4>
     <ul class="breadcrumbs">
         <li class="nav-home">
-            <a href="#">
+            <a [routerLink]="['/dashboard']">
                 <i class="flaticon-home"></i>
             </a>
         </li>
@@ -10,13 +10,19 @@
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="#">Projects</a>
+            <a [routerLink]="['/projects']">Proyectos</a>
         </li>
         <li class="separator">
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="#">Detail</a>
+            <a>Resumen</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a>{{ project.context }}</a>
         </li>
     </ul>
 </div>
@@ -24,185 +30,33 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Magic Trivia</h4>
+                <h4 class="card-title">{{ project.context }}</h4>
             </div>
             <div class="card-body">
-                <ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+                <ul class="nav nav-pills nav-primary" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="pills-overview-tab" data-toggle="pill" href="#pills-overview"
-                            role="tab" aria-controls="pills-home" aria-selected="true">Overview</a>
+                        <a class="nav-link" id="pills-overview-tab" data-toggle="pill" [routerLink]="['overview']" [routerLinkActive]="['active']"
+                            role="tab" aria-controls="pills-overview" aria-selected="true">Resumen</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-logs-tab" data-toggle="pill" href="#pills-logs" role="tab"
-                            aria-controls="pills-profile" aria-selected="false">Logs</a>
+                        <a class="nav-link" id="pills-activity-tab" data-toggle="pill" [routerLink]="['activity']" [routerLinkActive]="['active']"
+                            role="tab" aria-controls="pills-activity" aria-selected="false">Actividad</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-phase-tab" data-toggle="pill" href="#pills-phase" role="tab"
-                            aria-controls="pills-contact" aria-selected="false">Phase</a>
+                        <a class="nav-link" id="pills-access-tab" data-toggle="pill" [routerLink]="['access']" [routerLinkActive]="['active']"
+                            role="tab" aria-controls="pills-access" aria-selected="false">Acceso</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-settings-tab" data-toggle="pill" href="#pills-settings" role="tab"
-                            aria-controls="pills-contact" aria-selected="false">Settings</a>
+                        <a class="nav-link" id="pills-phases-tab" data-toggle="pill" [routerLink]="['phases']" [routerLinkActive]="['active']"
+                            role="tab" aria-controls="pills-phases" aria-selected="false">Fases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-settings-tab" data-toggle="pill" [routerLink]="['settings']" [routerLinkActive]="['active']"
+                            role="tab" aria-controls="pills-settings" aria-selected="false">Configuración</a>
                     </li>
                 </ul>
-                <div class="tab-content mt-2 mb-3" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
-                        aria-labelledby="pills-overview-tab">
-
-                    </div>
-                    <div class="tab-pane fade" id="pills-logs" role="tabpanel" aria-labelledby="pills-logs-tab">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="nav flex-column nav-pills nav-secondary nav-pills-no-bd nav-pills-icons"
-                                    id="v-pills-tab-with-icon" role="tablist" aria-orientation="vertical">
-                                    <a class="nav-link active" id="v-pills-home-tab-icons" data-toggle="pill"
-                                        href="#v-pills-home-icons" role="tab" aria-controls="v-pills-home-icons"
-                                        aria-selected="true" (click)="getLogs(false, true)">
-                                        <i class="flaticon-settings"></i>
-                                        Build Logs
-                                    </a>
-                                    <a class="nav-link" id="v-pills-profile-tab-icons" data-toggle="pill"
-                                        href="#v-pills-profile-icons" role="tab" aria-controls="v-pills-profile-icons"
-                                        aria-selected="false" (click)="getLogs(true, false)">
-                                        <i class="flaticon-interface-3"></i>
-                                        Deployment Logs
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="tab-pane fade show active" id="v-pills-home-icons" role="tabpanel"
-                                    aria-labelledby="v-pills-home-tab-icons" [ngClass]="{'d-none': showLogsBuild}">
-                                    <div class="monitor">
-                                        <log-monitor 
-                                            theme="dark" 
-                                            [animated]="true" 
-                                            [icons]="true" 
-                                            [history]="build">
-                                        </log-monitor>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="v-pills-profile-icons" role="tabpanel"
-                                    aria-labelledby="v-pills-profile-tab-icons" [ngClass]="{'d-none': showLogsDeploy}">
-                                    <div class="monitor">
-                                        <log-monitor 
-                                            theme="dark" 
-                                            [animated]="true" 
-                                            [icons]="true" 
-                                            [history]="deploy">
-                                        </log-monitor>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-phase" role="tabpanel" aria-labelledby="pills-phase-tab">
-                        <ul class="timeline">
-                            <li>
-                                <div class="timeline-badge"><i class="flaticon-message"></i></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-                                        <p><small class="text-muted"><i class="flaticon-message"></i> 11 hours ago via
-                                                Twitter</small></p>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="timeline-inverted">
-                                <div class="timeline-badge warning"><i class="flaticon-alarm-1"></i></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="timeline-badge danger"><i class="flaticon-error"></i></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="timeline-inverted">
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="timeline-badge info"><i class="flaticon-price-tag"></i></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                        <hr>
-                                        <div class="btn-group dropdown">
-                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
-                                                data-toggle="dropdown">
-                                                <span class="btn-label">
-                                                    <i class="fa fa-cog"></i>
-                                                </span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li>
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="timeline-inverted">
-                                <div class="timeline-badge success"><i class="flaticon-credit-card-1"></i></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-                                    </div>
-                                    <div class="timeline-body">
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-settings-tab">
-
-                    </div>
+                <div class="tab-content my-5" id="pills-tabContent">
+                    <router-outlet></router-outlet>
                 </div>
             </div>
         </div>

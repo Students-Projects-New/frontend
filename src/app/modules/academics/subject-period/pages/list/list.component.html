@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h4 class="page-title">Lista de Materias</h4>
+    <h4 class="page-title">Lista de Materia Periodo</h4>
     <ul class="breadcrumbs">
         <li class="nav-home">
             <a [routerLink]="['/dashboard']">
@@ -22,6 +22,12 @@
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
+            <a [routerLink]="['/academics/subject-period']">Periodos</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
             <a>Lista</a>
         </li>
     </ul>
@@ -31,7 +37,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <div class="card-title">Lista de Materias</div>
+                    <div class="card-title">Lista de Materia Periodo</div>
                     <button class="btn btn-primary btn-round ml-auto" (click)="createSubjectPeriod()">
                         <i class="fa fa-plus"></i>
                         Adicionar Materias Periodo
@@ -62,7 +68,8 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group" style="width: 40%">
                             <label for="search">Buscar</label>
-                            <input type="text" placeholder="Buscar" class="form-control" id="search" (keyup)="filterSubjects($event)">
+                            <input type="text" placeholder="Buscar" class="form-control" id="search"
+                                (keyup)="filterSubjects($event)">
                         </div>
                     </div>
                 </div>
@@ -71,41 +78,57 @@
                 <!-- Table -->
                 <ngx-datatable class="material striped" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
                     rowHeight="auto" [rows]="rows" [limit]="limit">
+
+                    <!-- ID Column -->
                     <ngx-datatable-column name="ID" [flexGrow]="1" [resizeable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{ row?.id }}
                         </ng-template>
                     </ngx-datatable-column>
+
+                    <!-- Code Column -->
                     <ngx-datatable-column name="Código Materia" [flexGrow]="2" [resizeable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{ row.id_subject.code }}
                         </ng-template>
                     </ngx-datatable-column>
+
+                    <!-- Name Column -->
                     <ngx-datatable-column name="Nombre Materia" [flexGrow]="3" [resizeable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{ row.id_subject.name | titlecase }}
                         </ng-template>
                     </ngx-datatable-column>
+
+                    <!-- Code Teacher Column -->
                     <ngx-datatable-column name="Código Docente" [flexGrow]="2" [resizeable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{ row.id_teacher }}
                         </ng-template>
                     </ngx-datatable-column>
+
+                    <!-- Group Column -->
                     <ngx-datatable-column name="Grupo" [flexGrow]="1" [resizeable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{ row.group }}
                         </ng-template>
                     </ngx-datatable-column>
+
+                    <!-- Year Column -->
                     <ngx-datatable-column name="Año" [flexGrow]="1" [resizeable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{ row.year }}
                         </ng-template>
                     </ngx-datatable-column>
+
+                    <!-- Period Column -->
                     <ngx-datatable-column name="Periodo" [flexGrow]="1" [resizeable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             {{ row.period }}
                         </ng-template>
                     </ngx-datatable-column>
+
+                    <!-- Actions Column -->
                     <ngx-datatable-column name="Acciones" [flexGrow]="2" [resizeable]="false" [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             <div class="form-button-action">
@@ -115,13 +138,14 @@
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 <button type="button" data-toggle="tooltip" title="Eliminar"
-                                    class="btn btn-link btn-danger" data-original-title="Eliminar Materia Periodo"
+                                    class="btn btn-link btn-default" data-original-title="Eliminar Materia Periodo"
                                     (click)="deleteSubjectPeriod(row.id)">
                                     <i class="fa fa-times"></i>
                                 </button>
                             </div>
                         </ng-template>
                     </ngx-datatable-column>
+
                 </ngx-datatable>
                 <!-- End Table -->
             </div>

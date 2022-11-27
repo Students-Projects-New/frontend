@@ -58,7 +58,8 @@
                                 <div class="fallback">
                                     <input class="form-control-file" type="file" hidden id="input-custom-file"
                                         accept=".xls, .xlsx" style="display:none;" (change)="onFileChange($event)">
-                                    <label for="input-custom-file" class="btn btn-primary text-white">Cargar Archivo</label>
+                                    <label for="input-custom-file" class="btn btn-primary text-white">Cargar
+                                        Archivo</label>
                                 </div>
                             </form>
                         </div>
@@ -92,29 +93,40 @@
                     <div class="card-title">Lista de Materias por Periodo</div>
                 </div>
                 <div class="card-body">
+                    <!-- Table -->
                     <ngx-datatable class="material striped" [columnMode]="'flex'" [headerHeight]="50"
                         [footerHeight]="50" rowHeight="auto" [rows]="rows" [limit]="limit">
+
+                        <!-- Position Column -->
                         <ngx-datatable-column name="#" [flexGrow]="0.5">
                             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                                 {{ (rowIndex + 1) }}
                             </ng-template>
                         </ngx-datatable-column>
+
+                        <!-- ID Subject Period Column -->
                         <ngx-datatable-column name="Código Materia" [flexGrow]="2">
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 {{ row?.id_subject }}
                             </ng-template>
                         </ngx-datatable-column>
+
+                        <!-- Name Teacher Column -->
                         <ngx-datatable-column name="Código Docente" [flexGrow]="2">
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 {{ row?.id_teacher }}
                             </ng-template>
                         </ngx-datatable-column>
+
+                        <!-- Group Column -->
                         <ngx-datatable-column name="Grupo" [flexGrow]="2">
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 {{ row?.group }}
                             </ng-template>
                         </ngx-datatable-column>
+
                     </ngx-datatable>
+                    <!-- End Table -->
                 </div>
                 <div class="card-action text-center">
                     <button class="btn btn-primary" (click)="onSubmit()">Guardar</button>

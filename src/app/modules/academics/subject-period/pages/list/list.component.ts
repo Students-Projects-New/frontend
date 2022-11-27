@@ -29,7 +29,8 @@ export class ListComponent implements OnInit {
   }
 
   private getSubjectsPeriod(): void {
-    this.subjectPeriodService.getSubjectsPeriod()
+    this.subjectPeriodService
+      .getSubjectsPeriod()
       .subscribe((data: ICourse[]) => {
         this.rows = data;
         this.temp = [...data];

@@ -29,7 +29,8 @@ export class ListComponent implements OnInit {
   }
 
   private getSubjects(): void {
-    this.subjectsService.getSubjects()
+    this.subjectsService
+      .getSubjects()
       .subscribe((data: ISubject[]) => {
         this.rows = data;
         this.temp = [...data];
@@ -42,9 +43,10 @@ export class ListComponent implements OnInit {
   }
 
   public filterSubjects(event: Event): void {
-    const val = (event.target as HTMLInputElement).value.toLowerCase();
-    const temp = this.temp.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+    const value = (event.target as HTMLInputElement).value;
+    const filterValue = value.trim().toLowerCase();
+    const temp = this.temp.filter((subject: ISubject) => {
+      return subject.name.toLowerCase().indexOf(filterValue) !== -1;
     });
     this.rows = temp;
     this.table.offset = 0;
@@ -60,7 +62,8 @@ export class ListComponent implements OnInit {
   }
 
   public deleteSubject(id: number): void {
-    this.subjectsService.deleteSubject(id)
+    this.subjectsService
+      .deleteSubject(id)
       .subscribe((data: ISubject) => {
         this.getSubjects();
       });

@@ -3,9 +3,9 @@
         <img class="card-img-top rounded" src="{{ course.image }}" alt="{{ course.id_subject.name }}">
     </div>
     <div class="card-body pt-2">
-        <span class="badge badge-warning float-right">{{ course.year + ' - ' + course.period }}</span>
+        <span class="badge badge-danger float-right">{{ course.year + ' - ' + course.period }}</span>
         <h4 class="card-title mb-1 fw-bold">
-            <a class="text-dark" [routerLink]="['/academics/courses', course.id]">{{ course.id_subject.name + ' - ' + course.group }}</a>
+            <a class="text-dark" [routerLink]="['/academics/courses', course.id]">{{ course.id_subject.name + ' - ' + course.group | titlecase }}</a>
         </h4>
     </div>
 </div>

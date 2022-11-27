@@ -45,7 +45,8 @@ export class AddComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.subjectsService.createSubject(this.rows)
+    this.subjectsService
+      .createSubject(this.rows)
       .subscribe((data: ISubject[]) => {
         this.onReset();
       });
@@ -60,7 +61,8 @@ export class AddComponent implements OnInit {
   }
 
   private xlsxToJson(): void {
-    this.convertFileService.convertToJson(this.file as File)
+    this.convertFileService
+      .convertToJson(this.file as File)
       .then((data: ISubject[]) => this.rows = data)
       .catch((error: Error) => console.log(error));
   }

@@ -24,7 +24,8 @@ export class ListComponent implements OnInit {
 
   private getCourses(): void {
     const id = this.authService.getCurrentUserSubject().id;
-    this.coursesService.getCourses(id)
+    this.coursesService
+      .getCourses(id)
       .subscribe((courses: ICourse[]) => {
         this.courses = courses;
       });

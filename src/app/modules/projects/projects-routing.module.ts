@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AddComponent } from './pages/add/add.component';
-import { DetailComponent } from './pages/detail/detail.component';
 import { ListComponent } from './pages/list/list.component';
 
 import { AdminLayoutComponent } from '@layout/admin-layout/admin-layout.component';
@@ -30,9 +29,8 @@ const routes: Routes = [
         data: { roles: [ROLE.ADMIN, ROLE.SUPPORT, ROLE.TEACHER, ROLE.STUDENT] }
       },
       {
-        path: ':id',
-        component: DetailComponent,
-        title: 'Detalles del Proyecto',
+        path: ':id/:context',
+        loadChildren: () => import('./pages/detail/detail.module').then(m => m.DetailModule),
         canActivate: [RoleGuard],
         data: { roles: [ROLE.ADMIN, ROLE.SUPPORT, ROLE.TEACHER, ROLE.STUDENT] }
       }
@@ -45,5 +43,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class ProjectsRoutingModule {
-  static components = [ListComponent, DetailComponent, AddComponent];
+  static components = [ListComponent, AddComponent];
 }

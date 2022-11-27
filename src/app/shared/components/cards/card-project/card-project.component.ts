@@ -21,22 +21,12 @@ export class CardProjectComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.setImages();
     this.setCollaborators();
   }
 
   private setCollaborators(): void {
-    /*if (this.project.collaborators.length > 0) {
-      this.collaborators = [...this.project.collaborators];
-    }
-    this.collaborators.push(this.project.id_user);*/
     this.collaborators = [...this.project.collaborators, this.project.id_user];
     this.getCollaborators();
-  }
-
-  private setImages(): void {
-    const image = this.project.image || 'assets/img/projects/product1.jpg';
-    this.project.image = image.replace('https:', 'http:');
   }
 
   private getCollaborators(): void {
