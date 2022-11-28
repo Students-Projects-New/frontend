@@ -3,7 +3,7 @@ import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/form
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { ProjectService } from '@modules/projects/services/project.service';
+import { ProjectsService } from '@modules/projects/services/projects.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,11 @@ import { ProjectService } from '@modules/projects/services/project.service';
 export class ProjectValidateContextService implements AsyncValidator {
 
   constructor(
-    private projectService: ProjectService
+    private projectsService: ProjectsService
   ) { }
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
-    return this.projectService.projectValidateContext(control.value)
+    return this.projectsService.projectValidateContext(control.value)
       .pipe(
         map(({ exist }) => (exist) ? { exist: true } : null),
       );

@@ -8,9 +8,12 @@ export class HttpApi {
     // Project
     static project_Validate_Context = 'validate_context';
     static project_List = 'list_project';
+    static project_Get = 'find_project';
     static project_Create = 'create_project';
     static project_Deploy = 'deploy_project';
     static project_Delete = 'delete_project';
+
+    // Collaborators
     static collaborators = 'list_users_by_ids';
     static collaborators_Add = 'add_collaborator';
     static collaborators_Remove = 'remove_collaborator';

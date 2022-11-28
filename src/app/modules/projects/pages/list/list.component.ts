@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { IProject } from '@data/interfaces';
 import { AuthService } from '@core/authentication/auth.service';
-import { ProjectService } from '@modules/projects/services/project.service';
+import { ProjectsService } from '@modules/projects/services/projects.service';
 
 @Component({
   selector: 'app-project-list',
@@ -15,7 +15,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private projectService: ProjectService
+    private projectsService: ProjectsService
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class ListComponent implements OnInit {
 
   private loadProjects(): void {
     const id = this.authService.getCurrentUserSubject().id;
-    this.projectService
+    this.projectsService
       .getProjects(id)
       .subscribe((res: IProject[]) => {
         this.projects = res;
@@ -32,7 +32,7 @@ export class ListComponent implements OnInit {
   }
 
   private deleteProject(id: any): void {
-    this.projectService
+    this.projectsService
       .deleteProject(id)
       .subscribe((res) => {
         console.log(res);

@@ -9,7 +9,7 @@ import { environment } from '@env/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
+export class ProjectsService {
 
   private readonly url = `${environment.baseUrlProjects}`;
 
@@ -27,6 +27,10 @@ export class ProjectService {
 
   public createProject(project: FormData): Observable<IProject> {
     return this.http.post<IProject>(`${this.url}/${HttpApi.project_Create}/`, project);
+  }
+
+  public deployProject(project: IProjectDto): Observable<any> {
+    return this.http.post<any>(`${this.url}/${HttpApi.project_Deploy}/`, project);
   }
 
   public deleteProject(project: IProjectDto): Observable<any> {

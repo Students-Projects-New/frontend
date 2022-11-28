@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { CurrentProjectService } from '@modules/projects/services/current-project.service';
+import { IProject } from '@data/interfaces';
+
 @Component({
   selector: 'app-project-detail',
   templateUrl: './detail.component.html',
@@ -8,18 +11,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DetailComponent implements OnInit {
 
-  project!: { id: number, context: string };
+  private id!: number;
+  public project!: IProject;
 
   constructor(
     private route: ActivatedRoute,
+    private currentProjectService: CurrentProjectService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.project = {
-      id: this.route.snapshot.params['id'],
-      context: this.route.snapshot.params['context']
-    };
+    this.id = +this.route.snapshot.params['id'];
+    this.getProject();
+  }
+
+  private getProject(): void {
+    this.currentProjectService
+      .getCurrentProject(this.id)
+      .subscribe((project: IProject) => {
+        this.project = project;
+      });
   }
 
   public onBack(): void {

@@ -7,7 +7,7 @@ import { ConvertFileService } from '@core/services/convert-file.service';
 import { AuthService } from '@core/authentication/auth.service';
 import { ProjectValidateContextService } from '@core/services/project-validate-context.service';
 import { CourseStudentService } from '@modules/projects/services/course-student.service';
-import { ProjectService } from '@modules/projects/services/project.service';
+import { ProjectsService } from '@modules/projects/services/projects.service';
 
 @Component({
   selector: 'app-project-add',
@@ -67,7 +67,7 @@ export class AddComponent implements OnInit {
     private contexValidatorService: ProjectValidateContextService,
     private authService: AuthService,
     private courseStudentService: CourseStudentService,
-    private projectService: ProjectService,
+    private projectsService: ProjectsService,
     private router: Router
   ) {
     this.imageURL = 'https://cdn-icons-png.flaticon.com/512/4173/4173337.png';
@@ -177,7 +177,7 @@ export class AddComponent implements OnInit {
     }
 
     const formData: FormData = this.convertFileService.convertToFormData(this.newProject.value);
-    this.projectService
+    this.projectsService
       .createProject(formData)
       .subscribe((project: IProject) => {
         this.router.navigate(['/projects']);

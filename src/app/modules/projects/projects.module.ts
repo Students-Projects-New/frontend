@@ -9,10 +9,17 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 import { VarsComponent } from './components/vars/vars.component';
 import { LogsComponent } from './components/logs/logs.component';
 import { TagsComponent } from './components/tags/tags.component';
+import { CollaboratorsComponent } from './components/collaborators/collaborators.component';
+import { MaintenanceModeComponent } from './components/maintenance-mode/maintenance-mode.component';
+import { DeleteProjectComponent } from './components/delete-project/delete-project.component';
 
 const COMPONENTS = [
   VarsComponent,
-  LogsComponent
+  LogsComponent,
+  TagsComponent,
+  CollaboratorsComponent,
+  MaintenanceModeComponent,
+  DeleteProjectComponent,
 ];
 
 const MODULES = [
@@ -25,7 +32,7 @@ const MODULES = [
 
 
 @NgModule({
-  declarations: [...ProjectsRoutingModule.components, ...COMPONENTS, TagsComponent],
+  declarations: [...ProjectsRoutingModule.components, ...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS]
 })

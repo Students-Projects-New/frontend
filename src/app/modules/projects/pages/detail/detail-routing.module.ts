@@ -5,6 +5,7 @@ import { AccessComponent } from './access/access.component';
 import { ActivityComponent } from './activity/activity.component';
 import { OverviewComponent } from './overview/overview.component';
 import { PhasesComponent } from './phases/phases.component';
+import { ResourcesComponent } from './resources/resources.component';
 import { SettingsComponent } from './settings/settings.component';
 
 import { DetailComponent } from './detail.component';
@@ -18,6 +19,11 @@ const routes: Routes = [
         path: 'overview',
         component: OverviewComponent,
         title: 'Resumen'
+      },
+      { 
+        path: 'resources',
+        component: ResourcesComponent,
+        title: 'Recursos'
       },
       {
         path: 'phases',
@@ -49,5 +55,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class DetailRoutingModule {
-  static components = [AccessComponent, ActivityComponent, OverviewComponent, PhasesComponent, SettingsComponent];
+  static components = [AccessComponent, ActivityComponent, OverviewComponent, PhasesComponent, ResourcesComponent, SettingsComponent];
 }
