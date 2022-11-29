@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { IUserDto } from '@data/interfaces';
 import { AuthService } from '@core/authentication/auth.service';
@@ -22,11 +23,14 @@ export class CollaboratorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getContributors();
-    this.list = Object.keys(this.collaborators).map(Number);
   }
 
   public getContributors(): void {
-    this.collaborators = this.collaboratorsService.contributorsValue;
+    this.collaboratorsService.currentContributors
+      .subscribe((contributors: Record<number, IUserDto>) => {
+        this.collaborators = contributors;
+        this.list = Object.keys(this.collaborators).map(Number);
+      });
   }
 
   public getContributorsLength(): number {
@@ -35,7 +39,6 @@ export class CollaboratorsComponent implements OnInit {
 
   public removeCollaborator(id: number): void {
     console.log(id);
-    //this.collaboratorsService.deleteContributor(id);
   }
 
   getRole(id: number): string {

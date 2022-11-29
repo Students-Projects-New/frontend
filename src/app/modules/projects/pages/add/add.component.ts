@@ -30,8 +30,7 @@ export class AddComponent implements OnInit {
     description: [
       { type: 'required', message: 'Descripción es requerida' },
       { type: 'minlength', message: 'Descripción debe tener al menos 5 caracteres' },
-      { type: 'maxlength', message: 'Descripción no puede tener más de 50 caracteres' },
-      { type: 'pattern', message: 'Descripción debe contener solo letras' },
+      { type: 'maxlength', message: 'Descripción no puede tener más de 1000 caracteres' }
     ],
     image: [
       { type: 'required', message: 'Imagen es requerida' },
@@ -40,7 +39,7 @@ export class AddComponent implements OnInit {
       { type: 'required', message: 'Contexto es requerido' },
       { type: 'minlength', message: 'Contexto debe tener al menos 5 caracteres' },
       { type: 'maxlength', message: 'Contexto no puede tener más de 25 caracteres' },
-      { type: 'pattern', message: 'Contexto debe contener letras, números y guiones' },
+      { type: 'pattern', message: 'Contexto debe contener letras, números, acentos y espacios' },
       { type: 'exist', message: 'Contexto ya existe, busca otro 👎' },
     ],
     port_container: [
@@ -85,8 +84,7 @@ export class AddComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(50),
-          Validators.pattern('^[a-zA-Z ]*$')
+          Validators.maxLength(1000)
         ])),
       image: new FormControl(null,
         Validators.compose([
@@ -170,8 +168,8 @@ export class AddComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.newProject.markAllAsTouched();
-    /*if (!this.newProject.valid) {
+    //this.newProject.markAllAsTouched();
+    if (!this.newProject.valid) {
       this.newProject.markAllAsTouched();
       return;
     }
@@ -181,7 +179,7 @@ export class AddComponent implements OnInit {
       .createProject(formData)
       .subscribe((project: IProject) => {
         this.router.navigate(['/projects']);
-      });*/
+      });
   }
 
 }

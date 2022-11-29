@@ -7,41 +7,38 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody *ngIf="getContributorsLength() > 0">
-            <tr *ngFor="let i of list">
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="avatar">
-                            <img 
-                                [src]="collaborators[i].picture" 
-                                [alt]="collaborators[i].first_name"
-                                class="avatar-img rounded-circle">
+        <tbody>
+            <ng-container *ngIf="getContributorsLength() > 0">
+                <tr *ngFor="let i of list">
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="avatar">
+                                <img [src]="collaborators[i].picture" [alt]="collaborators[i].first_name"
+                                    class="avatar-img rounded-circle">
+                            </div>
+                            <div class="ml-2">
+                                <h6 class="mb-0">{{ collaborators[i].first_name }} {{ collaborators[i].last_name }}</h6>
+                                <small class="text-muted">{{ collaborators[i].first_name | removeWhitespace | lowercase
+                                    }}@ufps.edu.co</small>
+                            </div>
                         </div>
-                        <div class="ml-2">
-                            <h6 class="mb-0">{{ collaborators[i].first_name }} {{ collaborators[i].last_name }}</h6>
-                            <small class="text-muted">{{ collaborators[i].first_name | removeWhitespace | lowercase }}@ufps.edu.co</small>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge badge-pill badge-light-primary">{{ getRole(collaborators[i].id) }}</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="form-button-action">
+                            <ng-container *ngIf="getRole(collaborators[i].id) !== 'Owner'">
+                                <button type="button" data-toggle="tooltip" title="Eliminar"
+                                    class="btn btn-link btn-danger" (click)="removeCollaborator(i)"
+                                    data-original-title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </ng-container>
                         </div>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <span class="badge badge-pill badge-light-primary">{{ getRole(collaborators[i].id) }}</span>
-                </td>
-                <td class="text-center">
-                    <div class="form-button-action">
-                        <ng-container *ngIf="getRole(collaborators[i].id) !== 'Owner'">
-                            <button 
-                            type="button" 
-                            data-toggle="tooltip" 
-                            title="Eliminar"
-                            class="btn btn-link btn-danger" 
-                            (click)="removeCollaborator(i)"
-                            data-original-title="Eliminar">
-                            <i class="fas fa-trash"></i>
-                            </button>
-                        </ng-container>
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            </ng-container>
         </tbody>
     </table>
 </div>

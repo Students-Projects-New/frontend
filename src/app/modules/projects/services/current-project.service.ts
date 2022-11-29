@@ -6,6 +6,7 @@ import { map, tap } from 'rxjs/operators';
 import { HttpApi } from '@core/http/http-api';
 import { IProject } from '@data/interfaces';
 import { environment } from '@env/environment';
+import { CollaboratorsService } from '@app/core/services/collaborators.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class CurrentProjectService {
 
   constructor(
     private http: HttpClient,
+    private collaboratorsService: CollaboratorsService
   ) { }
 
   private setCurrentProject(project: IProject): void {
@@ -27,7 +29,11 @@ export class CurrentProjectService {
   public getCurrentProject(id: number): Observable<IProject> {
     return this.http.get<IProject>(`${this.url}/${HttpApi.project_Get}/${id}`)
       .pipe(
-        tap((project: IProject) => this.setCurrentProject(project)),
+        tap((project: IProject) => {
+          const collaborators = [...project.collaborators, project.id_user];
+          this.setCurrentProject(project);
+          this.collaboratorsService.setContributors(collaborators).subscribe();
+        }),
         map((project: IProject) => project)
       );
   }
