@@ -6,10 +6,11 @@ import * as SharedComponents from './components';
 import * as SharedPipes from './pipes';
 import { RolesDirective } from './directives/roles.directive';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { RemoveWhitespacePipe } from './pipes/remove-whitespace.pipe';
 
 
 @NgModule({
-  declarations: [...SharedComponents.components, RolesDirective, ...SharedPipes.pipes],
+  declarations: [...SharedComponents.components, RolesDirective, ...SharedPipes.pipes, RemoveWhitespacePipe],
   imports: [CommonModule, RouterModule, NgxDatatableModule],
   exports: [...SharedComponents.components, RolesDirective, ...SharedPipes.pipes]
 })
