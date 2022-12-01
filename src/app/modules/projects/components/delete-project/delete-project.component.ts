@@ -12,4 +12,8 @@ export class DeleteProjectComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteProject() {
+    console.log('delete project');
+  }
+
 }

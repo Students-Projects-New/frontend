@@ -1,1 +1,4 @@
-<p>maintenance-mode works!</p>
+<label class="switch">
+    <input type="checkbox" [checked]="maintenanceMode" (change)="toggleMaintenanceMode()" [disabled]="!canToggleMaintenanceMode">
+    <span class="slider"></span>
+</label>

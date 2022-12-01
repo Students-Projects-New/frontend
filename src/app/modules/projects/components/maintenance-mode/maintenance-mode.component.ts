@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+
+import { CurrentProjectService } from '@modules/projects/services/current-project.service';
+import { ProjectsService } from '@modules/projects/services/projects.service';
+
 @Component({
   selector: 'app-maintenance-mode',
   templateUrl: './maintenance-mode.component.html',
@@ -7,9 +11,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaintenanceModeComponent implements OnInit {
 
-  constructor() { }
+  public maintenanceMode: boolean = false;
+  public canToggleMaintenanceMode: boolean = true;
 
-  ngOnInit(): void {
+  constructor(
+    private currentProjectService: CurrentProjectService,
+    private projectService: ProjectsService
+  ) { }
+
+  ngOnInit(): void { }
+
+  toggleMaintenanceMode() {
+    this.getMaintenanceMode();
+  }
+
+  public getUserDto(): any {
+    return {
+      id_user: this.currentProjectService.currentProjectSubjectValue.id_user,
+      id_project: this.currentProjectService.currentProjectSubjectValue.id,
+    };
+  }
+
+  public getMaintenanceMode() {
+    this.projectService.deployProject(this.getUserDto())
+      .subscribe((res) => {
+        this.maintenanceMode = true;
+        console.log(res);
+      });
   }
 
 }

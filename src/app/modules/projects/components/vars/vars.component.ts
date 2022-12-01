@@ -24,7 +24,7 @@ export class VarsComponent implements OnInit {
 
   ngOnInit(): void {
     this.varsService.
-      getVars(2, 2)
+      getVars(2, 3)
       .subscribe((vars: IVar[]) => {
         vars.forEach((v: IVar) => {
           this.vars.push(this.fb.group({

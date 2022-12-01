@@ -114,7 +114,7 @@ export class AddComponent implements OnInit {
         ])),
       static_path: new FormControl('src/app',
         Validators.compose([
-          Validators.pattern('^[a-zA-Z0-9/]*$')
+          //Validators.pattern('^[a-zA-Z0-9/]*$')
         ])),
       subject_period: new FormControl(null,
         Validators.compose([
