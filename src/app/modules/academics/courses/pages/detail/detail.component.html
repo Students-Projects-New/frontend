@@ -1,1 +1,43 @@
-<p>detail works!</p>
+<div class="page-header">
+    <h4 class="page-title">{{ course.id_subject.name }}</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a [routerLink]="['/dashboard']">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a>Academico</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/academics/courses']">Cursos</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a>{{ course.id_subject.name }}</a>
+        </li>
+    </ul>
+    <div class="ml-auto">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            Acciones
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item">Estudiantes</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">Proyectos</a>
+        </div>
+    </div>
+</div>
+<div class="row row-projects">
+    <div class="col-sm-6 col-lg-3">
+        
+    </div>
+</div>

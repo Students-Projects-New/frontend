@@ -34,4 +34,12 @@ export class CoursesService {
       );
   }
 
+  public getCourseById(id: number): Observable<ICourse> {
+    return this.http.get<ICourse>(`${this.url}/${HttpApi.course}/${id}`);
+  }
+
+  public getStudentsEnrolledCourse(id: number): Observable<ICourse[]> {
+    return this.http.get<any[]>(`${this.url}/${HttpApi.course_Students_Enrolled}/${id}`);
+  }
+
 }

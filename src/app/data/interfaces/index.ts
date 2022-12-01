@@ -6,6 +6,8 @@ export { ITagElement } from './http/tag.interface';
 
 export { IStage } from './http/stage.interface';
 
+export { IVar } from './http/var.interface';
+
 export { IUser } from './http/user.interface';
 
 export { IUserDto } from './http/dto/user-dto.interface';

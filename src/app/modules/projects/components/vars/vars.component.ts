@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { IVar } from '@data/interfaces';
+import { VarsService } from '@app/modules/projects/services/vars.service';
+
 @Component({
   selector: 'app-vars',
   templateUrl: './vars.component.html',
@@ -11,7 +14,8 @@ export class VarsComponent implements OnInit {
   varsForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private varsService: VarsService
   ) {
     this.varsForm = this.fb.group({
       vars: this.fb.array([])
@@ -19,6 +23,16 @@ export class VarsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.varsService.
+      getVars(2, 2)
+      .subscribe((vars: IVar[]) => {
+        vars.forEach((v: IVar) => {
+          this.vars.push(this.fb.group({
+            key: new FormControl(v.name_var, Validators.required),
+            value: new FormControl(v.value_var, Validators.required)
+          }));
+        });
+      });
   }
 
   validationMessages = {

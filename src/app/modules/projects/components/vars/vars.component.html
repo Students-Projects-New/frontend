@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group d-flex">
-            <button type="button" class="btn btn-primary ml-auto" (click)="addVar()" [disabled]="varsForm.invalid">
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" (click)="addVar()" [disabled]="varsForm.invalid">
                 <i class="fa fa-plus"></i>
-                <span> Nuevo</span>
+                Nueva Variable
             </button>
         </div>
     </div>
@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="key{{ i }}">Key: {{ i }}</label>
+                        <label for="key{{ i }}">Key:</label>
                         <ng-container [formGroupName]="i">
                             <input type="text" class="form-control" id="key{{ i }}" name="key{{ i }}"
                                 formControlName="key" placeholder="Key">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="value{{ i }}">Value: {{ i }}</label>
+                        <label for="value{{ i }}">Value:</label>
                         <ng-container [formGroupName]="i">
                             <input type="text" class="form-control" id="value{{ i }}" name="value{{ i }}"
                                 formControlName="value" placeholder="Value">
@@ -56,13 +56,6 @@
         </ng-container>
     </ng-container>
 </form>
-<!--<pre class="p-1 mt-1">
-    <div *ngFor="let v of vars.controls; index as i">
-        Index: {{ i }}
-        Key: {{ v.get('key')!.value | json }}
-        Value: {{ v.get('value')!.value | json }}
-    </div>
-</pre>-->
 <ng-container *ngIf="vars.controls.length !== 0">
     <div class="row">
         <div class="col">

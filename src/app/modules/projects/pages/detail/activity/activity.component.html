@@ -19,11 +19,15 @@
         <div class="col-md-10">
             <div class="tab-pane fade show active" id="v-pills-home-icons" role="tabpanel"
                 aria-labelledby="v-pills-home-tab-icons" [ngClass]="{'d-none': showLogsBuild}">
-                <app-logs></app-logs>
+                <ng-container *ngIf="!showLogsBuild">
+                    <app-logs [logType]="'build'"></app-logs>
+                </ng-container>
             </div>
             <div class="tab-pane fade" id="v-pills-profile-icons" role="tabpanel"
                 aria-labelledby="v-pills-profile-tab-icons" [ngClass]="{'d-none': showLogsDeploy}">
-                <app-logs></app-logs>
+                <ng-container *ngIf="!showLogsDeploy">
+                    <app-logs [logType]="'deploy'"></app-logs>
+                </ng-container>
             </div>
         </div>
     </div>

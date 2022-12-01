@@ -31,7 +31,9 @@ export class HttpApi {
     static subjects_Student = 'subjectsStudent';
 
     // Courses
+    static course = 'subjectsPeriodDetailById';
     static courses_Teacher = 'subjectsPeriodDetail';
     static courses_Student = 'subjectStudentDetailView';
+    static course_Students_Enrolled = 'subjectStudentPeriod';
 
 }

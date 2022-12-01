@@ -1,6 +1,6 @@
 <div class="card">
     <a class="text-dark" [routerLink]="['/projects', project.id, project.context]">
-        <img class="card-img-top rounded img-project" src="{{ project.image }}" alt="{{ project.name }}">
+        <img class="card-img-top rounded img-project" [src]="project.image" [alt]="project.context">
     </a>
     <div class="card-body pt-2">
         <h4 class="card-title my-2 fw-bold">
@@ -26,7 +26,7 @@
                 <small class="date text-muted">{{ project.created_at | date }}</small>
             </div>
         </div>
-        <ng-container *ngIf="project.tags.length > 0">
+        <ng-container *ngIf="project.tags && project.tags.length > 0">
             <div class="tags">
                 <span class="badge" *ngFor="let t of project.tags">
                     {{ t.tag.name }}
@@ -36,7 +36,7 @@
         <p class="card-text">{{ project.description! | truncateText:200 }}</p>
         <div class="avatar-group">
             <ng-container *ngIf="getContributorsLength() > 0">
-                <div class="avatar" *ngFor="let c of this.project.collaborators">
+                <div class="avatar" *ngFor="let c of project.collaborators">
                     <img [src]="contributors[c].picture" [alt]="contributors[c].first_name" class="avatar-img rounded-circle border border-white">
                 </div>
             </ng-container>

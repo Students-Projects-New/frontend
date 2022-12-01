@@ -4,8 +4,7 @@
 
 const server = {
   protocol: 'https',
-  hostname: 'becl.me',
-  port: 80,
+  hostname: 'becl.me'
 };
 
 export const environment = {
