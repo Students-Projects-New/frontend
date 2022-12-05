@@ -39,7 +39,8 @@ export class DeployComponent implements OnInit {
     this.deploymentsService.
       getDeploymentsByProject(idProject)
       .subscribe((deployments) => {
-        this.deployments = deployments;
+        const arr = deployments.reverse();
+        this.deployments = arr;
       });
   }
 

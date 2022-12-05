@@ -44,7 +44,7 @@ export const MENU_ITEMS: ISidebar[] = [
                 icon: 'fas fa-columns',
                 link: '/projects',
                 expanded: false,
-                roles: [ROLE.STUDENT]
+                roles: [ROLE.STUDENT, ROLE.TEACHER, ROLE.SUPPORT, ROLE.ADMIN]
             },
             {
                 title: 'Usuarios',

@@ -74,7 +74,7 @@ export class AuthService {
     this.cookieService.set('refresh_token', token.refresh, new Date(this.token.exp * 1000), '/');
     localStorage.setItem('currentUser', JSON.stringify(this.token.user));
     this.currentUserSubject.next(this.token.user);
-    this.setRoles();
+    //this.setRoles();
     this.detectUserActivity();
     this.autoRefreshToken(new Date(this.token.exp * 1000).getTime() - new Date().getTime());
   }
@@ -85,6 +85,18 @@ export class AuthService {
         this.getCurrentUserSubject().roles = roles;
       });
     localStorage.setItem('currentUser', JSON.stringify(this.getCurrentUserSubject()));
+  }
+
+  public isStudent(): boolean {
+    return this.hasRole([ROLE.STUDENT]);
+  }
+
+  public isTeacher(): boolean {
+    return this.hasRole([ROLE.TEACHER]);
+  }
+
+  public isAdmin(): boolean {
+    return this.hasRole([ROLE.ADMIN]);
   }
 
   private detectUserActivity(): void {
