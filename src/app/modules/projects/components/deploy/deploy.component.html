@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <ng-container *ngIf="deployments">
+        <ng-container *ngIf="!isDeploymentsEmpty()">
             <ul class="timeline">
                 <li [ngClass]="{'timeline-inverted': i % 2 !== 0, 'timeline': i % 2 === 0}"
                     *ngFor="let d of deployments; let i = index">

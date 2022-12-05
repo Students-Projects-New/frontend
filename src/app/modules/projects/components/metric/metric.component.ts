@@ -14,7 +14,9 @@ export class MetricComponent implements OnInit {
   constructor(
     private currentProjectService: CurrentProjectService,
     private metricsService: MetricsService
-  ) { }
+  ) {
+    Chart.register(...registerables);
+  }
 
   ngOnInit(): void {
     this.getMetrics();
@@ -30,9 +32,9 @@ export class MetricComponent implements OnInit {
   }
 
   public setData(data: any): void {
-    const cpu: any = [];
-    const memory: any = [];
-    const labels: any = [];
+    const cpu: number[] = [];
+    const memory: number[] = [];
+    const labels: string[] = [];
     data.forEach((item: any) => {
       cpu.push(item.cpu_perc);
       memory.push(item.mem_perc);
@@ -42,7 +44,6 @@ export class MetricComponent implements OnInit {
   }
 
   drawChart(metrics: any): void {
-    Chart.register(...registerables);
     const ctx = document.getElementById('metrics') as HTMLCanvasElement;
     const myChart = new Chart(ctx, {
       type: 'line',
@@ -63,13 +64,10 @@ export class MetricComponent implements OnInit {
           tension: 0.1
         }]
       },
-      /*options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }*/
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      }
     });
   }
 

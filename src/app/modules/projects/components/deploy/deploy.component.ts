@@ -43,4 +43,8 @@ export class DeployComponent implements OnInit {
       });
   }
 
+  public isDeploymentsEmpty(): boolean {
+    return this.deployments.length === 0;
+  }
+
 }
