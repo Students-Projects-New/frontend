@@ -16,6 +16,8 @@ export class Project implements IProject {
         public stages: IStage[],
         public collaborators: number[],
         public subjects: number[],
+        public running: boolean,
+        public guid: string,
         public created_at: Date,
         public updated_at: Date,
     ) { }

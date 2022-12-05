@@ -12,6 +12,7 @@ export class HttpApi {
     static project_Create = 'create_project';
     static project_Deploy = 'deploy_project';
     static project_Delete = 'delete_project';
+    static project_Delete_Workspace = 'delete_workspace';
     static project_List_By_Course = 'list_projects_subject';
 
     // Collaborators

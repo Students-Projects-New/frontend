@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ICourse, IProject, IUserDto } from '@data/interfaces';
 import { CoursesService } from '@modules/academics/courses/services/courses.service';
 import { ProjectsService } from '@modules/projects/services/projects.service';
+import { UsersService } from '@modules/users/services/users.service';
+import { ICourse, IProject, IUserDto } from '@data/interfaces';
 
 @Component({
   selector: 'app-detail',
@@ -22,6 +23,7 @@ export class DetailComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     private projectsService: ProjectsService,
+    private usersService: UsersService,
     private route: ActivatedRoute,
   ) {
     this.course = {} as ICourse;
@@ -57,8 +59,16 @@ export class DetailComponent implements OnInit {
   public getStudentsEnrolledCourse(idCourse: number = this.idCourse): void {
     this.coursesService
       .getStudentsEnrolledCourse(this.idCourse)
-      .subscribe((students: any[]) => {
-        console.log(students);
+      .subscribe((res: any) => {
+        this.getStudentsByIds(res.students);
+      });
+  }
+
+  private getStudentsByIds(ids: number[]): void {
+    this.usersService
+      .getUsersByIds(ids)
+      .subscribe((students: IUserDto[]) => {
+        this.students = students;
       });
   }
 

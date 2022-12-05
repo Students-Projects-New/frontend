@@ -38,7 +38,11 @@ export class ProjectsService {
   }
 
   public deleteProject(project: IProjectDto): Observable<any> {
-    return this.http.post<any>(`${this.url}/${HttpApi.project_Delete}`, { params: project });
+    return this.http.post<any>(`${this.url}/${HttpApi.project_Delete}`, project);
+  }
+
+  public deleteWorkspace(project: IProjectDto): Observable<any> {
+    return this.http.post<any>(`${this.url}/${HttpApi.project_Delete_Workspace}`, project);
   }
 
 }

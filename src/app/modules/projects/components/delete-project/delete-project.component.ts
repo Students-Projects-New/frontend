@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CurrentProjectService } from '@modules/projects/services/current-project.service';
+import { ProjectsService } from '@modules/projects/services/projects.service';
+import { IProjectDto } from '@data/interfaces';
+
 @Component({
   selector: 'app-delete-project',
   templateUrl: './delete-project.component.html',
@@ -7,13 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteProjectComponent implements OnInit {
 
-  constructor() { }
+  private project: IProjectDto = {} as IProjectDto;
 
-  ngOnInit(): void {
+  constructor(
+    private projectsService: ProjectsService,
+    private currentProjectService: CurrentProjectService
+  ) { }
+
+  ngOnInit() {
+    this.project = {
+      id_user: this.currentProjectService.currentProjectSubjectValue.id_user,
+      id_project: this.currentProjectService.currentProjectSubjectValue.id
+    }
   }
 
   deleteProject() {
-    console.log('delete project');
+    this.projectsService
+      .deleteProject(this.project)
+      .subscribe(() => {
+        this.currentProjectService.clearCurrentProject();
+      });
   }
 
 }

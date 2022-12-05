@@ -16,6 +16,8 @@ export interface IProject {
     stages: IStage[];
     collaborators: number[];
     subjects: number[];
+    running: boolean;
+    guid: string;
     created_at: Date;
     updated_at: Date;
 }
