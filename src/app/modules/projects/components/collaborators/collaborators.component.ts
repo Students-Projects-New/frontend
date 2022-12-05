@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { IUserDto } from '@data/interfaces';
-import { AuthService } from '@core/authentication/auth.service';
+import { CurrentProjectService } from '@modules/projects/services/current-project.service';
 import { CollaboratorsService } from '@app/core/services/collaborators.service';
 
 @Component({
@@ -12,21 +12,26 @@ import { CollaboratorsService } from '@app/core/services/collaborators.service';
 })
 export class CollaboratorsComponent implements OnInit {
 
-  private id_user: number = this.authService.getCurrentUserSubject().id;
-  public collaborators: Record<number, IUserDto> = {};
-  public list: number[] = [];
+  private id_owner: number;
+  public collaborators: Record<number, IUserDto>;
+  public list: number[];
 
   constructor(
-    private authService: AuthService,
+    private currentProjectService: CurrentProjectService,
     private collaboratorsService: CollaboratorsService
-  ) { }
+  ) {
+    this.id_owner = this.currentProjectService.currentProjectSubjectValue.id_user;
+    this.collaborators = {};
+    this.list = [];
+  }
 
   ngOnInit(): void {
     this.getContributors();
   }
 
   public getContributors(): void {
-    this.collaboratorsService.currentContributors
+    this.collaboratorsService
+      .currentContributors
       .subscribe((contributors: Record<number, IUserDto>) => {
         this.collaborators = contributors;
         this.list = Object.keys(this.collaborators).map(Number);
@@ -42,8 +47,7 @@ export class CollaboratorsComponent implements OnInit {
   }
 
   getRole(id: number): string {
-    if (this.collaborators[id].id !== this.id_user) return 'Collaborator';
-    return 'Owner';
+    return this.collaborators[id].id === this.id_owner ? 'Owner' : 'Contributor';
   }
 
 }

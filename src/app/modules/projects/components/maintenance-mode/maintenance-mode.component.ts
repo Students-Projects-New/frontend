@@ -11,13 +11,16 @@ import { ProjectsService } from '@modules/projects/services/projects.service';
 })
 export class MaintenanceModeComponent implements OnInit {
 
-  public maintenanceMode: boolean = false;
-  public canToggleMaintenanceMode: boolean = true;
+  public maintenanceMode: boolean;
+  public canToggleMaintenanceMode: boolean;
 
   constructor(
     private currentProjectService: CurrentProjectService,
     private projectService: ProjectsService
-  ) { }
+  ) { 
+    this.maintenanceMode = false;
+    this.canToggleMaintenanceMode = true;
+  }
 
   ngOnInit(): void { }
 

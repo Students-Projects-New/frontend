@@ -1,8 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { IProject, IDictionary, IUserDto } from '@data/interfaces';
+import { ICourse, IProject, IUserDto } from '@data/interfaces';
 import { CollaboratorsService } from '@app/core/services/collaborators.service';
+import { CoursesService } from '@app/modules/academics/courses/services/courses.service';
 
 @Component({
   selector: 'card-project',
@@ -12,15 +13,23 @@ import { CollaboratorsService } from '@app/core/services/collaborators.service';
 export class CardProjectComponent implements OnInit, OnDestroy {
 
   @Input() project!: IProject;
-  private collaboratorSubscription: Subscription | undefined;
-  private collaborators: number[] = [];
-  public contributors: Record<number, IUserDto> = {};
+  private subscription$: Subscription;
+  private collaborators: number[];
+  public contributors: Record<number, IUserDto>;
+  public course: ICourse;
 
   constructor(
-    private collaboratorsService: CollaboratorsService
-  ) { }
+    private collaboratorsService: CollaboratorsService,
+    private courseService: CoursesService,
+  ) {
+    this.subscription$ = new Subscription();
+    this.collaborators = [];
+    this.contributors = {};
+    this.course = {} as ICourse;
+  }
 
   ngOnInit(): void {
+    this.setCourse();
     this.setCollaborators();
   }
 
@@ -29,8 +38,17 @@ export class CardProjectComponent implements OnInit, OnDestroy {
     this.getCollaborators();
   }
 
+  public setCourse(): void {
+    const course_id = this.project.subjects_period[0];
+    this.courseService
+      .getCourseById(course_id)
+      .subscribe((course: ICourse) => {
+        this.course = course;
+      });
+  }
+
   private getCollaborators(): void {
-    this.collaboratorSubscription = this.collaboratorsService
+    this.subscription$ = this.collaboratorsService
       .setContributors(this.collaborators)
       .subscribe((contributors: IUserDto[]) => {
         contributors.forEach((contributor: IUserDto) => {
@@ -44,7 +62,7 @@ export class CardProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.collaboratorSubscription?.unsubscribe();
+    this.subscription$.unsubscribe();
   }
 
 }

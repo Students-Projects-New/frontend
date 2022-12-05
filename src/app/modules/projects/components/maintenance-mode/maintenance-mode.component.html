@@ -1,4 +1,4 @@
-<label class="switch">
+<label class="switch" *appPermissions="['write']">
     <input type="checkbox" [checked]="maintenanceMode" (change)="toggleMaintenanceMode()" [disabled]="!canToggleMaintenanceMode">
     <span class="slider"></span>
 </label>

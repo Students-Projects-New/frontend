@@ -61,6 +61,13 @@ export class ListComponent implements OnInit {
     this.showModal = true;
   }
 
+  public closeModal(event: boolean): void {
+    if (event) {
+      this.getSubjects();
+    }
+    this.showModal = false;
+  }
+
   public deleteSubject(id: number): void {
     this.subjectsService
       .deleteSubject(id)

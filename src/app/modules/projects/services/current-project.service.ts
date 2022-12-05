@@ -7,20 +7,25 @@ import { HttpApi } from '@core/http/http-api';
 import { IProject } from '@data/interfaces';
 import { environment } from '@env/environment';
 import { CollaboratorsService } from '@app/core/services/collaborators.service';
+import { CoursesService } from '@app/modules/academics/courses/services/courses.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentProjectService {
 
-  private currentProjectSubject = new BehaviorSubject<IProject>({} as IProject);
-  public readonly currentProject = this.currentProjectSubject.asObservable();
+  private currentProjectSubject;
+  public readonly currentProject;
   private readonly url = `${environment.baseUrlProjects}`;
 
   constructor(
     private http: HttpClient,
-    private collaboratorsService: CollaboratorsService
-  ) { }
+    private collaboratorsService: CollaboratorsService,
+    private courseService: CoursesService,
+  ) {
+    this.currentProjectSubject = new BehaviorSubject<IProject>(JSON.parse(localStorage.getItem('currentProject') || '{}') as IProject);
+    this.currentProject = this.currentProjectSubject.asObservable();
+  }
 
   private setCurrentProject(project: IProject): void {
     this.currentProjectSubject.next(project);
@@ -31,7 +36,9 @@ export class CurrentProjectService {
       .pipe(
         tap((project: IProject) => {
           const collaborators = [...project.collaborators, project.id_user];
+          localStorage.setItem('currentProject', JSON.stringify(project));
           this.setCurrentProject(project);
+          this.courseService.getCourseById(project.subjects_period[0]).subscribe();
           this.collaboratorsService.setContributors(collaborators).subscribe();
         }),
         map((project: IProject) => project)
@@ -44,6 +51,23 @@ export class CurrentProjectService {
 
   public get currentProjectValue(): Observable<IProject> {
     return this.currentProject;
+  }
+
+  public clearCurrentProject(): void {
+    this.currentProjectSubject.next({} as IProject);
+  }
+
+  public isContributor(id: number): boolean {
+    const collaborators = this.currentProjectSubjectValue.collaborators ?? [];
+    return collaborators.includes(id);
+  }
+
+  public isOwner(id: number): boolean {
+    return this.currentProjectSubjectValue.id_user === id;
+  }
+
+  public isContributorOrOwner(id: number): boolean {
+    return this.isContributor(id) || this.isOwner(id);
   }
 
 }

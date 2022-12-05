@@ -6,6 +6,8 @@ import { ActivityComponent } from './activity/activity.component';
 import { OverviewComponent } from './overview/overview.component';
 import { PhasesComponent } from './phases/phases.component';
 import { ResourcesComponent } from './resources/resources.component';
+import { MetricsComponent } from './metrics/metrics.component';
+import { DeploymentsComponent } from './deployments/deployments.component';
 import { SettingsComponent } from './settings/settings.component';
 
 import { DetailComponent } from './detail.component';
@@ -20,7 +22,7 @@ const routes: Routes = [
         component: OverviewComponent,
         title: 'Resumen'
       },
-      { 
+      {
         path: 'resources',
         component: ResourcesComponent,
         title: 'Recursos'
@@ -31,6 +33,11 @@ const routes: Routes = [
         title: 'Fases'
       },
       {
+        path: 'metrics',
+        component: MetricsComponent,
+        title: 'Métricas'
+      },
+      {
         path: 'activity',
         component: ActivityComponent,
         title: 'Actividad'
@@ -39,6 +46,11 @@ const routes: Routes = [
         path: 'access',
         component: AccessComponent,
         title: 'Acceso'
+      },
+      {
+        path: 'deployments',
+        component: DeploymentsComponent,
+        title: 'Despliegues'
       },
       {
         path: 'settings',
@@ -55,5 +67,14 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class DetailRoutingModule {
-  static components = [AccessComponent, ActivityComponent, OverviewComponent, PhasesComponent, ResourcesComponent, SettingsComponent];
+  static components = [
+    AccessComponent,
+    ActivityComponent,
+    OverviewComponent,
+    PhasesComponent,
+    ResourcesComponent,
+    MetricsComponent,
+    DeploymentsComponent,
+    SettingsComponent
+  ];
 }

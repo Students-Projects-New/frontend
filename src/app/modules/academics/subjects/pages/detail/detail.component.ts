@@ -73,16 +73,16 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   public updateSubject(): void {
     this.subjectsService
-      .updateSubject(this.subject.id!, this.subject)
+      .updateSubject(this.formSubject.value)
       .subscribe((data: ISubject) => {
         this.subject = data;
       });
-    this.showModal.emit(false);
+    this.closedModal(true);
   }
 
-  public closedModal(): void {
+  public closedModal(value: boolean = false): void {
     this.openModal('hide');
-    this.showModal.emit(false);
+    this.showModal.emit(value);
   }
 
   ngOnDestroy(): void {

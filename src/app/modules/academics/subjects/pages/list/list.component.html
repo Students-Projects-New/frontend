@@ -42,7 +42,7 @@
 
                 <!-- Modal -->
                 <ng-container *ngIf="showModal">
-                    <app-subject-detail [subject]="subject" (showModal)="showModal = $event"></app-subject-detail>
+                    <app-subject-detail [subject]="subject" (showModal)="closeModal($event)"></app-subject-detail>
                 </ng-container>
                 <!-- End Modal -->
 

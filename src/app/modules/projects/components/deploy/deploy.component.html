@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-12">
+        <ng-container *ngIf="deployments">
+            <ul class="timeline">
+                <li [ngClass]="{'timeline-inverted': i % 2 !== 0, 'timeline': i % 2 === 0}"
+                    *ngFor="let d of deployments; let i = index">
+                    <div class="timeline-badge" [ngClass]="{'danger': i === 0}">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading d-flex align-items-center justify-content-between">
+                            <h4 class="timeline-title">
+                                {{proyecto.context}} at
+                                <a [href]="getURLRepostrory(d.commit)" target="_blank">
+                                    {{ d.commit }}
+                                </a>
+                            </h4>
+                            <span class="badge" [ngClass]="{'badge-danger': i === 0,'badge-default': i !== 0}">
+                                {{ ( i!= 0 ) ? 'Inactivo' : 'Activo' }}
+                            </span>
+                        </div>
+                        <div class="timeline-body my-3">
+                            <div class="d-flex">
+                                <div class="avatar avatar-xs">
+                                    <img 
+                                        class="avatar-img rounded-circle" 
+                                        [src]="contribuidor[d.id_user_deploy].picture" 
+                                        [alt]="contribuidor[d.id_user_deploy].first_name">
+                                </div>
+                                <div class="ml-2">
+                                    <small class="text-muted mr-1">by</small>
+                                    <small class="username">
+                                        <strong>{{ contribuidor[d.id_user_deploy].first_name }}</strong>
+                                    </small>
+                                    <span class="text-muted ml-50 mr-25"> | </span>
+                                    <small class="date text-muted">{{ d.created_at | date }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </ng-container>
+    </div>
+</div>

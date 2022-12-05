@@ -11,6 +11,8 @@ export class CardUserComponent {
 
   @Input() user!: IUserDto;
 
-  constructor() { }
+  constructor() {
+    console.log(this.user);
+  }
 
 }

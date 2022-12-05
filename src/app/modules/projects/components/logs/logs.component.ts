@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnDestroy, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { LogMessage as NgxLogMessage } from 'ngx-log-monitor';
 import { CurrentProjectService } from '@app/modules/projects/services/current-project.service';
@@ -9,23 +10,29 @@ import { LogsService } from '@modules/projects/services/logs.service';
   templateUrl: './logs.component.html',
   styleUrls: ['./logs.component.css']
 })
-export class LogsComponent implements OnInit {
+export class LogsComponent implements OnInit, OnDestroy {
 
   @Input() logType!: string;
-  private idProject!: number;
-  public logs: NgxLogMessage[] = [];
+  private idProject: number;
+  private subscription$: Subscription;
+  public logs: NgxLogMessage[];
 
   constructor(
     private currentProjectService: CurrentProjectService,
     private logsService: LogsService
-  ) { }
+  ) {
+    this.idProject = 0;
+    this.subscription$ = new Subscription();
+    this.logs = [];
+  }
 
   ngOnInit(): void {
     this.getIdProjectValue();
   }
 
   private getIdProjectValue(): void {
-    this.currentProjectService.currentProjectValue
+    this.subscription$ = this.currentProjectService
+      .currentProjectValue
       .subscribe((project) => {
         this.idProject = project.id;
         if (this.idProject) {
@@ -56,13 +63,13 @@ export class LogsComponent implements OnInit {
       .subscribe((logs: NgxLogMessage[]) => {
         this.logs = logs;
       });
-    this.refreshLogs();
   }
 
-  private refreshLogs(): void {
-    setInterval(() => {
-      this.getDeployLogs(String(this.idProject));
-    }, 10000);
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.logs = [];
+    this.idProject = 0;
+    this.logType = '';
   }
 
 }

@@ -25,6 +25,10 @@ export class ProjectsService {
     return this.http.post<IProject[]>(`${this.url}/${HttpApi.project_List}/${id}`, (tags) ? { params: tags } : {});
   }
 
+  public getProjectsByCourse(id: number): Observable<IProject[]> {
+    return this.http.get<IProject[]>(`${this.url}/${HttpApi.project_List_By_Course}/${id}`);
+  }
+
   public createProject(project: FormData): Observable<IProject> {
     return this.http.post<IProject>(`${this.url}/${HttpApi.project_Create}/`, project);
   }

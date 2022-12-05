@@ -29,8 +29,8 @@ export class SubjectsService {
     return this.http.post<ISubject[]>(`${this.url}/${HttpApi.subjects}/`, subject);
   }
 
-  public updateSubject(id: number, subject: ISubject): Observable<ISubject> {
-    return this.http.put<ISubject>(`${this.url}/${HttpApi.subjects}/${id}/`, subject);
+  public updateSubject(subject: ISubject): Observable<ISubject> {
+    return this.http.put<ISubject>(`${this.url}/${HttpApi.subjects}/${subject.id}/`, subject);
   }
 
   public deleteSubject(id: number): Observable<ISubject> {

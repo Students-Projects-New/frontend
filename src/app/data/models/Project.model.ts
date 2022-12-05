@@ -11,7 +11,7 @@ export class Project implements IProject {
         public port_container: number,
         public url: string,
         public static_path: string,
-        public subject_period: number,
+        public subjects_period: number[],
         public tags: ITagElement[],
         public stages: IStage[],
         public collaborators: number[],

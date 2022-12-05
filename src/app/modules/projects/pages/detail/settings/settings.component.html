@@ -1,7 +1,7 @@
-<div class="tab-pane fade show active" id="pills-settings" role="tabpanel" aria-labelledby="pills-settings-tab">
+<div class="tab-pane fade show active" id="pills-settings" role="tabpanel" aria-labelledby="pills-settings-tab" *appPermissions="['write']">
 
     <!-- ======= Environment Variables Section ======= -->
-    <section id="environment-variable">
+    <section id="environment-variable" *appPermissions="['write']">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -22,7 +22,7 @@
     <hr>
 
     <!-- ======= Tags Section ======= -->
-    <section id="tags">
+    <section id="tags" *appPermissions="['write']">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -43,7 +43,7 @@
     <hr>
 
     <!-- ======= Maintenance Mode Section ======= -->
-    <section id="maintenance-mode">
+    <section id="maintenance-mode" *appPermissions="['write']">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -65,7 +65,7 @@
     <hr>
 
     <!-- ======= Delete Project Section ======= -->
-    <section id="delete-project">
+    <section id="delete-project" *appPermissions="['maintainer']">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">

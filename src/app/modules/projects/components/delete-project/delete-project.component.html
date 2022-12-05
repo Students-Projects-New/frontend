@@ -1,1 +1,3 @@
-<button class="btn btn-primary" (click)="deleteProject()">Eliminar</button>
+<button class="btn btn-primary" (click)="deleteProject()" *appPermissions="['maintainer']">
+    Eliminar
+</button>

@@ -1,30 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { IVar } from '@data/interfaces';
 import { VarsService } from '@app/modules/projects/services/vars.service';
+import { CurrentProjectService } from '@modules/projects/services/current-project.service';
 
 @Component({
   selector: 'app-vars',
   templateUrl: './vars.component.html',
   styleUrls: ['./vars.component.css']
 })
-export class VarsComponent implements OnInit {
+export class VarsComponent implements OnInit, OnDestroy {
 
+  private idProject: number;
+  private idOwner: number;
+  private subscription$: Subscription;
   varsForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private varsService: VarsService
+    private varsService: VarsService,
+    private currentProjectService: CurrentProjectService,
   ) {
+    this.idProject = 0;
+    this.idOwner = 0;
+    this.subscription$ = new Subscription();
     this.varsForm = this.fb.group({
       vars: this.fb.array([])
     });
   }
 
   ngOnInit(): void {
-    this.varsService.
-      getVars(2, 3)
+    this.getProjectValue();
+  }
+
+  private getProjectValue(): void {
+    this.subscription$ = this.currentProjectService
+      .currentProjectValue
+      .subscribe((project) => {
+        this.idProject = project.id;
+        this.idOwner = project.id_user;
+        if (this.idProject) {
+          this.getVars(this.idOwner, this.idProject);
+        }
+      });
+  }
+
+  private getVars(idOwner: number, idProject: number): void {
+    this.subscription$ = this.varsService.
+      getVars(idOwner, idProject)
       .subscribe((vars: IVar[]) => {
         vars.forEach((v: IVar) => {
           this.vars.push(this.fb.group({
@@ -74,6 +99,10 @@ export class VarsComponent implements OnInit {
 
   public deleteVar(index: number): void {
     this.vars.removeAt(index);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 
 }

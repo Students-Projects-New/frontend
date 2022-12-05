@@ -30,7 +30,7 @@
                             <ng-container *ngIf="getRole(collaborators[i].id) !== 'Owner'">
                                 <button type="button" data-toggle="tooltip" title="Eliminar"
                                     class="btn btn-link btn-danger" (click)="removeCollaborator(i)"
-                                    data-original-title="Eliminar">
+                                    data-original-title="Eliminar" *appPermissions="['maintainer']">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </ng-container>

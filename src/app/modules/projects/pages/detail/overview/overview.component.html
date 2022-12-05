@@ -1,18 +1,17 @@
 <div class="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab">
-    <div class="">
+    <ng-container *ngIf="!isCourseEmpty() && getContributorsLength() > 0">
         <div class="row">
             <div class="col-md-4">
                 <img class="img-fluid rounded img-project" [src]="[project.image]" [alt]="project.context">
                 <div class="d-flex mt-3">
                     <div class="avatar">
-                        <ng-container *ngIf="getContributorsLength() > 0">
-                            <img [src]="collaborators[project.id_user].picture"
-                                [alt]="collaborators[project.id_user].first_name" class="avatar-img rounded-circle">
+                        <ng-container *ngIf="!isContributorsEmpty()">
+                            <img class="avatar-img rounded-circle" [src]="collaborators[project.id_user].picture" [alt]="collaborators[project.id_user].first_name">
                         </ng-container>
                     </div>
                     <div class="ml-2">
                         <span class="badge badge-danger">
-                            {{ 'Fundamentos de Programación en Computadores' }}
+                            {{ course.id_subject.name }}
                         </span><br>
                         <small class="text-muted mr-25">by</small>
                         <ng-container *ngIf="getContributorsLength() > 0">
@@ -35,13 +34,15 @@
                     </div>
                 </ng-container>
                 <p class="text-justify">{{ project.description }}</p>
-                <ng-container *ngIf="getContributorsLength() > 0">
-                    <h4 class="font-weight-bold">Colaboradores <span class="badge badge-count badge-danger">{{
-                            project.collaborators.length }}</span></h4>
+                <ng-container *ngIf="getContributorsLength() > 1">
+                    <h4 class="font-weight-bold">Colaboradores
+                        <span class="badge badge-count badge-danger">
+                            {{ project.collaborators.length }}
+                        </span>
+                    </h4>
                     <div class="d-flex align-items-center mb-2" *ngFor="let c of project.collaborators">
                         <div class="avatar">
-                            <img [src]="collaborators[c].picture" [alt]="collaborators[c].first_name"
-                                class="avatar-img rounded-circle">
+                            <img class="avatar-img rounded-circle" [src]="collaborators[c].picture" [alt]="collaborators[c].first_name">
                         </div>
                         <div class="ml-2">
                             <h6 class="mb-0">{{ collaborators[c].first_name }} {{ collaborators[c].last_name }}</h6>
@@ -51,5 +52,5 @@
                 </ng-container>
             </div>
         </div>
-    </div>
+    </ng-container>
 </div>

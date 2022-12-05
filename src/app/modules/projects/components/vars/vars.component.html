@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" (click)="addVar()" [disabled]="varsForm.invalid">
+            <button type="button" class="btn btn-primary" (click)="addVar()" [disabled]="varsForm.invalid" *appPermissions="['write']">
                 <i class="fa fa-plus"></i>
                 Nueva Variable
             </button>
@@ -43,10 +43,7 @@
                 <div class="col-md-4">
                     <div class="form-group text-center">
                         <label for="value{{ i }}">Acciones</label><br>
-                        <button type="button" class="btn btn-danger btn-sm mr-2" (click)="editVar(i)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-sm" (click)="deleteVar(i)">
+                        <button type="button" class="btn btn-danger btn-sm" (click)="deleteVar(i)" *appPermissions="['write']">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>

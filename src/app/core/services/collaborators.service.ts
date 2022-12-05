@@ -17,7 +17,7 @@ export class CollaboratorsService {
   public readonly contributors: Observable<Record<number, IUserDto>>;
 
   constructor(private http: HttpClient) {
-    this.contributorSubject = new BehaviorSubject<Record<number, IUserDto>>({});
+    this.contributorSubject = new BehaviorSubject<Record<number, IUserDto>>(JSON.parse(localStorage.getItem('contributors') || '{}') as Record<number, IUserDto>);
     this.contributors = this.contributorSubject.asObservable();
   }
 
@@ -29,17 +29,22 @@ export class CollaboratorsService {
           contributors.forEach((contributor: IUserDto) => {
             contributorsDict[contributor.id] = contributor;
           });
+          localStorage.setItem('contributors', JSON.stringify(contributorsDict));
           this.contributorSubject.next(contributorsDict);
         })
       );
   }
 
-  get contributorsValue(): Record<number, IUserDto> {
+  get contributorsSubjectValue(): Record<number, IUserDto> {
     return this.contributorSubject.getValue();
   }
 
   get currentContributors(): Observable<Record<number, IUserDto>> {
     return this.contributors;
+  }
+
+  public clearContributors(): void {
+    this.contributorSubject.next({});
   }
 
 }

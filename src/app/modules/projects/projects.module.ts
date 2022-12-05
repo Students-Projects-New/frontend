@@ -13,12 +13,17 @@ import { TagsComponent } from './components/tags/tags.component';
 import { CollaboratorsComponent } from './components/collaborators/collaborators.component';
 import { MaintenanceModeComponent } from './components/maintenance-mode/maintenance-mode.component';
 import { DeleteProjectComponent } from './components/delete-project/delete-project.component';
+import { DeployComponent } from './components/deploy/deploy.component';
+import { MetricComponent } from './components/metric/metric.component';
 
 const COMPONENTS = [
   VarsComponent,
   LogsComponent,
   PhaseComponent,
   TagsComponent,
+  PhaseComponent,
+  MetricComponent,
+  DeployComponent,
   CollaboratorsComponent,
   MaintenanceModeComponent,
   DeleteProjectComponent,
@@ -34,8 +39,8 @@ const MODULES = [
 
 
 @NgModule({
-  declarations: [...ProjectsRoutingModule.components, ...COMPONENTS, PhaseComponent],
+  declarations: [...ProjectsRoutingModule.components, ...COMPONENTS],
   imports: [...MODULES],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS, SharedModule],
 })
 export class ProjectsModule { }

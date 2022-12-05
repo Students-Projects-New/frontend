@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CurrentProjectService } from '@modules/projects/services/current-project.service';
@@ -9,10 +9,10 @@ import { IProject } from '@data/interfaces';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
 
-  private id!: number;
-  public project!: IProject;
+  private id: number = 0;
+  public project: IProject = {} as IProject;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +35,14 @@ export class DetailComponent implements OnInit {
 
   public onBack(): void {
     this.router.navigate(['/projects']);
+  }
+
+  ngOnDestroy(): void {
+    this.currentProjectService.clearCurrentProject();
+  }
+
+  public isProjectEmpty(): boolean {
+    return Object.keys(this.project).length !== 0;
   }
 
 }

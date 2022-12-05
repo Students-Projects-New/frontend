@@ -16,7 +16,6 @@ export class ListComponent implements OnInit {
   public rows: ICourse[] = [];
   private temp: ICourse[] = [];
   public limit: number = 10;
-  public showModal: boolean = false;
   @ViewChild(DatatableComponent) table!: DatatableComponent;
 
   constructor(
@@ -61,13 +60,12 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/academics/subject-period/new']);
   }
 
-  public openModal(course: ICourse): void {
-    this.course = course;
-    this.showModal = true;
-  }
-
   public deleteSubjectPeriod(id: number): void {
-    console.log(id);
+    this.subjectPeriodService
+      .deleteSubjectPeriod(id)
+      .subscribe(() => {
+        this.getSubjectsPeriod();
+      });
   }
 
 }

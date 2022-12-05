@@ -11,7 +11,7 @@ export interface IProject {
     port_container: number;
     url: string;
     static_path: string;
-    subject_period: number;
+    subjects_period: number[];
     tags: ITagElement[];
     stages: IStage[];
     collaborators: number[];

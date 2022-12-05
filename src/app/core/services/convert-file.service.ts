@@ -48,4 +48,16 @@ export class ConvertFileService {
     return formData;
   }
 
+  public convertTxtToJson(file: File): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const reader: FileReader = new FileReader();
+      reader.readAsText(file as Blob);
+      reader.onload = () => {
+        const json = JSON.parse(reader.result as string);
+        resolve(json);
+      };
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
 }

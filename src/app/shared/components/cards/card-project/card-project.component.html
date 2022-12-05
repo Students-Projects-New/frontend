@@ -12,11 +12,13 @@
                     <img [src]="contributors[project.id_user].picture" [alt]="contributors[project.id_user].first_name" class="avatar-img rounded-circle">
                 </ng-container>
             </div>
-            <div class="owner ml-2">
-                <span class="badge badge-danger">
-                    {{ 'Fundamentos de Programación en Computadores' | truncateText:45 }}
-                </span><br>
-                <small class="text-muted mr-25">by</small>
+            <div class="ml-2">
+                <ng-container *ngIf="course.id === project.subjects_period[0]">
+                    <span class="badge badge-danger">
+                        {{ course.id_subject.name | truncateText:45 }}
+                    </span><br>
+                </ng-container>
+                <small class="text-muted mr-1">by</small>
                 <ng-container *ngIf="getContributorsLength() > 0">
                     <small class="username">
                         <strong> {{ contributors[project.id_user].first_name | titlecase }}</strong>

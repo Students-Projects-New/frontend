@@ -12,6 +12,7 @@ export class HttpApi {
     static project_Create = 'create_project';
     static project_Deploy = 'deploy_project';
     static project_Delete = 'delete_project';
+    static project_List_By_Course = 'list_projects_subject';
 
     // Collaborators
     static collaborators = 'list_users_by_ids';
@@ -24,6 +25,12 @@ export class HttpApi {
 
     // Logs
     static logs_Project = 'log_project';
+
+    // Metrics
+    static metrics_Project = 'list_statistics';
+
+    // Deployments
+    static deployments_Project = 'list_deploys';
 
     // Subjects
     static subjects = 'subjects';

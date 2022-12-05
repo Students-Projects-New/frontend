@@ -1,5 +1,7 @@
 <div class="page-header">
-    <h4 class="page-title">{{ course.id_subject.name }}</h4>
+    <ng-container *ngIf="!isCourseEmpty()">
+        <h4 class="page-title">{{ course.id_subject.name }}</h4>
+    </ng-container>
     <ul class="breadcrumbs">
         <li class="nav-home">
             <a [routerLink]="['/dashboard']">
@@ -21,23 +23,38 @@
         <li class="separator">
             <i class="flaticon-right-arrow"></i>
         </li>
-        <li class="nav-item">
-            <a>{{ course.id_subject.name }}</a>
-        </li>
+        <ng-container *ngIf="!isCourseEmpty()">
+            <li class="nav-item">
+                <a>{{ course.id_subject.name }}</a>
+            </li>
+        </ng-container>
     </ul>
     <div class="ml-auto">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
             Acciones
         </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item">Estudiantes</a>
+            <a class="dropdown-item" [routerLink]="['/academics/courses/new']">Matricular Alumnos</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item">Proyectos</a>
+            <a class="dropdown-item" (click)="manageShow(false, true)">
+                Estudiantes
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="manageShow(true, false)">
+                Proyectos
+            </a>
         </div>
     </div>
 </div>
 <div class="row row-projects">
-    <div class="col-sm-6 col-lg-3">
-        
-    </div>
+    <ng-container *ngIf="!showStudents">
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4" *ngFor="let s of students;">
+            <card-user [user]="s"></card-user>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!showProjects">
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4" *ngFor="let p of projects;">
+            <card-project [project]="p"></card-project>
+        </div>
+    </ng-container>
 </div>
