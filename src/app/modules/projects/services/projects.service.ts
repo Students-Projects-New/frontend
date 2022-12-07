@@ -33,16 +33,16 @@ export class ProjectsService {
     return this.http.post<IProject>(`${this.url}/${HttpApi.project_Create}/`, project);
   }
 
-  public deployProject(project: IProjectDto): Observable<any> {
+  public deployProject(project: any): Observable<any> {
     return this.http.post<any>(`${this.url}/${HttpApi.project_Deploy}/`, project);
   }
 
   public deleteProject(project: IProjectDto): Observable<any> {
-    return this.http.post<any>(`${this.url}/${HttpApi.project_Delete}`, project);
+    return this.http.post<any>(`${this.url}/${HttpApi.project_Delete}/`, project);
   }
 
   public deleteWorkspace(project: IProjectDto): Observable<any> {
-    return this.http.post<any>(`${this.url}/${HttpApi.project_Delete_Workspace}`, project);
+    return this.http.post<any>(`${this.url}/${HttpApi.project_Delete_Workspace}/`, project);
   }
 
 }

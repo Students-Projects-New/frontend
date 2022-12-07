@@ -16,7 +16,7 @@
                                 </a>
                             </h4>
                             <span class="badge" [ngClass]="{'badge-danger': i === 0,'badge-default': i !== 0}">
-                                {{ ( i!= 0 ) ? 'Inactivo' : 'Activo' }}
+                                {{ ( d.status === "PRO" ) ? 'Activo' : 'Inactivo' }}
                             </span>
                         </div>
                         <div class="timeline-body my-3">

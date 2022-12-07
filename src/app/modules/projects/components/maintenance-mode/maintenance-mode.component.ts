@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-
+import { AuthService } from '@core/authentication/auth.service';
 import { CurrentProjectService } from '@modules/projects/services/current-project.service';
 import { ProjectsService } from '@modules/projects/services/projects.service';
 import { IProjectDto } from '@data/interfaces';
@@ -16,6 +16,7 @@ export class MaintenanceModeComponent implements OnInit {
   public canToggleMaintenanceMode: boolean;
 
   constructor(
+    private authService: AuthService,
     private currentProjectService: CurrentProjectService,
     private projectService: ProjectsService
   ) {
@@ -26,7 +27,6 @@ export class MaintenanceModeComponent implements OnInit {
   ngOnInit(): void { }
 
   toggleMaintenanceMode() {
-    this.canToggleMaintenanceMode = false;
     if (this.maintenanceMode) {
       this.stopMaintenanceMode();
     } else {
@@ -34,9 +34,10 @@ export class MaintenanceModeComponent implements OnInit {
     }
   }
 
-  public getUserDto(): IProjectDto {
+  public getUserDto(): any {
     return {
       id_user: this.currentProjectService.currentProjectSubjectValue.id_user,
+      id_user_deploy: this.authService.getCurrentUserSubject().id,
       id_project: this.currentProjectService.currentProjectSubjectValue.id,
     };
   }

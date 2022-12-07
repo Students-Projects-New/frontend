@@ -69,6 +69,7 @@ export class DetailComponent implements OnInit {
       .getUsersByIds(ids)
       .subscribe((students: IUserDto[]) => {
         this.students = students;
+        console.log(students);
       });
   }
 
