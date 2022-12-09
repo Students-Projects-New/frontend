@@ -18,7 +18,19 @@ export class VarsService {
   ) { }
 
   public getVars(idUser: number, idProject: number): Observable<IVar[]> {
-    return this.http.get<IVar[]>(`${this.url}/${HttpApi.environment_List}/${idUser}/${idProject}`);
+    return this.http.get<IVar[]>(`${this.url}/${HttpApi.var_List}/${idUser}/${idProject}`);
+  }
+
+  public addVar(newVar: IVar): Observable<IVar> {
+    return this.http.post<IVar>(`${this.url}/${HttpApi.var_Create}/`, JSON.stringify(newVar));
+  }
+
+  public updateVar(updateVar: IVar): Observable<IVar> {
+    return this.http.put<IVar>(`${this.url}/${HttpApi.var_Update}/`, JSON.stringify(updateVar));
+  }
+
+  public deleteVar(idVar: number): Observable<IVar> {
+    return this.http.delete<IVar>(`${this.url}/${HttpApi.var_Delete}/${idVar}`);
   }
 
 }

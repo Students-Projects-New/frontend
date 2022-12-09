@@ -686,7 +686,7 @@ section {
 /* About Us Section
   --------------------------------*/
 #about {
-    background: url("assets/img/home/about-bg.jpg") center top no-repeat fixed;
+    background: url("../img/home/about-bg.jpg") center top no-repeat fixed;
     background-size: cover;
     padding: 60px 0 40px 0;
     position: relative;

@@ -10,7 +10,7 @@ import { User } from '@data/models';
 export class RolesDirective implements OnInit, OnDestroy {
 
   private currentUser!: User;
-  private roles!: string[];
+  private roles: string[] = [];
   private unsubscribe$ = new Subject<void>();
 
   constructor(

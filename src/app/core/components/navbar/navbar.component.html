@@ -5,14 +5,14 @@
             <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
-                        <img [src]="currentUser.picture" alt="{{ currentUser.username }}" class="avatar-img rounded-circle">
+                        <img class="avatar-img rounded-circle" [src]="currentUser.picture" [alt]="currentUser.username">
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <li>
                         <div class="user-box">
                             <div class="avatar-lg">
-                                <img [src]="currentUser.picture" alt="{{ currentUser.username }}" class="avatar-img rounded">
+                                <img class="avatar-img rounded" [src]="currentUser.picture" [alt]="currentUser.username">
                             </div>
                             <div class="u-text">
                                 <h4>{{ currentUser.first_name }}</h4>

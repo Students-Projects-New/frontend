@@ -1,51 +1,53 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" (click)="addVar()" [disabled]="varsForm.invalid" *appPermissions="['write']">
-                <i class="fa fa-plus"></i>
-                Nueva Variable
-            </button>
-        </div>
-    </div>
-</div>
 <form autocomplete="off" [formGroup]="varsForm">
     <ng-container formArrayName="vars">
         <ng-container *ngFor="let v of vars.controls; index as i">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="key{{ i }}">Key:</label>
+                        <label for="name_var{{ i }}">Key:</label>
                         <ng-container [formGroupName]="i">
-                            <input type="text" class="form-control" id="key{{ i }}" name="key{{ i }}"
-                                formControlName="key" placeholder="Key">
+                            <input type="text" class="form-control" id="name_var{{ i }}" name="name_var{{ i }}" formControlName="name_var" placeholder="Key">
                         </ng-container>
-                        <ng-container *ngFor="let validation of validationMessages['key']">
-                            <div *ngIf="f[i].get('key')!.hasError(validation.type) && isFieldValid('key', i)">
-                                <small class="text-danger">{{ validation.message }}</small>
-                            </div>
+                        <ng-container *ngFor="let validation of validationMessages['name_var']">
+                            <small class="text-danger">{{ getErrorMessage('name_var', i) }}</small>
                         </ng-container>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="value{{ i }}">Value:</label>
+                        <label for="value_var{{ i }}">Value:</label>
                         <ng-container [formGroupName]="i">
-                            <input type="text" class="form-control" id="value{{ i }}" name="value{{ i }}"
-                                formControlName="value" placeholder="Value">
+                            <input type="text" class="form-control" id="value_var{{ i }}" name="value_var{{ i }}" formControlName="value_var" placeholder="Value">
                         </ng-container>
-                        <ng-container *ngFor="let validation of validationMessages['value']">
-                            <div *ngIf="f[i].get('value')!.hasError(validation.type) && isFieldValid('value', i)">
-                                <small class="text-danger">{{ validation.message }}</small>
-                            </div>
+                        <ng-container *ngFor="let validation of validationMessages['value_var']">
+                            <small class="text-danger">{{ getErrorMessage('value_var', i) }}</small>
                         </ng-container>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group text-center">
                         <label for="value{{ i }}">Acciones</label><br>
-                        <button type="button" class="btn btn-danger btn-sm" (click)="deleteVar(i)" *appPermissions="['write']">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        <ng-container *ngIf="!isFieldEmpty(i) && !isFieldEdit(i)">
+                            <button type="button" class="btn btn-danger btn-sm mr-2" (click)="updateVar(i)">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="deleteVar(i)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="!isFieldEmpty(i) && isFieldEdit(i)">
+                            <button type="button" class="btn btn-danger btn-sm mr-2" (click)="editVar(i)" [disabled]="varsForm.invalid" *appPermissions="['write']">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="cancelVar(i)">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="isFieldEmpty(i)">
+                            <button type="button" class="btn btn-primary btn-sm btn-block-custom" (click)="addVar(i)" [disabled]="varsForm.invalid" *appPermissions="['write']">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </ng-container>
                     </div>
                 </div>
             </div>
@@ -53,15 +55,3 @@
         </ng-container>
     </ng-container>
 </form>
-<ng-container *ngIf="vars.controls.length !== 0">
-    <div class="row">
-        <div class="col">
-            <div class="form-group text-center">
-                <button type="button" class="btn btn-primary" (click)="saveVars()" [disabled]="varsForm.invalid">
-                    <i class="fa fa-save"></i>
-                    <span> Guardar</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</ng-container>

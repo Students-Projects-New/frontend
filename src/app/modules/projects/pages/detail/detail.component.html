@@ -33,7 +33,13 @@
         <div class="card">
             <div class="card-header">
                 <ng-container *ngIf="project">
-                    <h4 class="card-title">{{ project.context }}</h4>
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">{{ project.context }}</h4>
+                        <a class="btn btn-primary btn-round ml-auto" href="https://becl.me/{{project.context}}" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-rocket"></i>
+                            Open app
+                        </a>
+                    </div>
                 </ng-container>
             </div>
             <div class="card-body">

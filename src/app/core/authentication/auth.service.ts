@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie-service';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
-import { RolesMock } from '@app/data/mocks/roles.mock';
 import { environment } from '@env/environment';
 import { HttpApi } from '@core/http/http-api';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -29,8 +27,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
-    private socialAuthService: SocialAuthService,
-    private rolesMock: RolesMock,
     private router: Router
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}') as User);
@@ -74,17 +70,8 @@ export class AuthService {
     this.cookieService.set('refresh_token', token.refresh, new Date(this.token.exp * 1000), '/');
     localStorage.setItem('currentUser', JSON.stringify(this.token.user));
     this.currentUserSubject.next(this.token.user);
-    //this.setRoles();
     this.detectUserActivity();
-    this.autoRefreshToken(new Date(this.token.exp * 1000).getTime() - new Date().getTime());
-  }
-
-  public setRoles(): void {
-    this.rolesMock.getRoles()
-      .subscribe((roles: any) => {
-        this.getCurrentUserSubject().roles = roles;
-      });
-    localStorage.setItem('currentUser', JSON.stringify(this.getCurrentUserSubject()));
+    this.autoRefreshToken((new Date(this.token.exp * 1000).getTime()) - (new Date().getTime()));
   }
 
   public isStudent(): boolean {
@@ -118,17 +105,7 @@ export class AuthService {
     this.cookieService.delete('refresh_token', '/');
     this.currentUserSubject = new BehaviorSubject<User>({} as User);
     this.currentUser = this.currentUserSubject.asObservable();
-    this.signOutWithGoogle();
-    this.router.navigate(['/auth/login']);
-  }
-
-  private signOutWithGoogle(): void {
-    this.socialAuthService.authState
-      .subscribe((user) => {
-        if (user) {
-          this.socialAuthService.signOut();
-        }
-      });
+    this.router.navigate(['/home']);
   }
 
   private autoRefreshToken(expirationDuration: number = 300000): void {
@@ -152,7 +129,6 @@ export class AuthService {
           this.cookieService.set('access_token', res.access, new Date(this.token.exp * 1000), '/');
           localStorage.setItem('currentUser', JSON.stringify(this.token.user));
           this.currentUserSubject.next(this.token.user);
-          this.setRoles();
           this.detectUserActivity();
           this.autoRefreshToken(new Date(this.token.exp * 1000).getTime() - new Date().getTime());
         }),

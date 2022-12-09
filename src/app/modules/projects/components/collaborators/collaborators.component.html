@@ -13,17 +13,22 @@
                     <td>
                         <div class="d-flex align-items-center">
                             <div class="avatar">
-                                <img [src]="collaborators[i].picture" [alt]="collaborators[i].first_name"
-                                    class="avatar-img rounded-circle">
+                                <img class="avatar-img rounded-circle" [src]="collaborators[i].picture" [alt]="collaborators[i].first_name">
                             </div>
                             <div class="ml-2">
-                                <h6 class="mb-0">{{ collaborators[i].first_name }} {{ collaborators[i].last_name }}</h6>
-                                <small class="text-muted">{{ collaborators[i].first_name | removeWhitespace | lowercase }}@ufps.edu.co</small>
+                                <h6 class="mb-0">
+                                    {{ collaborators[i].first_name }} {{ collaborators[i].last_name }}
+                                </h6>
+                                <small class="text-muted">
+                                    {{ collaborators[i].first_name | removeWhitespace | lowercase }}@ufps.edu.co
+                                </small>
                             </div>
                         </div>
                     </td>
                     <td class="text-center">
-                        <span class="badge badge-pill badge-light-primary">{{ getRole(collaborators[i].id) }}</span>
+                        <span class="badge badge-pill badge-light-primary">
+                            {{ getRole(collaborators[i].id) }}
+                        </span>
                     </td>
                     <td class="text-center">
                         <div class="form-button-action">

@@ -30,8 +30,7 @@
             <div class="card-body d-flex justify-content-center">
                 <div class="demo">
                     <div class="avatar avatar-xxl">
-                        <img class="img-fluid rounded img-perfil" [src]="[currentUser.picture]"
-                            [alt]="currentUser.first_name">
+                        <img class="img-fluid rounded img-perfil" [src]="currentUser.picture.split('=')[0]" [alt]="currentUser.first_name">
                     </div>
                 </div>
             </div>

@@ -231,14 +231,14 @@
   /**
    * Initiate portfolio lightbox 
    */
-  const portfolioLightbox = GLightbox({
+  /*const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
-  });
+  });*/
 
   /**
    * Portfolio details slider
    */
-  new Swiper('.portfolio-details-slider', {
+  /*new Swiper('.portfolio-details-slider', {
     speed: 400,
     loop: true,
     autoplay: {
@@ -250,12 +250,12 @@
       type: 'bullets',
       clickable: true
     }
-  });
+  });*/
 
   /**
    * Clients Slider
    */
-  new Swiper('.clients-slider', {
+  /*new Swiper('.clients-slider', {
     speed: 400,
     loop: true,
     autoplay: {
@@ -286,12 +286,12 @@
         spaceBetween: 20
       }
     }
-  });
+  });*/
 
   /**
    * Testimonials slider
    */
-  new Swiper('.testimonials-slider', {
+  /*new Swiper('.testimonials-slider', {
     speed: 600,
     loop: true,
     autoplay: {
@@ -304,7 +304,7 @@
       type: 'bullets',
       clickable: true
     }
-  });
+  });*/
 
   /**
    * Animation on scroll
@@ -321,6 +321,6 @@
   /**
    * Initiate Pure Counter 
    */
-  new PureCounter();
+  //new PureCounter();
 
 })()

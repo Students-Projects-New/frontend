@@ -20,9 +20,11 @@ export class HttpApi {
     static collaborators_Add = 'add_collaborator';
     static collaborators_Remove = 'remove_collaborator';
 
-    // Environment
-    static environment_List = 'list_env';
-    static environment_Create = 'create_env';
+    // Environment Vars
+    static var_List = 'list_env';
+    static var_Create = 'create_env';
+    static var_Update = 'update_env';
+    static var_Delete = 'delete_env';
 
     // Logs
     static logs_Project = 'log_project';

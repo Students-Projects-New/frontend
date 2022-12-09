@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { IVar } from '@data/interfaces';
+import { IVar, IValidationMessages } from '@data/interfaces';
 import { VarsService } from '@app/modules/projects/services/vars.service';
 import { CurrentProjectService } from '@modules/projects/services/current-project.service';
 
@@ -16,7 +16,8 @@ export class VarsComponent implements OnInit, OnDestroy {
   private idProject: number;
   private idOwner: number;
   private subscription$: Subscription;
-  varsForm: FormGroup;
+  public varsForm: FormGroup;
+  private currentVar: IVar = {} as IVar;
 
   constructor(
     private fb: FormBuilder,
@@ -53,16 +54,20 @@ export class VarsComponent implements OnInit, OnDestroy {
       .subscribe((vars: IVar[]) => {
         vars.forEach((v: IVar) => {
           this.vars.push(this.fb.group({
-            key: new FormControl(v.name_var, Validators.required),
-            value: new FormControl(v.value_var, Validators.required)
+            id: new FormControl(v.id),
+            name_var: new FormControl({ value: v.name_var, disabled: true }, Validators.required),
+            value_var: new FormControl({ value: v.value_var, disabled: true }, Validators.required),
+            edit: new FormControl(false),
+            empty: new FormControl(false),
           }));
         });
+        this.vars.push(this.newVar());
       });
   }
 
-  validationMessages = {
-    key: [{ type: 'required', message: 'Key is required' }],
-    value: [{ type: 'required', message: 'Value is required' }]
+  public validationMessages: IValidationMessages = {
+    name_var: [{ type: 'required', message: 'Key is required' }],
+    value_var: [{ type: 'required', message: 'Value is required' }]
   };
 
   get vars(): FormArray {
@@ -73,28 +78,95 @@ export class VarsComponent implements OnInit, OnDestroy {
     return this.vars.controls;
   }
 
+  public isFieldEmpty(index: number): boolean {
+    return this.vars.controls[index].get('empty')!.value;
+  }
+
+  public isFieldEdit(index: number): boolean {
+    return this.vars.controls[index].get('edit')!.value;
+  }
+
   public isFieldValid(field: string, index: number): boolean {
     return this.vars.controls[index].get(field)!.dirty || this.vars.controls[index].get(field)!.touched;
   }
 
-  public addVar(): void {
-    const varControl = this.fb.group({
-      key: new FormControl('', Validators.required),
-      value: new FormControl('', Validators.required)
-    })
-    this.vars.push(varControl);
+  public getErrorMessage(field: string, index: number): string {
+    let message = '';
+    this.validationMessages[field].forEach((v) => {
+      if (this.f[index].get(field)!.hasError(v.type) && this.isFieldValid(field, index)) {
+        message = v.message;
+      }
+    });
+    return message;
+  }
+
+  public newVar(): FormGroup {
+    return this.fb.group({
+      id: new FormControl(0),
+      name_var: new FormControl('', Validators.required),
+      value_var: new FormControl('', Validators.required),
+      edit: new FormControl(false),
+      empty: new FormControl(true),
+    });
+  }
+
+  public addVar(index: number): void {
+    this.vars.push(this.newVar());
+    this.vars.controls[index].get('empty')!.setValue(false);
+    this.disableFields(index);
+  }
+
+  public enableFields(index: number): void {
+    this.vars.controls[index].get('name_var')!.enable();
+    this.vars.controls[index].get('value_var')!.enable();
+    this.vars.controls[index].get('edit')!.setValue(true);
+  }
+
+  public disableFields(index: number): void {
+    this.vars.controls[index].get('name_var')!.disable();
+    this.vars.controls[index].get('value_var')!.disable();
+    this.vars.controls[index].get('edit')!.setValue(false);
+  }
+
+  private setCurrentVar(index: number, varValue: IVar): void {
+    this.vars.controls[index].get('name_var')!.setValue(varValue.name_var);
+    this.vars.controls[index].get('value_var')!.setValue(varValue.value_var);
+  }
+
+  private getCurrentVar(index: number): IVar {
+    return {
+      id: this.vars.controls[index].get('id')!.value,
+      id_project: this.idProject,
+      name_var: this.vars.controls[index].get('name_var')!.value,
+      value_var: this.vars.controls[index].get('value_var')!.value,
+    };
+  }
+
+  private saveVarService(index: number): void {
+    this.varsService
+      .addVar(this.getCurrentVar(index))
+      .subscribe((res: IVar) => {
+        this.vars.controls[index].get('id')!.setValue(res.id);
+        this.vars.controls[index].get('edit')!.setValue(false);
+        this.vars.controls[index].get('empty')!.setValue(false);
+        this.disableFields(index);
+      });
+  }
+
+  public updateVar(index: number): void {
+    this.currentVar = this.getCurrentVar(index);
+    this.enableFields(index);
   }
 
   public editVar(index: number): void {
-    const varControl = this.fb.group({
-      key: new FormControl(this.vars.value[index].key, Validators.required),
-      value: new FormControl(this.vars.value[index].value, Validators.required)
-    })
-    this.vars.setControl(index, varControl);
+    const currentVar = this.getCurrentVar(index);
+    this.disableFields(index);
   }
 
-  public saveVars(): void {
-    console.log(this.varsForm.value);
+  public cancelVar(index: number): void {
+    const currentVar = this.currentVar;
+    this.setCurrentVar(index, currentVar);
+    this.disableFields(index);
   }
 
   public deleteVar(index: number): void {

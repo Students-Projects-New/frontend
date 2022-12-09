@@ -3,7 +3,9 @@
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
             <div class="col-xl-11 d-flex align-items-center justify-content-between">
-                <h1 class="logo"><a href="#hero">Students Projects</a></h1>
+                <h1 class="logo">
+                    <a [routerLink]="['/']">Students Projects</a>
+                </h1>
                 <!-- Navbar -->
                 <nav id="navbar" class="navbar">
                     <ul>
@@ -32,8 +34,9 @@
                             <h2 class="animate__animated animate__fadeInDown">Te facilitamos tus despliegues</h2>
                             <p class="animate__animated animate__fadeInUp">Automatizamos la forma de desplegar tus
                                 proyectos web, realizados en clase, solo necesitas un conocimiento basico en docker.</p>
-                            <a routerLink="/auth"
-                                class="btn-get-started scrollto animate__animated animate__fadeInUp">Iniciar sesión</a>
+                            <a  class="btn-get-started scrollto animate__animated animate__fadeInUp" [routerLink]="['/auth/login']">
+                                Iniciar sesión
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -125,7 +128,7 @@
     <!-- End About Us Section -->
 
     <!-- ======= Call To Action Section ======= -->
-  
+
     <!-- End Call To Action Section -->
 
     <!-- ======= Team Section ======= -->
@@ -139,7 +142,8 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
-                        <img src="assets/img/home/people/david_rojas.png" class="img-fluid"  alt="David Fernando Rojas Sachica">
+                        <img src="assets/img/home/people/david_rojas.png" class="img-fluid"
+                            alt="David Fernando Rojas Sachica">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>David Fernando Rojas Sachica</h4>
@@ -150,7 +154,8 @@
 
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
-                        <img src="assets/img/home/people/manuel_coronel.png" class="img-fluid" style="width: 80%;" alt=">Manuel Alejandro Coronel Andrade">
+                        <img src="assets/img/home/people/manuel_coronel.png" class="img-fluid" style="width: 80%;"
+                            alt=">Manuel Alejandro Coronel Andrade">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Manuel Alejandro Coronel Andrade</h4>
@@ -161,7 +166,8 @@
 
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="fade-up" data-aos-delay="300">
-                        <img src="assets/img/home/people/stiward_carrillo.png"   style="width: 75%;" class="img-fluid" alt="Stiward Jherikof Carrillo Ramirez">
+                        <img src="assets/img/home/people/stiward_carrillo.png" style="width: 75%;" class="img-fluid"
+                            alt="Stiward Jherikof Carrillo Ramirez">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Stiward Jherikof Carrillo Ramirez</h4>
@@ -172,7 +178,8 @@
 
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="fade-up" data-aos-delay="400">
-                        <img src="assets/img/home/people/rafael.jpg" class="img-fluid" style="width: 75%;" alt="Jose Rafael Peña Mena">
+                        <img src="assets/img/home/people/rafael.jpg" class="img-fluid" style="width: 75%;"
+                            alt="Jose Rafael Peña Mena">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Jose Rafael Peña Mena</h4>

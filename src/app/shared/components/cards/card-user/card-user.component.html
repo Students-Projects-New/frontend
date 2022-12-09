@@ -1,8 +1,10 @@
 <div class="card">
     <div class="p-2">
-        <img class="card-img-top rounded" [src]="user.picture" [alt]="user.first_name">
+        <img class="card-img-top rounded" [src]="user.picture.split('=')[0]" [alt]="user.first_name">
     </div>
     <div class="card-body">
-        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+        <h5 class="card-title">
+            {{ user.first_name }} {{ user.last_name }}
+        </h5>
     </div>
 </div>
