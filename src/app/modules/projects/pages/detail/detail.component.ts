@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { CurrentProjectService } from '@modules/projects/services/current-project.service';
+import { CurrentProjectService } from '@modules/projects';
 import { IProject } from '@data/interfaces';
 
 @Component({

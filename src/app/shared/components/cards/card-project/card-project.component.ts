@@ -2,8 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ICourse, IProject, IUserDto } from '@data/interfaces';
-import { CollaboratorsService } from '@app/core/services/collaborators.service';
-import { CoursesService } from '@app/modules/academics/courses/services/courses.service';
+import { CollaboratorsService } from '@core/services';
+import { CoursesService } from '@modules/academics/courses';
 
 @Component({
   selector: 'card-project',

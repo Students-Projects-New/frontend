@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { CoursesService } from '@modules/academics/courses/services/courses.service';
-import { ProjectsService } from '@modules/projects/services/projects.service';
-import { UsersService } from '@modules/users/services/users.service';
+import { CoursesService } from '@modules/academics/courses';
+import { ProjectsService } from '@modules/projects';
+import { UsersService } from '@modules/users';
 import { ICourse, IProject, IUserDto } from '@data/interfaces';
 
 @Component({

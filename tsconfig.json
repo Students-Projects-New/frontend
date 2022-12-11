@@ -29,7 +29,6 @@
       "@layout/*": ["app/layout/*"],
       "@modules/*": ["app/modules/*"],
       "@shared/*": ["app/shared/*"],
-      "@components/*": ["app/shared/components/*"],
       "@env/*": ["environments/*"],
     }
   },

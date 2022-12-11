@@ -3,8 +3,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Subscription } from 'rxjs';
 
 import { IVar, IValidationMessages } from '@data/interfaces';
-import { VarsService } from '@app/modules/projects/services/vars.service';
-import { CurrentProjectService } from '@modules/projects/services/current-project.service';
+import { VarsService } from '@modules/projects';
+import { CurrentProjectService } from '@modules/projects';
 
 @Component({
   selector: 'app-vars',

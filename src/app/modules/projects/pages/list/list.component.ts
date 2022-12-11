@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IProject } from '@data/interfaces';
-import { AuthService } from '@core/authentication/auth.service';
-import { ProjectsService } from '@modules/projects/services/projects.service';
+import { AuthService } from '@app/core';
+import { ProjectsService } from '@modules/projects';
 
 @Component({
   selector: 'app-project-list',

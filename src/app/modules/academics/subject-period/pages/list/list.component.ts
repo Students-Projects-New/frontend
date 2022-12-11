@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ICourse, ISubject } from '@data/interfaces';
-import { SubjectPeriodService } from '@modules/academics/subject-period/services/subject-period.service';
+import { ICourse } from '@data/interfaces';
+import { SubjectPeriodService } from '@modules/academics/subject-period';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({

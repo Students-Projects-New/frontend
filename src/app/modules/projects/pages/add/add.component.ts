@@ -3,11 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { IValidationMessages, ICourseStudent, IProject } from '@data/interfaces';
-import { ConvertFileService } from '@core/services/convert-file.service';
-import { AuthService } from '@core/authentication/auth.service';
-import { ProjectValidateContextService } from '@core/services/project-validate-context.service';
-import { CourseStudentService } from '@modules/projects/services/course-student.service';
-import { ProjectsService } from '@modules/projects/services/projects.service';
+import { ConvertFileService } from '@core/services';
+import { AuthService } from '@core/authentication';
+import { ProjectValidateContextService } from '@core/services';
+import { CourseStudentService } from '@modules/projects';
+import { ProjectsService } from '@modules/projects';
 
 @Component({
   selector: 'app-project-add',

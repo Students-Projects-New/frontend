@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CurrentProjectService } from '../../services/current-project.service';
-import { CollaboratorsService } from '@app/core/services/collaborators.service';
-import { DeploymentsService } from '../../services/deployments.service';
+import { CurrentProjectService } from '@modules/projects';
+import { CollaboratorsService } from '@core/services';
+import { DeploymentsService } from '@modules/projects';
 import { IProject, IUserDto } from '@data/interfaces';
 
 @Component({

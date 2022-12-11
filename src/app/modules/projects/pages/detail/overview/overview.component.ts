@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ICourse, IProject, IUserDto } from '@data/interfaces';
-import { CollaboratorsService } from '@app/core/services/collaborators.service';
-import { CurrentProjectService } from '@app/modules/projects/services/current-project.service';
-import { CoursesService } from '@app/modules/academics/courses/services/courses.service';
+import { CollaboratorsService } from '@app/core';
+import { CurrentProjectService } from '@modules/projects';
+import { CoursesService } from '@modules/academics/courses';
 
 @Component({
   selector: 'app-overview',

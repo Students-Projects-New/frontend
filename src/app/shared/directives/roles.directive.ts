@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
-import { AuthService } from '@core/authentication/auth.service';
+import { AuthService } from '@core/authentication';
 import { User } from '@data/models';
 
 @Directive({

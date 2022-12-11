@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from '@app/core/authentication/auth.service';
-import { CoursesService } from '@modules/academics/courses/services/courses.service';
-import { CourseStudentService } from '@modules/projects/services/course-student.service';
+import { AuthService } from '@core/authentication';
+import { CoursesService } from '@modules/academics/courses';
+import { CourseStudentService } from '@modules/projects/services';
 import { User } from '@data/models';
 import { ICourse, ICourseStudent } from '@data/interfaces';
 

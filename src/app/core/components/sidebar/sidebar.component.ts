@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { AuthService } from '@core/authentication/auth.service';
+import { AuthService } from '@core/authentication';
 import { ISidebar } from '@data/interfaces';
-import { ROLE } from '@data/enums/role.enum';
+import { ROLE } from '@data/enums';
 import { User } from '@data/models';
 
 @Component({

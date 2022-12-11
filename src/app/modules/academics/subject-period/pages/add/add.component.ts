@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ISubjectPeriod, ICourse } from '@data/interfaces';
-import { SubjectPeriodService } from '@modules/academics/subject-period/services/subject-period.service';
-import { ConvertFileService } from '@core/services/convert-file.service';
+import { SubjectPeriodService } from '@modules/academics/subject-period';
+import { ConvertFileService } from '@core/services';
 
 @Component({
   selector: 'app-add',

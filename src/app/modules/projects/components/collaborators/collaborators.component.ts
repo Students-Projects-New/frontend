@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import { IUserDto } from '@data/interfaces';
-import { CurrentProjectService } from '@modules/projects/services/current-project.service';
-import { CollaboratorsService } from '@app/core/services/collaborators.service';
+import { CurrentProjectService } from '@modules/projects';
+import { CollaboratorsService } from '@core/services';
 
 @Component({
   selector: 'app-collaborators',

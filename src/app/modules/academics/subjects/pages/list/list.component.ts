@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ISubject } from '@data/interfaces';
-import { SubjectsService } from '@modules/academics/subjects/services/subjects.service';
+import { SubjectsService } from '@modules/academics/subjects';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({

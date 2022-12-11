@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
-import { AuthService } from '@core/authentication/auth.service';
+import { AuthService } from '@core/authentication';
 import { ITokenDto, IToken } from '@data/interfaces';
 
 @Component({

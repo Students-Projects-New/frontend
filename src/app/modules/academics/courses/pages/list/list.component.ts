@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ICourse } from '@data/interfaces';
-import { AuthService } from '@core/authentication/auth.service';
-import { CoursesService } from '@modules/academics/courses/services/courses.service';
+import { AuthService } from '@core/authentication';
+import { CoursesService } from '@modules/academics/courses';
 
 @Component({
   selector: 'app-list',

@@ -6,8 +6,8 @@ import { map, tap } from 'rxjs/operators';
 import { HttpApi } from '@core/http/http-api';
 import { IProject } from '@data/interfaces';
 import { environment } from '@env/environment';
-import { CollaboratorsService } from '@app/core/services/collaborators.service';
-import { CoursesService } from '@app/modules/academics/courses/services/courses.service';
+import { CollaboratorsService } from '@core/services';
+import { CoursesService } from '@modules/academics/courses';
 
 @Injectable({
   providedIn: 'root'

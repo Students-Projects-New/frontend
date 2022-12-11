@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ISubject } from '@data/interfaces';
-import { SubjectsService } from '@modules/academics/subjects/services/subjects.service';
-import { ConvertFileService } from '@core/services/convert-file.service';
+import { SubjectsService } from '@modules/academics/subjects';
+import { ConvertFileService } from '@core/services';
 
 @Component({
   selector: 'app-subject-add',
