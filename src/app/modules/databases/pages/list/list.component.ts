@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { IDatabase, IUser } from '@data/interfaces';
+import { IDatabase } from '@data/interfaces';
+import { User } from '@data/models';
+import { AuthService } from '@core/authentication/auth.service';
 import { DatabasesService } from '@modules/databases/services/databases.service';
 
 @Component({
@@ -10,15 +12,16 @@ import { DatabasesService } from '@modules/databases/services/databases.service'
 })
 export class ListComponent implements OnInit {
 
-  private currentUser: IUser;
+  private currentUser: User;
   public rows!: IDatabase[];
   public limit: number = 10;
   public showModal: boolean = false;
 
   constructor(
     private databaseService: DatabasesService,
+    private currentUserService: AuthService
   ) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    this.currentUser = this.currentUserService.getCurrentUserSubject();
   }
 
   ngOnInit(): void {
@@ -27,8 +30,8 @@ export class ListComponent implements OnInit {
 
   private getDatabases(): void {
     this.databaseService
-      .getDatabases(1).
-      subscribe((databases: IDatabase[]) => {
+      .getDatabases(this.currentUser.id)
+      .subscribe((databases: IDatabase[]) => {
         this.rows = databases;
       });
   }

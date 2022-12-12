@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
   private getShowCourses(): void {
     if (this.authService.isStudent()) {
       this.getCoursesStudent();
-    } else if (this.authService.isTeacher()) {
+    } if (this.authService.isTeacher()) {
       this.getCourses();
     }
   }

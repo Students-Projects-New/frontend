@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { User } from '@data/models';
+import { AuthService } from '@core/authentication/auth.service';
 import { DatabasesService } from '@modules/databases/services/databases.service';
 
 declare var $: any;
@@ -19,8 +21,9 @@ export class AddComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private databaseService: DatabasesService,
+    private currentUserService: AuthService
   ) {
-    this.username = JSON.parse(localStorage.getItem('currentUser')!).email.split('@')[0];
+    this.username = this.currentUserService.getCurrentUserSubject().username.split('@')[0];
     this.formUserSGDB = this.fb.group({
       password: new FormControl('', Validators.compose([
         Validators.required,
@@ -48,8 +51,12 @@ export class AddComponent implements OnInit {
     const password = this.formUserSGDB.get('password')!.value;
     this.databaseService
       .createUserSGDB(password)
-      .subscribe();
-    this.closedModal(true);
+      .subscribe({
+        next: (data) => console.log(data),
+        error: (error) => console.log(error),
+        complete: () => console.log('completed'),
+      });
+      this.closedModal(true);
   }
 
 }

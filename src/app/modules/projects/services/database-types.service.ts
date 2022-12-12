@@ -42,6 +42,7 @@ export class DatabaseTypesService {
           return databases.map((database: ITypeDatabase) => {
             database.image = this.info.find((info: ITypeDatabase) => info.id === database.id)?.image || '';
             database.description = this.info.find((info: ITypeDatabase) => info.id === database.id)?.description || '';
+            database.link = this.info.find((info: ITypeDatabase) => info.id === database.id)?.link || '';
             return database;
           });
         })

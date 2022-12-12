@@ -1,19 +1,23 @@
-<div class="card">
-    <div class="p-2">
-        <img class="card-img-top rounded" [src]="database.image" [alt]="database.type">
+<ng-container *ngIf="loading">
+    <div class="card">
+        <div class="p-2">
+            <img class="card-img-top rounded" [src]="database.image" [alt]="database.type">
+        </div>
+        <div class="card-body pt-2">
+            <h5 class="card-title">
+                {{ database.type }}
+            </h5>
+            <p class="card-text">
+                {{ database.description }}
+            </p>
+            <ng-container *ngIf="!exist">
+                <button class="btn btn-primary" (click)="createDatabase()">Crear Base de Datos &raquo;</button>
+            </ng-container>
+            <ng-container *ngIf="exist">
+                <a class="btn btn-primary" href="{{ database.link }}" target="_blank" rel="noopener noreferrer">
+                    Ir a la base de datos &raquo;
+                </a>
+            </ng-container>
+        </div>
     </div>
-    <div class="card-body pt-2">
-        <h5 class="card-title">
-            {{ database.type }}
-        </h5>
-        <p class="card-text">
-            {{ database.description }}
-        </p>
-        <button class="btn btn-primary" (click)="createDatabase()">Crear Base de Datos &raquo;</button>
-        <ng-container *ngIf="exist">
-            <a class="btn btn-primary" href="{{ database.link }}" target="_blank" rel="noopener noreferrer">
-                Ir a la base de datos &raquo;
-            </a>
-        </ng-container>
-    </div>
-</div>
+</ng-container>

@@ -15,6 +15,7 @@ export class CardDatabaseComponent implements OnInit {
   database!: ITypeDatabase;
   proyecto: IProject = this.currentProjectService.currentProjectSubjectValue;
   exist = false;
+  loading = false;
 
   constructor(
     private currentProjectService: CurrentProjectService,
@@ -30,6 +31,7 @@ export class CardDatabaseComponent implements OnInit {
       .getSearchDatabaseContext(this.proyecto.context)
       .subscribe((database: IDatabase) => {
         this.exist = Object.entries(database).length !== 0;
+        this.loading = true;
       });
   }
 

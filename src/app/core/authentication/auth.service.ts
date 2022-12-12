@@ -42,6 +42,10 @@ export class AuthService {
     return this.currentUser;
   }
 
+  public set currentUserValue(user: User) {
+    this.currentUserSubject.next(user);
+  }
+
   public isLoggedIn(): boolean {
     return this.cookieService.check('access_token');
   }
