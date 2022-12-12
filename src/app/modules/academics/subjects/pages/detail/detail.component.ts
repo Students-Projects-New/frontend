@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnDestroy, OnInit } from '@angu
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ISubject, IValidationMessages } from '@data/interfaces';
-import { SubjectsService } from '@modules/academics/subjects';
+import { SubjectsService } from '@modules/academics/subjects/services';
 
 declare var $: any;
 

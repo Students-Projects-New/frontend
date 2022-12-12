@@ -41,8 +41,15 @@ export const MENU_ITEMS: ISidebar[] = [
             },
             {
                 title: 'Proyectos',
-                icon: 'fas fa-columns',
+                icon: 'fas fa-file-signature',
                 link: '/projects',
+                expanded: false,
+                roles: [ROLE.STUDENT, ROLE.TEACHER, ROLE.SUPPORT, ROLE.ADMIN]
+            },
+            {
+                title: 'Bases de Datos',
+                icon: 'fas fa-database',
+                link: '/databases',
                 expanded: false,
                 roles: [ROLE.STUDENT, ROLE.TEACHER, ROLE.SUPPORT, ROLE.ADMIN]
             },

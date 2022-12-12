@@ -9,6 +9,7 @@ export class User implements IUser {
         public email: string,
         public picture: string,
         public is_active: boolean,
-        public roles: IRole[]
+        public roles: IRole[],
+        public has_sgbd_user: boolean,
     ) { }
 }

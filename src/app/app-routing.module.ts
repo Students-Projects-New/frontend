@@ -29,6 +29,11 @@ const routes: Routes = [
     loadChildren: () => import('@modules/projects/projects.module').then((m) => m.ProjectsModule),
     canActivate: [AuthGuard]
   },
+  { 
+    path: 'databases',
+    loadChildren: () => import('@modules/databases/databases.module').then((m) => m.DatabasesModule),
+    canActivate: [AuthGuard]
+  },
   {
     path: 'academics',
     loadChildren: () => import('@modules/academics/academics.module').then((m) => m.AcademicsModule),
@@ -50,8 +55,7 @@ const routes: Routes = [
 const config: ExtraOptions = {
   anchorScrolling: 'enabled',
   useHash: true,
-  enableTracing: false,
-  //preloadingStrategy: PreloadAllModules
+  enableTracing: false
 };
 
 @NgModule({

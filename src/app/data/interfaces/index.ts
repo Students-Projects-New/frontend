@@ -1,4 +1,5 @@
 export * from './http/project.interface';
+export * from './http/database.interface';
 export * from './http/tag.interface';
 export * from './http/stage.interface';
 export * from './http/var.interface';

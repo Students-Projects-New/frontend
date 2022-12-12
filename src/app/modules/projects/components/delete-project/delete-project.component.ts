@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CurrentProjectService } from '@modules/projects';
-import { ProjectsService } from '@modules/projects';
+import { CurrentProjectService, ProjectsService } from '@modules/projects/services';
 import { IProjectDto } from '@data/interfaces';
 
 @Component({

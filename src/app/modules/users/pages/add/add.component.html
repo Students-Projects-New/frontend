@@ -1,1 +1,98 @@
-<p>add works!</p>
+<div class="page-header">
+    <h4 class="page-title">Carge de Usuarios</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a [routerLink]="['/dashboard']">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a>Usuarios</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a>Agregar</a>
+        </li>
+    </ul>
+</div>
+<div class="row mx-5">
+    <ng-container *ngIf="!show">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Subir Archivos</div>
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-center mb-3">
+                        <div class="col-2">
+                            <h4>Archivo de materias de ejemplo (.txt)</h4>
+                        </div>
+                        <div class="col-2">
+                            <a href="assets/files/emails.txt" download>
+                                <i class="fas fa-file-alt fa-2x"></i>
+                                <span class="sub-item"> Descargar plantilla</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col text-center">
+                            <form class="dropzone">
+                                <div class="dz-message mb-3" data-dz-message>
+                                    <div class="icon">
+                                        <i class="flaticon-file"></i>
+                                    </div>
+                                    <h4 class="message"><strong>Cargar archivo</strong></h4>
+                                    <span class="note">Archivos compatibles: txt</span>
+                                </div>
+                                <div class="fallback">
+                                    <input class="form-control-file" type="file" hidden id="input-custom-file"
+                                        accept=".txt" style="display:none;" (change)="onFileChange($event)">
+                                    <label for="input-custom-file" class="btn btn-primary text-white">Cargar Archivo</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action text-center">
+                    <button class="btn btn-primary" [disabled]="!isFileSelected()" (click)="onUpload()">Cargar</button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="show">
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Lista de Correos</div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-head-bg-primary table-striped table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Correo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let r of rows; index as i">
+                                    <th scope="row">{{ i + 1 }}</th>
+                                    <td>{{ r }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-action text-center">
+                    <button class="btn btn-primary" (click)="onSubmit()">Guardar</button>
+                    <button class="btn btn-default" (click)="onCancel()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

@@ -26,7 +26,7 @@ const COMPONENTS = [
   DeployComponent,
   CollaboratorsComponent,
   MaintenanceModeComponent,
-  DeleteProjectComponent,
+  DeleteProjectComponent
 ];
 
 const MODULES = [

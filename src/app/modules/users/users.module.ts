@@ -5,6 +5,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { ListComponent } from './pages/list/list.component';
 import { DetailComponent } from './pages/detail/detail.component';
 import { AddComponent } from './pages/add/add.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { AddComponent } from './pages/add/add.component';
   ],
   imports: [
     CommonModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    NgxDatatableModule
   ]
 })
 export class UsersModule { }

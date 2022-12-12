@@ -1,0 +1,95 @@
+<div class="page-header">
+    <h4 class="page-title">Lista Bases de Datos</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a [routerLink]="['/dashboard']">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/databases']">Bases de Datos</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a>Lista</a>
+        </li>
+    </ul>
+    <div class="ml-auto">
+        <ng-container *ngIf="!hasSGDB()">
+            <button type="button" class="btn btn-primary ml-auto" (click)="createDatabase()">
+                <i class="fa fa-plus"></i>
+                Crear Usuario
+            </button>
+        </ng-container>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Lista de Bases de Datos</div>
+            </div>
+            <div class="card-body">
+
+                <!-- Modal -->
+                <ng-container *ngIf="showModal">
+                    <app-add (close)="closeModal($event)"></app-add>
+                </ng-container>
+                <!-- End Modal -->
+
+                <!-- Table -->
+                <ngx-datatable class="material striped" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+                    rowHeight="auto" [rows]="rows" [limit]="limit" #table>
+
+                    <!-- ID Column -->
+                    <ngx-datatable-column name="ID" [flexGrow]="1" [resizeable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.id }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <!-- Name Column -->
+                    <ngx-datatable-column name="Nombre Base de Datos" [flexGrow]="2" [resizeable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.context }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <!-- Count Tables Column -->
+                    <ngx-datatable-column name="Cantidad Tablas" [flexGrow]="2" [resizeable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.count }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <!-- SGBD Column -->
+                    <ngx-datatable-column name="SGBD" [flexGrow]="2" [resizeable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{ row?.type.type }}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <!-- Actions Column -->
+                    <ngx-datatable-column name="Acciones" [flexGrow]="1" [resizeable]="false" [sortable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="form-button-action">
+                                <button type="button" data-toggle="tooltip" title="Eliminar"
+                                    class="btn btn-link btn-default" data-original-title="Eliminar Base de Datos"
+                                    (click)="deleteDatabase(row.id)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+                <!-- End Table -->
+            </div>
+        </div>
+    </div>
+</div>

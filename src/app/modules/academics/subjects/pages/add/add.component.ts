@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ISubject } from '@data/interfaces';
-import { SubjectsService } from '@modules/academics/subjects';
+import { SubjectsService } from '@modules/academics/subjects/services';
 import { ConvertFileService } from '@core/services';
 
 @Component({

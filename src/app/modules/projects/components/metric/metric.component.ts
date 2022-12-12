@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CurrentProjectService } from '@modules/projects';
-import { MetricsService } from '@modules/projects';
+import { CurrentProjectService } from '@modules/projects/services';
+import { MetricsService } from '@modules/projects/services';
 import { Chart, registerables } from 'chart.js'
 
 @Component({

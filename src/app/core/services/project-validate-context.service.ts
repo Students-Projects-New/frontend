@@ -3,7 +3,7 @@ import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/form
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { ProjectsService } from '@modules/projects';
+import { ProjectsService } from '@modules/projects/services';
 
 @Injectable({
   providedIn: 'root'

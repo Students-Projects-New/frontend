@@ -9,4 +9,5 @@ export interface IUser {
     picture: string;
     is_active: boolean;
     roles: IRole[];
+    has_sgbd_user: boolean;
 }

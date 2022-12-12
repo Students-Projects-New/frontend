@@ -27,23 +27,23 @@
                 <div class="col-md-4">
                     <div class="form-group text-center">
                         <label for="value{{ i }}">Acciones</label><br>
-                        <ng-container *ngIf="!isFieldEmpty(i) && !isFieldEdit(i)">
-                            <button type="button" class="btn btn-danger btn-sm mr-2" (click)="updateVar(i)">
+                        <ng-container *ngIf="!isFieldEmptyOrEdit(i, 'empty') && !isFieldEmptyOrEdit(i, 'edit')">
+                            <button type="button" class="btn btn-danger btn-sm mr-2" (click)="updateVar(i)" *appPermissions="['write']">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" (click)="deleteVar(i)">
+                            <button type="button" class="btn btn-danger btn-sm" (click)="deleteVar(i)" *appPermissions="['maintainer']">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </ng-container>
-                        <ng-container *ngIf="!isFieldEmpty(i) && isFieldEdit(i)">
-                            <button type="button" class="btn btn-danger btn-sm mr-2" (click)="editVar(i)" [disabled]="varsForm.invalid" *appPermissions="['write']">
+                        <ng-container *ngIf="!isFieldEmptyOrEdit(i, 'empty') && isFieldEmptyOrEdit(i, 'edit')">
+                            <button type="button" class="btn btn-danger btn-sm mr-2" (click)="editVar(i)" [disabled]="isFieldValidControl('name_var', i) || isFieldValidControl('value_var', i)">
                                 <i class="fas fa-check"></i>
                             </button>
                             <button type="button" class="btn btn-danger btn-sm" (click)="cancelVar(i)">
                                 <i class="fas fa-times"></i>
                             </button>
                         </ng-container>
-                        <ng-container *ngIf="isFieldEmpty(i)">
+                        <ng-container *ngIf="isFieldEmptyOrEdit(i, 'empty')">
                             <button type="button" class="btn btn-primary btn-sm btn-block-custom" (click)="addVar(i)" [disabled]="varsForm.invalid" *appPermissions="['write']">
                                 <i class="fa fa-plus"></i>
                             </button>

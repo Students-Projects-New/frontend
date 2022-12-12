@@ -2,7 +2,7 @@ import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } fr
 import { Subject, takeUntil } from 'rxjs';
 
 import { AuthService } from '@core/authentication';
-import { CurrentProjectService } from '@modules/projects';
+import { CurrentProjectService } from '@modules/projects/services';
 import { User } from '@data/models';
 
 @Directive({

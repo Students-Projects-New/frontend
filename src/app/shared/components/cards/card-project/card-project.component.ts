@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { ICourse, IProject, IUserDto } from '@data/interfaces';
 import { CollaboratorsService } from '@core/services';
-import { CoursesService } from '@modules/academics/courses';
+import { CoursesService } from '@modules/academics/courses/services';
 
 @Component({
   selector: 'card-project',

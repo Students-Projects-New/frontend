@@ -6,8 +6,8 @@ import { IValidationMessages, ICourseStudent, IProject } from '@data/interfaces'
 import { ConvertFileService } from '@core/services';
 import { AuthService } from '@core/authentication';
 import { ProjectValidateContextService } from '@core/services';
-import { CourseStudentService } from '@modules/projects';
-import { ProjectsService } from '@modules/projects';
+import { CourseStudentService } from '@modules/projects/services';
+import { ProjectsService } from '@modules/projects/services';
 
 @Component({
   selector: 'app-project-add',
@@ -112,7 +112,7 @@ export class AddComponent implements OnInit {
           Validators.required,
           Validators.pattern('^(https?://)?(www.)?((github.com)|(gitlab.com))/.+$')
         ])),
-      static_path: new FormControl('src/app',
+      static_path: new FormControl('',
         Validators.compose([
           //Validators.pattern('^[a-zA-Z0-9/]*$')
         ])),
@@ -168,7 +168,6 @@ export class AddComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    //this.newProject.markAllAsTouched();
     if (!this.newProject.valid) {
       this.newProject.markAllAsTouched();
       return;

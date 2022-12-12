@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from '@app/core';
-import { CurrentProjectService } from '@modules/projects';
-import { ProjectsService } from '@modules/projects';
+import { AuthService } from '@core/authentication';
+import { CurrentProjectService } from '@modules/projects/services';
+import { ProjectsService } from '@modules/projects/services';
 
 @Component({
   selector: 'app-maintenance-mode',

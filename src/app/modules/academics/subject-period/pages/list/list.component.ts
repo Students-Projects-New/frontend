@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ICourse } from '@data/interfaces';
-import { SubjectPeriodService } from '@modules/academics/subject-period';
+import { SubjectPeriodService } from '@modules/academics/subject-period/services';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({

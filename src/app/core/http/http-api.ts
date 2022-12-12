@@ -15,6 +15,14 @@ export class HttpApi {
     static project_Delete_Workspace = 'delete_workspace';
     static project_List_By_Course = 'list_projects_subject';
 
+    // Database
+    static database_List = 'list_database';
+    static database_Create = 'create_database';
+    static database_Delete = 'delete_database';
+    static database_Search = 'search_database';
+    static database_Types_List = 'list_types_database';
+    static database_Create_User = 'create_user_sgbd';
+
     // Collaborators
     static collaborators = 'list_users_by_ids';
     static collaborators_Add = 'add_collaborator';
@@ -45,5 +53,9 @@ export class HttpApi {
     static courses_Teacher = 'subjectsPeriodDetail';
     static courses_Student = 'subjectStudentDetailView';
     static course_Students_Enrolled = 'subjectStudentPeriod';
+
+    // Users
+    static users_Ids_By_Emails = 'get_ids_by_email';
+    static users_Update_Role = 'update_to_teacher';
 
 }

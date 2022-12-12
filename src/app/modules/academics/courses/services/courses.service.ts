@@ -48,6 +48,10 @@ export class CoursesService {
       );
   }
 
+  public setEnrollStudentCourse(id_subject_period: number, students: number[]): Observable<any> {
+    return this.http.post<any>(`${this.url}/${HttpApi.subjects_Student}/`, JSON.stringify({ id_subject_period, students }));
+  }
+
   public getStudentsEnrolledCourse(id: number): Observable<ICourse[]> {
     return this.http.get<any[]>(`${this.url}/${HttpApi.course_Students_Enrolled}/${id}`);
   }

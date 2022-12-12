@@ -6,6 +6,7 @@ import * as SharedComponents from './components';
 import * as SharedPipes from './pipes';
 import * as SharedDirectives from './directives';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { CardDatabaseComponent } from './components/cards/card-database/card-database.component';
 
 const MODULES = [
   CommonModule,
@@ -23,7 +24,7 @@ const PIPES = [
 
 
 @NgModule({
-  declarations: [...SharedComponents.components, ...DIRECTIVES, ...PIPES],
+  declarations: [...SharedComponents.components, ...DIRECTIVES, ...PIPES, CardDatabaseComponent],
   imports: [...MODULES],
   exports: [...SharedComponents.components, ...DIRECTIVES, ...PIPES],
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IUserDto } from '@data/interfaces';
-import { CurrentProjectService } from '@modules/projects';
+import { CurrentProjectService } from '@modules/projects/services';
 import { CollaboratorsService } from '@core/services';
 
 @Component({

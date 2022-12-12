@@ -3,8 +3,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Subscription } from 'rxjs';
 
 import { IVar, IValidationMessages } from '@data/interfaces';
-import { VarsService } from '@modules/projects';
-import { CurrentProjectService } from '@modules/projects';
+import { VarsService } from '@modules/projects/services';
+import { CurrentProjectService } from '@modules/projects/services';
 
 @Component({
   selector: 'app-vars',
@@ -17,7 +17,7 @@ export class VarsComponent implements OnInit, OnDestroy {
   private idOwner: number;
   private subscription$: Subscription;
   public varsForm: FormGroup;
-  private currentVar: IVar = {} as IVar;
+  private varsCopy: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -78,16 +78,16 @@ export class VarsComponent implements OnInit, OnDestroy {
     return this.vars.controls;
   }
 
-  public isFieldEmpty(index: number): boolean {
-    return this.vars.controls[index].get('empty')!.value;
+  public isFieldEmptyOrEdit(index: number, field: string): boolean {
+    return this.vars.controls[index].get(field)!.value;
   }
 
-  public isFieldEdit(index: number): boolean {
-    return this.vars.controls[index].get('edit')!.value;
-  }
-
-  public isFieldValid(field: string, index: number): boolean {
+  private isFieldValid(field: string, index: number): boolean {
     return this.vars.controls[index].get(field)!.dirty || this.vars.controls[index].get(field)!.touched;
+  }
+
+  public isFieldValidControl(field: string, index: number): boolean {
+    return this.vars.controls[index].get(field)!.invalid && this.isFieldValid(field, index);
   }
 
   public getErrorMessage(field: string, index: number): string {
@@ -100,9 +100,9 @@ export class VarsComponent implements OnInit, OnDestroy {
     return message;
   }
 
-  public newVar(): FormGroup {
+  private newVar(): FormGroup {
     return this.fb.group({
-      id: new FormControl(0),
+      id: new FormControl(this.vars.length + 1),
       name_var: new FormControl('', Validators.required),
       value_var: new FormControl('', Validators.required),
       edit: new FormControl(false),
@@ -111,18 +111,17 @@ export class VarsComponent implements OnInit, OnDestroy {
   }
 
   public addVar(index: number): void {
+    this.saveVarService(index);
     this.vars.push(this.newVar());
-    this.vars.controls[index].get('empty')!.setValue(false);
-    this.disableFields(index);
   }
 
-  public enableFields(index: number): void {
+  private enableFields(index: number): void {
     this.vars.controls[index].get('name_var')!.enable();
     this.vars.controls[index].get('value_var')!.enable();
     this.vars.controls[index].get('edit')!.setValue(true);
   }
 
-  public disableFields(index: number): void {
+  private disableFields(index: number): void {
     this.vars.controls[index].get('name_var')!.disable();
     this.vars.controls[index].get('value_var')!.disable();
     this.vars.controls[index].get('edit')!.setValue(false);
@@ -147,6 +146,8 @@ export class VarsComponent implements OnInit, OnDestroy {
       .addVar(this.getCurrentVar(index))
       .subscribe((res: IVar) => {
         this.vars.controls[index].get('id')!.setValue(res.id);
+        this.vars.controls[index].get('name_var')!.setValue(res.name_var);
+        this.vars.controls[index].get('value_var')!.setValue(res.value_var);
         this.vars.controls[index].get('edit')!.setValue(false);
         this.vars.controls[index].get('empty')!.setValue(false);
         this.disableFields(index);
@@ -154,7 +155,10 @@ export class VarsComponent implements OnInit, OnDestroy {
   }
 
   public updateVar(index: number): void {
-    this.currentVar = this.getCurrentVar(index);
+    this.varsCopy = [];
+    for (let i = 0; i < this.vars.controls.length; i++) {
+      this.varsCopy.push(this.getCurrentVar(i));
+    }
     this.enableFields(index);
   }
 
@@ -164,12 +168,16 @@ export class VarsComponent implements OnInit, OnDestroy {
   }
 
   public cancelVar(index: number): void {
-    const currentVar = this.currentVar;
+    const currentVar = this.varsCopy[index];
     this.setCurrentVar(index, currentVar);
     this.disableFields(index);
   }
 
   public deleteVar(index: number): void {
+    const idVar = this.getCurrentVar(index).id;
+    this.varsService
+      .deleteVar(idVar)
+      .subscribe();
     this.vars.removeAt(index);
   }
 

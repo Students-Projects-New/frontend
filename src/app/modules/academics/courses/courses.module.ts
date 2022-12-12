@@ -6,6 +6,7 @@ import { SharedModule } from '@shared/shared.module';
 import { ListComponent } from './pages/list/list.component';
 import { DetailComponent } from './pages/detail/detail.component';
 import { AddComponent } from './pages/add/add.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 const COMPONENTS = [
   ListComponent,
@@ -16,6 +17,7 @@ const COMPONENTS = [
 const MODULES = [
   CommonModule,
   CoursesRoutingModule,
+  NgxDatatableModule,
   SharedModule
 ]
 

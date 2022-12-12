@@ -1,0 +1,21 @@
+.text-white {
+    color: #fff;
+}
+
+button {
+    margin-right: 10px;
+}
+
+i {
+    color: #aa1916;
+}
+
+span {
+    color: #575962;
+    font-weight: bold;
+    margin-left: 0.5px;
+}
+
+a {
+    text-decoration: none;
+}

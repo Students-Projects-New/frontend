@@ -7,7 +7,7 @@ import { HttpApi } from '@core/http/http-api';
 import { IProject } from '@data/interfaces';
 import { environment } from '@env/environment';
 import { CollaboratorsService } from '@core/services';
-import { CoursesService } from '@modules/academics/courses';
+import { CoursesService } from '@modules/academics/courses/services';
 
 @Injectable({
   providedIn: 'root'

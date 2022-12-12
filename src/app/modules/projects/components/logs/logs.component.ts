@@ -2,8 +2,8 @@ import { Component, OnDestroy, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { LogMessage as NgxLogMessage } from 'ngx-log-monitor';
-import { CurrentProjectService } from '@modules/projects';
-import { LogsService } from '@modules/projects';
+import { CurrentProjectService } from '@modules/projects/services';
+import { LogsService } from '@modules/projects/services';
 
 @Component({
   selector: 'app-logs',

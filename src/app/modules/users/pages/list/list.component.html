@@ -1,1 +1,39 @@
-<p>list works!</p>
+<div class="page-header">
+    <h4 class="page-title">Lista de Usuarios</h4>
+    <ul class="breadcrumbs">
+        <li class="nav-home">
+            <a [routerLink]="['/dashboard']">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/users']">Usuarios</a>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a>Lista</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <div class="card-title">Lista de Usuarios</div>
+                    <a class="btn btn-primary btn-round ml-auto" [routerLink]="['/users/new']">
+                        <i class="fa fa-plus"></i>
+                        Actualizar Roles Usuarios
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                
+            </div>
+        </div>
+    </div>
+</div>
