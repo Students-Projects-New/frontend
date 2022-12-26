@@ -5,7 +5,7 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component';
 
 import { AdminLayoutComponent } from '@layout/admin-layout/admin-layout.component';
 
-const routes: Routes = [
+const DASHBOARD_ROUTES: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(DASHBOARD_ROUTES)],
   exports: [RouterModule]
 })
 export class DashboardRoutingModule { }

@@ -7,7 +7,7 @@ import { ListComponent } from './pages/list/list.component';
 
 import { AdminLayoutComponent } from '@layout/admin-layout/admin-layout.component';
 
-const routes: Routes = [
+const COURSES_ROUTES: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
@@ -33,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(COURSES_ROUTES)],
   exports: [RouterModule]
 })
 export class CoursesRoutingModule { }

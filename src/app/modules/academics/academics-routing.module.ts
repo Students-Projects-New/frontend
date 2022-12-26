@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RoleGuard } from '@core/guards';
 import { ROLE } from "@data/enums/role.enum";
 
-const routes: Routes = [
+const ACADEMICS_ROUTES: Routes = [
   {
     path: 'subjects',
     loadChildren: () => import('./subjects/subjects.module').then(m => m.SubjectsModule),
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(ACADEMICS_ROUTES)],
   exports: [RouterModule]
 })
 export class AcademicsRoutingModule { }

@@ -5,7 +5,7 @@ import { Page401Component } from './pages/page401/page401.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { Page500Component } from './pages/page500/page500.component';
 
-const routes: Routes = [
+const NOT_PAGES_FOUND_ROUTES: Routes = [
   {
     path: '',
     children: [
@@ -18,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(NOT_PAGES_FOUND_ROUTES)],
   exports: [RouterModule]
 })
 export class NotPagesFoundRoutingModule {

@@ -8,7 +8,7 @@ import { AdminLayoutComponent } from '@layout/admin-layout/admin-layout.componen
 import { RoleGuard } from '@core/guards';
 import { ROLE } from "@data/enums/role.enum";
 
-const routes: Routes = [
+const PROJECTS_ROUTES: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
@@ -39,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(PROJECTS_ROUTES)],
   exports: [RouterModule]
 })
 export class ProjectsRoutingModule {

@@ -7,7 +7,7 @@ import { AdminLayoutComponent } from '@layout/admin-layout/admin-layout.componen
 import { RoleGuard } from '@core/guards';
 import { ROLE } from "@data/enums/role.enum";
 
-const routes: Routes = [
+const DATABASES_ROUTES: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
@@ -25,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(DATABASES_ROUTES)],
   exports: [RouterModule]
 })
 export class DatabasesRoutingModule { }

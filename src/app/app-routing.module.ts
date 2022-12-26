@@ -3,7 +3,7 @@ import { ExtraOptions, RouterModule, Routes, PreloadAllModules } from '@angular/
 
 import { AuthGuard, NoAuthGuard } from '@core/guards';
 
-const routes: Routes = [
+const APP_ROUTES: Routes = [
   {
     path: 'home',
     loadChildren: () => import('@modules/home/home.module').then((m) => m.HomeModule),
@@ -29,7 +29,7 @@ const routes: Routes = [
     loadChildren: () => import('@modules/projects/projects.module').then((m) => m.ProjectsModule),
     canActivate: [AuthGuard]
   },
-  { 
+  {
     path: 'databases',
     loadChildren: () => import('@modules/databases/databases.module').then((m) => m.DatabasesModule),
     canActivate: [AuthGuard]
@@ -59,7 +59,7 @@ const config: ExtraOptions = {
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config)],
+  imports: [RouterModule.forRoot(APP_ROUTES, config)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

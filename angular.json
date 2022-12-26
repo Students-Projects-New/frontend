@@ -5,7 +5,29 @@
   "projects": {
     "students-projects": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:component": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -19,8 +41,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "src/students-projects/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -134,8 +155,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "src/students-projects/assets"
             ],
             "styles": [
               "src/styles.css"

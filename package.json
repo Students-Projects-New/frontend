@@ -1,13 +1,14 @@
 {
   "name": "students-projects",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "server": "json-server --watch ./src/app/data/server/db.json --routes ./src/app/data/server/routes.json"
+    "server": "json-server --watch ./src/app/data/server/db.json --routes ./src/app/data/server/routes.json",
+    "compodoc": "compodoc -p tsconfig.doc.json -d docs -n \"Students Projects Documentation\" --customFavicon ./src/students-projects/assets/img/favicon/favicon.ico --customLogo ./src/students-projects/assets/img/logo.png --hideGenerator -s -o"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "@angular-devkit/build-angular": "^14.2.10",
     "@angular/cli": "~14.2.10",
     "@angular/compiler-cli": "^14.2.12",
+    "@compodoc/compodoc": "^1.1.19",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.1",

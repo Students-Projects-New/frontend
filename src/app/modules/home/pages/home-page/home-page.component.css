@@ -18,3 +18,13 @@ img {
 .social > a > i {
   font-size: 1.5rem !important;
 }
+
+.img-footer {
+  background: #fff;
+}
+
+.img-footer-logo {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+}

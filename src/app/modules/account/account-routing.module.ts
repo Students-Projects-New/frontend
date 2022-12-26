@@ -4,19 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from '@layout/admin-layout/admin-layout.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
-const routes: Routes = [
+const ACCOUNT_ROUTES: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
     children: [
       { path: 'profile', component: ProfileComponent, title: 'Profile' },
-      { path: '**', redirectTo: 'profile', pathMatch: 'full' },
+      { path: '**', redirectTo: 'profile', pathMatch: 'full' }
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(ACCOUNT_ROUTES)],
   exports: [RouterModule]
 })
 export class AccountRoutingModule {
