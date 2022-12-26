@@ -33,7 +33,7 @@ export class CoursesService {
       .pipe(
         map((courses: ICourse[]) => {
           return courses.map((course: ICourse) => {
-            course.image = `students-projects/assets/img/courses/${this.currentValue}.svg`;
+            course.image = `assets/img/courses/${this.currentValue}.svg`;
             return course;
           });
         })

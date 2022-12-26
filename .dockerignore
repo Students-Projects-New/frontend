@@ -1,0 +1,13 @@
+.git
+.gitignore
+.vscode
+Dockerfile
+.dockerignore
+/.vscode/*
+/node_modules
+/e2e
+/dist
+/docs
+LICENSE
+*.md
+*.zip

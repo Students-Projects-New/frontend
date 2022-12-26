@@ -13,43 +13,43 @@ export class ContributorsMock {
             id: 1,
             first_name: 'John',
             last_name: 'Doe',
-            picture: 'students-projects/assets/img/projects/product1.jpg'
+            picture: 'assets/img/projects/product1.jpg'
         },
         2: {
             id: 1,
             first_name: 'John',
             last_name: 'Doe',
-            picture: 'students-projects/assets/img/projects/product1.jpg'
+            picture: 'assets/img/projects/product1.jpg'
         },
         3: {
             id: 1,
             first_name: 'John',
             last_name: 'Doe',
-            picture: 'students-projects/assets/img/projects/product1.jpg'
+            picture: 'assets/img/projects/product1.jpg'
         },
         4: {
             id: 1,
             first_name: 'John',
             last_name: 'Doe',
-            picture: 'students-projects/assets/img/projects/product1.jpg'
+            picture: 'assets/img/projects/product1.jpg'
         },
         5: {
             id: 1,
             first_name: 'John',
             last_name: 'Doe',
-            picture: 'students-projects/assets/img/projects/product1.jpg'
+            picture: 'assets/img/projects/product1.jpg'
         },
         6: {
             id: 1,
             first_name: 'John',
             last_name: 'Doe',
-            picture: 'students-projects/assets/img/projects/product1.jpg'
+            picture: 'assets/img/projects/product1.jpg'
         },
         7: {
             id: 1,
             first_name: 'John',
             last_name: 'Doe',
-            picture: 'students-projects/assets/img/projects/product1.jpg'
+            picture: 'assets/img/projects/product1.jpg'
         },
     };
 

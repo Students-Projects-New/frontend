@@ -774,7 +774,7 @@ export class CoursesService {
       .pipe(
         map((courses: ICourse[]) &#x3D;&gt; {
           return courses.map((course: ICourse) &#x3D;&gt; {
-            course.image &#x3D; &#x60;students-projects/assets/img/courses/${this.currentValue}.svg&#x60;;
+            course.image &#x3D; &#x60;assets/img/courses/${this.currentValue}.svg&#x60;;
             return course;
           });
         })

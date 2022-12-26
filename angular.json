@@ -41,7 +41,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/students-projects/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -155,7 +156,8 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/students-projects/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"

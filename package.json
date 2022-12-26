@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "server": "json-server --watch ./src/app/data/server/db.json --routes ./src/app/data/server/routes.json",
-    "compodoc": "compodoc -p tsconfig.doc.json -d docs -n \"Students Projects Documentation\" --customFavicon ./src/students-projects/assets/img/favicon/favicon.ico --customLogo ./src/students-projects/assets/img/logo.png --hideGenerator -s -o"
+    "compodoc": "compodoc -p tsconfig.doc.json -d docs -n \"Students Projects Documentation\" --customFavicon ./src/assets/img/favicon/favicon.ico --customLogo ./src/assets/img/logo.png --hideGenerator -s -o"
   },
   "private": true,
   "dependencies": {

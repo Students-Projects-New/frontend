@@ -16,24 +16,24 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) { }
 
   public styles: string[] = [
-    'students-projects/assets/vendor/animate.css/animate.min.css',
-    'students-projects/assets/vendor/aos/aos.css',
-    'students-projects/assets/vendor/bootstrap/css/bootstrap.min.css',
-    'students-projects/assets/vendor/bootstrap-icons/bootstrap-icons.css',
-    'students-projects/assets/vendor/glightbox/css/glightbox.min.css',
-    'students-projects/assets/vendor/swiper/swiper-bundle.min.css',
-    'students-projects/assets/css/style.css'
+    'assets/vendor/animate.css/animate.min.css',
+    'assets/vendor/aos/aos.css',
+    'assets/vendor/bootstrap/css/bootstrap.min.css',
+    'assets/vendor/bootstrap-icons/bootstrap-icons.css',
+    'assets/vendor/glightbox/css/glightbox.min.css',
+    'assets/vendor/swiper/swiper-bundle.min.css',
+    'assets/css/style.css'
   ];
 
   public scripts: string[] = [
-    'students-projects/assets/vendor/purecounter/purecounter_vanilla.js',
-    'students-projects/assets/vendor/aos/aos.js',
-    'students-projects/assets/vendor/bootstrap/js/bootstrap.bundle.min.js',
-    'students-projects/assets/vendor/glightbox/js/glightbox.min.js',
-    'students-projects/assets/vendor/isotope-layout/isotope.pkgd.min.js',
-    'students-projects/assets/vendor/swiper/swiper-bundle.min.js',
-    'students-projects/assets/vendor/waypoints/noframework.waypoints.js',
-    'students-projects/assets/js/home/main.js'
+    'assets/vendor/purecounter/purecounter_vanilla.js',
+    'assets/vendor/aos/aos.js',
+    'assets/vendor/bootstrap/js/bootstrap.bundle.min.js',
+    'assets/vendor/glightbox/js/glightbox.min.js',
+    'assets/vendor/isotope-layout/isotope.pkgd.min.js',
+    'assets/vendor/swiper/swiper-bundle.min.js',
+    'assets/vendor/waypoints/noframework.waypoints.js',
+    'assets/js/home/main.js'
   ];
 
   ngOnInit(): void { 
