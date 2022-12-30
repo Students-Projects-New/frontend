@@ -1,6 +1,6 @@
 const server = {
   protocol: 'https',
-  hostname: 'becl.me'
+  hostname: 'studentsprojects.cloud.ufps.edu.co'
 };
 
 export const environment = {

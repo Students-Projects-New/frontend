@@ -21,14 +21,14 @@ RUN npm run build -- --configuration=$configuration
 ######### STAGE 2:RUN #########
 FROM nginx:latest AS nginx
 
-# Remove default nginx website
-RUN rm -rf /usr/share/nginx/html/*
+# Create students-projects directory
+RUN mkdir -p /usr/share/nginx/html/students-projects
 
 # Copy the nginx.conf file to override the default nginx configuration
 COPY ./nginx.conf  /etc/nginx/conf.d/default.conf
 
 # Copy dist folder fro build stage to nginx public folder
-COPY --from=build /app/dist/students-projects /usr/share/nginx/html
+COPY --from=build /app/dist/students-projects /usr/share/nginx/html/students-projects
 
 # Expose port 80
 EXPOSE 80

@@ -22,7 +22,7 @@ const MODULES = [
 ];
 
 const PROVIDERS = [
-  { provide: APP_BASE_HREF, useValue: '/students-projects' },
+  { provide: APP_BASE_HREF, useValue: '/students-projects/' },
   { provide: LocationStrategy, useClass: PathLocationStrategy }
 ];
 
