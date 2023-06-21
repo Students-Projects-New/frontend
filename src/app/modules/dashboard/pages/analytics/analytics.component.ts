@@ -141,13 +141,13 @@ export class AnalyticsComponent implements OnInit {
       });
   }
 
-  private deleteProject(id: any): void {
-    this.projectsService
-      .deleteProject(id)
-      .subscribe((res) => {
-        console.log(res);
-      });
-  }
+  // private deleteProject(id: any): void {
+  //   this.projectsService
+  //     .deleteProject(id)
+  //     .subscribe((res) => {
+  //       console.log(res);
+  //     });
+  // }
 
   public toggleRunningState(app: any) {
     app.running = !app.running;
