@@ -4,7 +4,7 @@
 
 const server = {
   protocol: 'https',
-  hostname: 'becl.me'
+  hostname: '2c45-186-144-69-224.ngrok-free.app'
 };
 
 export const environment = {

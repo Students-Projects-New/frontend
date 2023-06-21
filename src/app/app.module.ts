@@ -9,16 +9,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+// import { ListappComponent } from './modules/dashboard/pages/listapp/listapp.component';
+
 const COMPONENTS = [
   AppComponent,
-  AdminLayoutComponent
+  AdminLayoutComponent,
+  // ListappComponent
 ];
 
 const MODULES = [
   BrowserModule,
   AppRoutingModule,
   CoreModule,
-  SharedModule
+  SharedModule,
+  BrowserAnimationsModule, // required animations module
+  ToastrModule.forRoot(),
 ];
 
 const PROVIDERS = [
@@ -27,7 +35,7 @@ const PROVIDERS = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS,],
   imports: [...MODULES],
   providers: [...PROVIDERS],
   bootstrap: [AppComponent]

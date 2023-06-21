@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 
 
+
 @NgModule({
   declarations: [
     AnalyticsComponent

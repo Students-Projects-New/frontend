@@ -1316,7 +1316,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">
+
+import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient, HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
 import { BehaviorSubject, Observable, throwError } from &#x27;rxjs&#x27;;
 import { catchError, tap } from &#x27;rxjs/operators&#x27;;
@@ -1430,7 +1432,7 @@ export class AuthService {
     this.router.navigate([&#x27;/home&#x27;]);
   }
 
-  private autoRefreshToken(expirationDuration: number &#x3D; 300000): void {
+  private autoRefreshToken(expirationDuration: number &#x3D; 1800000): void {
     let refreshInterval &#x3D; setInterval(() &#x3D;&gt; {
       if (this.isLoggedIn()) {
         if (this.jwtHelper.isTokenExpired(this.accessToken)) {

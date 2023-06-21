@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { HttpApi } from '@core/http/http-api';
@@ -8,6 +8,7 @@ import { IProject } from '@data/interfaces';
 import { environment } from '@env/environment';
 import { CollaboratorsService } from '@core/services';
 import { CoursesService } from '@modules/academics/courses/services';
+import { LogMessage as NgxLogMessage } from 'ngx-log-monitor';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,11 @@ export class CurrentProjectService {
   }
 
   public get currentProjectSubjectValue(): IProject {
-    return this.currentProjectSubject.getValue();
+    try{
+      return this.currentProjectSubject.getValue();
+    }catch(e: any){
+      return e.message;
+    }
   }
 
   public get currentProjectValue(): Observable<IProject> {

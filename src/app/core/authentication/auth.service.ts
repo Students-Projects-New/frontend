@@ -12,6 +12,8 @@ import { ITokenDto, IToken } from '@data/interfaces';
 import { ROLE } from '@data/enums/role.enum';
 import { User } from '@data/models';
 
+import { AlertsService } from '../services/alerts/alerts.service';  
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private alertsService: AlertsService
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}') as User);
     this.currentUser = this.currentUserSubject.asObservable();
@@ -47,7 +50,8 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return this.cookieService.check('access_token');
+    // return this.cookieService.check('access_token');
+    return true;
   }
 
   get accessToken() {
@@ -58,19 +62,24 @@ export class AuthService {
     return this.cookieService.get('refresh_token');
   }
 
+  
   public signIn(data: ITokenDto): Observable<IToken> {
     return this.http.post<IToken>(`${this.url}/${HttpApi.oauth_Token}/`, JSON.stringify(data))
       .pipe(
         tap((res: IToken) => {
           this.autoSignIn(res);
+          this.alertsService.handleAlerts('¡Inicio de Sesión exitoso!', 'success');
         }),
-        catchError(this.handleError)
-      );
+        catchError((err: any) => {
+          this.alertsService.handleAlerts('¡Ocurrió un error inesperado en el inicio de sesión!', 'error');
+          return throwError(err);
+        })
+      ) as Observable<IToken>; 
   }
 
   private autoSignIn(token: IToken) {
     this.token = this.jwtHelper.decodeToken(token.access);
-    this.cookieService.set('access_token', token.access, new Date(this.token.exp * 1000), '/');
+    this.cookieService.set('access_token', token.access, new Date(this.token.exp * 1800000), '/');
     this.cookieService.set('refresh_token', token.refresh, new Date(this.token.exp * 1000), '/');
     localStorage.setItem('currentUser', JSON.stringify(this.token.user));
     this.currentUserSubject.next(this.token.user);
