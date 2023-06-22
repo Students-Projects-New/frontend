@@ -54,6 +54,8 @@ handleAlerts(message: string, typeAlert: string) {
 
 - List of applications or projects for the administrator to stop.
 
+![](https://raw.githubusercontent.com/FelipeM09/imagesProject/main/Imagen%20de%20WhatsApp%202023-06-22%20a%20las%2000.47.09.jpg)
+
 For this modification, it was handled within the dashboard component called "analytics.component.ts". Here, the methods "loadProjects," "toggleRunningState," and "trackByFn" are implemented.
 
 #### Method loadProjects
@@ -93,5 +95,61 @@ public trackByFn(index: number, item: IProject): number {
   }
 
 ```
+- Dashboard with figures in real time.
+
+![](https://raw.githubusercontent.com/FelipeM09/imagesProject/main/Imagen%20de%20WhatsApp%202023-06-22%20a%20las%2000.47.16.jpg)
+
+For this modification the following methods were used:
+
+#### Method getDatabases
+
+Get the ID of a databases.
+
+``` 
+private getDatabases(): void {
+    this.dataBasesService
+      .getDatabases(this.currentUser.id)
+      .subscribe((databases: IDatabase[]) => {
+        this.rows = databases;
+      });
+  }
+
+```
+
+#### Method getCourses
+
+Get the ID of a Courses.
+
+``` 
+private getCourses(): void {
+    const id = this.authService.getCurrentUserSubject().id;
+    this.coursesService
+      .getCourses(id)
+      .subscribe((courses: ICourse[]) => {
+        this.courses = courses;
+      });
+  }
+
+```
+
+#### Method getUsers
+
+Get the ID of a Users.
+
+``` 
+private getUsers(): void {
+    this.usersService
+      .getUsersById(this.currentUser.id)
+      .subscribe((users: IUserDto[]) => {
+        this.rowsUser = users;
+      });
+  }
+
+```
+This is the final result of the dashboard and the list of projects:
+
+![](https://raw.githubusercontent.com/FelipeM09/imagesProject/main/Imagen%20de%20WhatsApp%202023-06-22%20a%20las%2000.46.36.jpg)
+
+
 
 ### End
