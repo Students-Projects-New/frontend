@@ -22,6 +22,13 @@ export class UsersService {
     return this.http.post<IUserDto[]>(`${this.url}/${HttpApi.collaborators}/`, { id_users: ids });
   }
 
+  public getUsersById(idUser: number): Observable<IUserDto[]> {
+    return this.http.get<IUserDto[]>(`${this.url}/${HttpApi.collaborators}/`)
+      .pipe(
+        map((users: IUserDto[]) => users.filter(users => users.id === idUser))
+      );
+  }
+
   public getUserByEmails(emails: string[]): Observable<any> {
     return this.http.post<any>(`${this.url}/${HttpApi.users_Ids_By_Emails}/`, JSON.stringify({ emails }));
   }
