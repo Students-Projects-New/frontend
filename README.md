@@ -1,45 +1,41 @@
-**Table of Contents**
-
-[TOCM]
-
-[TOC]
-
-### Instalaciones Adicionales
-Para las modificaciones realizadas al frontend del proyecto "Students Projects" se deben instalar las sisguientes librerias:
-
-- ng-zorro-antd.  Para instalarla abra una ventana de comandos, copie y pegue el siguiente comando `npm i ng-zorro-antd@12.1.1 --force`
-
-- datatables.net.  Para instalarlo, en la ventana de comandos, copie y pegue el siguiente comando `npm i datatables.net@1.10.25 --force`
-
-- @angular/animations.  Para instalarlo, en la ventana de comandos, copie y pegue el siguiente comando `npm i @angular/animations`
-
-- ngx-toastr.  Para instalarlo, en la ventana de comandos, copie y pegue el siguiente comando `npm i ngx-toastr@15.2.1`. Luego siga las instrucciones del sitio oficial de ngx-toastr. `Link`: ***https://www.npmjs.com/package/ngx-toastr/v/15.2.1?activeTab=readme***.
+##Frontend Students Project
 
 
-### Despliegue
+### Additional Installations
+For the modifications made to the frontend of the "Students Projects" project, the following libraries need to be installed:
 
-Una vez instalado todas las librerías anteriores siga los siguientes pasos:
+- ng-zorro-antd. To install it, open a command prompt, copy and paste the following command: `npm i ng-zorro-antd@12.1.1 --force`
 
-1. Instale las dependencias con `npm install --legacy-peer-deps` o `npm install --force`.
+- datatables.net. To install it, in the command prompt, copy and paste the following command: `npm i datatables.net@1.10.25 --force`
 
-2. Ejecute el comando `ng serve` y luego abra `Link` : http://localhost:4200/students-projects.
+- @angular/animations. To install it, in the command prompt, copy and paste the following command: `npm i @angular/animations`
 
-### Otros comandos utilizados
+- ngx-toastr. To install it, in the command prompt, copy and paste the following command: `npm i ngx-toastr@15.2.1`. Then follow the instructions on the official ngx-toastr website. `Link`: ***https://www.npmjs.com/package/ngx-toastr/v/15.2.1?activeTab=readme***.
 
-En las modificaciones se utilizaron otros comandos básicos de angular como por ejemplo:
+### Deployment
 
-- `ng g s <ruta o ubicación>`. Utilizado para crear un servicio.
-- `ng g c <ruta o ubicación>`. Utilizado para crear un componente en el proyecto.
+Once all the above libraries are installed, follow these steps:
 
-### Modificaciones Realizadas
+1. Install the dependencies with `npm install --legacy-peer-deps` or `npm install --force`.
 
-Las principales modificaciones fueron:
+2. Run the command `ng serve` and then open `Link`: http://localhost:4200/students-projects.
 
-- Control y manejo de errores en los servicios de authentication y databases.
+### Other Used Commands
 
-Para esto se creó un servicio llamado "alerts" donde un método llamado "handleAlerts" en el cual se validan los tipos de alertas que se producen en el proyecto como lo son el "error", "success" y "warning".
+Other basic Angular commands were used in the modifications, such as:
 
-####Método handleAlerts
+- `ng g s <path or location>`. Used to create a service.
+- `ng g c <path or location>`. Used to create a component in the project.
+
+### Modifications Made
+
+The main modifications were:
+
+- Error control and handling in the authentication and databases services.
+
+For this, a service called "alerts" was created, with a method called "handleAlerts" where the types of alerts that occur in the project, such as "error," "success," and "warning," are validated.
+
+#### Method handleAlerts
 
 ```
 handleAlerts(message: string, typeAlert: string) {
@@ -56,13 +52,13 @@ handleAlerts(message: string, typeAlert: string) {
   }
 ```
 
-- Lista de aplicaciones o proyectos para que el administrador las detenga.
+- List of applications or projects for the administrator to stop.
 
-Para esta modificación se manejó dentro del componente del dashboard la cual se llama "analytics.component.ts" Aquí se implementan los métodos "loadProjects", "toggleRunningState" y  "trackByFn".
+For this modification, it was handled within the dashboard component called "analytics.component.ts". Here, the methods "loadProjects," "toggleRunningState," and "trackByFn" are implemented.
 
-#### Método loadProjects
+#### Method loadProjects
 
-Accede a  los proyectos del administrador o usuario. (Es el mismo método que está en list.component.ts).
+Access the projects of the administrator or user. (It is the same method as in list.component.ts).
 
 ``` 
 private loadProjects(): void {
@@ -76,9 +72,9 @@ private loadProjects(): void {
 
 ```
 
-#### Método toggleRunningState
+#### Method toggleRunningState
 
-Utilizado para realizar el cambio del estado del proyecto ("true" o "false").
+Used to change the state of the project ("true" or "false").
 
 ``` 
 public toggleRunningState(app: any) {
@@ -87,9 +83,9 @@ public toggleRunningState(app: any) {
 
 ```
 
-#### Método trackByFn
+#### Method trackByFn
 
-Obtiene el ID de un proyecto.
+Get the ID of a project.
 
 ``` 
 public trackByFn(index: number, item: IProject): number {
@@ -98,7 +94,4 @@ public trackByFn(index: number, item: IProject): number {
 
 ```
 
-
-
-
-###End
+### End
