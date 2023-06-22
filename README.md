@@ -150,6 +150,22 @@ This is the final result of the dashboard and the list of projects:
 
 ![](https://raw.githubusercontent.com/FelipeM09/imagesProject/main/Imagen%20de%20WhatsApp%202023-06-22%20a%20las%2000.46.36.jpg)
 
+- Session Time
+
+The time in milliseconds of the "autoSignIn" method of the "Auth" service has been modified.
+
+``` 
+private autoSignIn(token: IToken) {
+    this.token = this.jwtHelper.decodeToken(token.access);
+    this.cookieService.set('access_token', token.access, new Date(this.token.exp * 1800000), '/');
+    this.cookieService.set('refresh_token', token.refresh, new Date(this.token.exp * 1000), '/');
+    localStorage.setItem('currentUser', JSON.stringify(this.token.user));
+    this.currentUserSubject.next(this.token.user);
+    this.detectUserActivity();
+    this.autoRefreshToken((new Date(this.token.exp * 1000).getTime()) - (new Date().getTime()));
+  }
+  
+```
 
 
 ### End
